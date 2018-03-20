@@ -1,0 +1,84 @@
+@import '../../../../assets/styles/global_vars';
+
+$row-height: 20px;
+
+.card {
+  .card-body {
+    position: relative;
+    height: calc(100vh - 116px);
+    .entry {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      padding: 10px 20px;
+      box-sizing: border-box;
+      border-bottom: 1px solid $light-border;
+      &.selected {
+        background: $lighter-bg;
+      }
+      &.new {
+        h6 {
+          &:before {
+            content: 'o';
+            color: #dca700;
+            width: 10px;
+            min-height: $row-height;
+            line-height: $row-height;
+            text-align: center;
+            position: absolute;
+            left: -12px;
+            margin: 0;
+          }
+        }
+      }
+      h6 {
+        position: relative;
+        min-height: $row-height;
+        line-height: $row-height;
+        .badge {
+          width: auto;
+          height: 20px;
+          line-height: 20px;
+          color: $default-text-color;
+          padding: 0 5px;
+          @include border-radius(5px);
+          background: $color-secondary;
+          margin: 0 0 0 10px;
+          &.completed {
+            background: $color-success;
+            color: #fff;
+          }
+          &.denied {
+            background: $color-danger;
+            color: #fff;
+          }
+        }
+      }
+      .meta-data {
+        display: block;
+        color: $color-secondary;
+        height: $row-height;
+        line-height: $row-height;
+        @include text-overflow;
+      }
+      p {
+        font-style: italic;
+        height: $row-height;
+        line-height: $row-height;
+        margin: 0;
+        @include text-overflow;
+      }
+    }
+    #no-entries {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 50px;
+      line-height: 50px;
+      box-sizing: border-box;
+      margin: -25px 40px 0 40px;
+      text-align: center;
+      top: 50%;
+    }
+  }
+}

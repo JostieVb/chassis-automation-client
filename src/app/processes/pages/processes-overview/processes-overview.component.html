@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-body no-padding">
+    <h5 class="card-title">
+      Processes
+      <button class="btn right" data-toggle="modal" data-target="#newProcessModal">New process</button>
+    </h5>
+    <table class="table table-striped">
+      <tr role="row">
+        <th rowspan="1" colspan="1">#</th>
+        <th rowspan="1" colspan="1">Name</th>
+      </tr>
+      <tr *ngFor="let process of processes">
+        <td>{{process.id}}</td>
+        <td><a routerLink="/processes/{{process.id}}">{{process.name}}</a></td>
+      </tr>
+    </table>
+  </div>
+</div>

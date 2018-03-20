@@ -1,0 +1,67 @@
+/* Variables */
+@import '../../../assets/styles/global_vars';
+$nav-item-height: 40px;
+
+.sidebar {
+  background: #2B303B;
+  height: 100vh;
+  position: fixed;
+  width: $sidebar-width;
+  .sidebar-header {
+    width: 100%;
+    height: $header-height;
+    line-height: $header-height;
+    text-align: center;
+    color: #fff;
+    background: #272b35;
+    border-bottom: 1px solid #232730;
+  }
+  ul {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    list-style: none;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 0;
+    margin: 20px 0 0 0;
+    li {
+      display: block;
+      padding: 0;
+      margin: 0;
+      clear: right;
+      color: #788296;
+      @include transition(.2s);
+      a {
+        font-family: Arial, sans-serif;
+        display: inline-block;
+        padding: 0 3px 0 32px;
+        min-height: $nav-item-height;
+        line-height: $nav-item-height;
+        font-size: 14px;
+        clear: both;
+        .title {
+          float: left;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 100%;
+        }
+      }
+      &:hover {
+        color: #fff !important;
+      }
+    }
+  }
+}
+
+h4 {
+  text-transform: uppercase;
+  font-size: 1em;
+  color: #bfbfbf;
+  margin: 10px 0 10px 20px;
+  font-weight: 400;
+}
+
+li:first-child {
+  margin-top: 30px;
+}

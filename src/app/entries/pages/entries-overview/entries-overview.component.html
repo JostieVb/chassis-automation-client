@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-body no-padding">
+    <h5 class="card-title">Entries</h5>
+
+    <ng-container *ngIf="entries.length > 0; else noEntries">
+      <div *ngFor="let entry of entries" class="entry new" id="entry-{{entry.id}}">
+        <h6>{{entry.title}}
+          <span class="badge">{{entry.label}}</span>
+        </h6>
+        <span class="meta-data">Received on {{entry.date}}</span>
+        <p>{{entry.text}}</p>
+      </div>
+    </ng-container>
+
+    <ng-template #noEntries>
+      <div id="no-entries">
+        No entries to show
+      </div>
+    </ng-template>
+
+  </div>
+</div>

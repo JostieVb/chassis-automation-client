@@ -1,0 +1,40 @@
+@import '../../../../assets/styles/global_vars';
+
+$padding-bottom: 0 0 20px 0;
+$margin: 0 1.25rem;
+
+.card {
+  background: $lighter-bg;
+  .card-body {
+    h5 {
+      padding: $padding-bottom;
+      margin: $margin;
+      border-bottom: 1px solid $light-border;
+    }
+    .meta-data {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      color: $color-secondary;
+      margin: 20px 1.25rem;
+      padding: $padding-bottom;
+      border-bottom: 1px solid $light-border;
+      box-sizing: border-box;
+      p {
+        margin: 0;
+        .label {
+          font-weight: bold;
+          width: 50px;
+          display: inline-block;
+        }
+      }
+    }
+    .content {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      margin: 20px 1.25rem;
+      border-bottom: 1px solid $light-border;
+    }
+  }
+}

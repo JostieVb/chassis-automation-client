@@ -1,0 +1,29 @@
+.card {
+  background: #f8f8f8; }
+  .card .card-body h5 {
+    padding: 0 0 20px 0;
+    margin: 0 1.25rem;
+    border-bottom: 1px solid #e6e6e6; }
+  .card .card-body .meta-data {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    color: #c7c7c7;
+    margin: 20px 1.25rem;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid #e6e6e6;
+    box-sizing: border-box; }
+    .card .card-body .meta-data p {
+      margin: 0; }
+      .card .card-body .meta-data p .label {
+        font-weight: bold;
+        width: 50px;
+        display: inline-block; }
+  .card .card-body .content {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    margin: 20px 1.25rem;
+    border-bottom: 1px solid #e6e6e6; }
+
+/*# sourceMappingURL=entries-detail.component.css.map */

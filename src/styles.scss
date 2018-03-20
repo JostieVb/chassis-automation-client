@@ -1,0 +1,124 @@
+@import 'assets/styles/global_vars';
+
+html, body {
+  background: #fafafa;
+  color: $default-text-color;
+  font-size: 14px;
+}
+
+a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+#page-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: $header-container-height 0 0 $sidebar-width;
+}
+
+.btn {
+  background: $color-default !important;
+  border: $color-default !important;
+  font-family: 'Arial';
+  color: #fff;
+  &.lighter {
+    background: $color-success !important;
+    border: $color-success !important;
+  }
+  &.btn-secondary {
+    background: $color-secondary !important;
+    border: $color-secondary !important;
+    color: $default-text-color;
+  }
+  &.btn-danger {
+    background: $color-danger !important;
+    border: $color-danger !important;
+  }
+}
+
+.breadcrumbs {
+  margin: 0;
+  padding: 0 0 0 $content-padding;
+  font-size: 14px;
+  background: #f0f0f0;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: $breadcrumbs-height;
+    li {
+      display: inline-block;
+      font-weight: 300;
+      height: $breadcrumbs-height;
+      line-height: $breadcrumbs-height;
+      font-weight: 300;
+      cursor: pointer;
+      &:first-letter {
+        text-transform: capitalize;
+      }
+      &:after {
+        font-family: FontAwesome;
+        content: '\f054';
+        width: 30px;
+        text-align: center;
+        display: inline-block;
+      }
+      &:last-child {
+        color: #0090d9;
+        font-weight: 600;
+        cursor: default !important;
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.row {
+  padding: 30px 40px;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+  h5 {
+    padding: 0 1.25rem;
+  }
+}
+
+.row {
+  width: 100%;
+  margin: 0;
+  padding: 30px 25px;
+  &.no-padding {
+    padding: 0;
+    .col {
+      padding: 0;
+      .card {
+        .card-body {
+          border-bottom: 0;
+        }
+      }
+    }
+  }
+  &.full-height {
+    @include full-height;
+    background: #fff;
+    .card {
+      border: none;
+      border-radius: 0;
+    }
+  }
+}

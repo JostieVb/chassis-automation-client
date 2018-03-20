@@ -1,0 +1,27 @@
+<nav class="sidebar">
+  <div class="sidebar-header">Chassis Automation</div>
+  <ul>
+    <ng-container *ngFor="let navItem of navItems">
+      <li *ngIf="navItem.link">
+        <a routerLink="{{navItem.path}}" routerLinkActive="active">
+          <span class="title">{{navItem.title}}</span>
+          <ng-container *ngIf="navItem.children.length > 0">
+            <span class=" arrow"></span>
+          </ng-container>
+        </a>
+        <span class="icon-thumbnail"><i class="{{navItem.icon}}"></i></span>
+
+        <ul *ngIf="navItem.children.length > 0" class="sub-menu">
+          <li *ngFor="let subItem of navItem.children">
+            <a routerLink="{{subItem.path}}">
+              <span class="title">{{subItem.title}}</span>
+            </a>
+            <span class="icon-thumbnail"><i class="{{subItem.icon}}"></i></span>
+          </li>
+        </ul>
+      </li>
+
+      <h4 *ngIf="!navItem.link">{{navItem.title}}</h4>
+    </ng-container>
+  </ul>
+</nav>

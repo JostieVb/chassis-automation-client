@@ -1,0 +1,44 @@
+$breadcrumbs-height: 55px;
+$header-height: 60px;
+$sidebar-width: 250px;
+$header-container-height: $breadcrumbs-height + $header-height + 1;
+$content-padding: 40px;
+
+$default-text-color: #626262;
+$color-default: #2390A8;
+$color-danger: #f55753;
+$color-success: #10cfbd;
+$color-secondary: #c7c7c7;
+
+$darker-bg: #f0f0f0;
+$lighter-bg: #f8f8f8;
+
+$light-border: #e6e6e6;
+
+@mixin transition($time) {
+  transition: all $time ease-in-out;
+  -o-transition: all $time ease-in-out;
+  -ms-transition: all $time ease-in-out;
+  -moz-transition: all $time ease-in-out;
+  -webkit-transition: all $time ease-in-out;
+}
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -o-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+}
+
+@mixin full-height {
+  min-height: calc(100vh - 116px);
+  height: auto;
+  overflow: hidden;
+}
+
+@mixin text-overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

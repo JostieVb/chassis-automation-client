@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,eAAgB;EACd,UAAU,ECUC,OAAO",
+"sources": ["entries.component.scss","../../../../assets/styles/global_vars.scss"],
+"names": [],
+"file": "entries.component.css"
+}

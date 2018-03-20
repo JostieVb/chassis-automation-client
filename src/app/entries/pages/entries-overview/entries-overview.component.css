@@ -1,0 +1,73 @@
+.card .card-body {
+  position: relative;
+  height: calc(100vh - 116px); }
+  .card .card-body .entry {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e6e6e6; }
+    .card .card-body .entry.selected {
+      background: #f8f8f8; }
+    .card .card-body .entry.new h6:before {
+      content: 'o';
+      color: #dca700;
+      width: 10px;
+      min-height: 20px;
+      line-height: 20px;
+      text-align: center;
+      position: absolute;
+      left: -12px;
+      margin: 0; }
+    .card .card-body .entry h6 {
+      position: relative;
+      min-height: 20px;
+      line-height: 20px; }
+      .card .card-body .entry h6 .badge {
+        width: auto;
+        height: 20px;
+        line-height: 20px;
+        color: #626262;
+        padding: 0 5px;
+        border-radius: 5px;
+        -o-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        background: #c7c7c7;
+        margin: 0 0 0 10px; }
+        .card .card-body .entry h6 .badge.completed {
+          background: #10cfbd;
+          color: #fff; }
+        .card .card-body .entry h6 .badge.denied {
+          background: #f55753;
+          color: #fff; }
+    .card .card-body .entry .meta-data {
+      display: block;
+      color: #c7c7c7;
+      height: 20px;
+      line-height: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
+    .card .card-body .entry p {
+      font-style: italic;
+      height: 20px;
+      line-height: 20px;
+      margin: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
+  .card .card-body #no-entries {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 50px;
+    line-height: 50px;
+    box-sizing: border-box;
+    margin: -25px 40px 0 40px;
+    text-align: center;
+    top: 50%; }
+
+/*# sourceMappingURL=entries-overview.component.css.map */

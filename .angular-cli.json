@@ -9,6 +9,7 @@
       "outDir": "dist",
       "assets": [
         "assets",
+        "../node_modules/bpmn-js/dist/assets/bpmn-font/font/bpmn.eot",
         "favicon.ico"
       ],
       "index": "index.html",
@@ -19,9 +20,18 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/bpmn-js/dist/assets/diagram-js.css",
+        "../node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn.css",
+        "../node_modules/@fortawesome/fontawesome/styles.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/bpmn-js/dist/bpmn-modeler.development.js",
+        "../node_modules/@fortawesome/fontawesome/index.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -54,7 +64,10 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
-    "component": {}
+    "styleExt": "scss",
+    "component": {},
+    "serve": {
+      "port": 9000
+    }
   }
 }

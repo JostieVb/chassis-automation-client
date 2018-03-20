@@ -1,0 +1,61 @@
+/* Variables */
+.sidebar {
+  background: #2B303B;
+  height: 100vh;
+  position: fixed;
+  width: 250px; }
+  .sidebar .sidebar-header {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    color: #fff;
+    background: #272b35;
+    border-bottom: 1px solid #232730; }
+  .sidebar ul {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    list-style: none;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 0;
+    margin: 20px 0 0 0; }
+    .sidebar ul li {
+      display: block;
+      padding: 0;
+      margin: 0;
+      clear: right;
+      color: #788296;
+      transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out; }
+      .sidebar ul li a {
+        font-family: Arial, sans-serif;
+        display: inline-block;
+        padding: 0 3px 0 32px;
+        min-height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+        clear: both; }
+        .sidebar ul li a .title {
+          float: left;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          width: 100%; }
+      .sidebar ul li:hover {
+        color: #fff !important; }
+
+h4 {
+  text-transform: uppercase;
+  font-size: 1em;
+  color: #bfbfbf;
+  margin: 10px 0 10px 20px;
+  font-weight: 400; }
+
+li:first-child {
+  margin-top: 30px; }
+
+/*# sourceMappingURL=sidebar.component.css.map */

@@ -1,1 +1,99 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  background: #fafafa;
+  color: #626262;
+  font-size: 14px; }
+
+a {
+  color: inherit !important;
+  text-decoration: none !important; }
+
+#page-container {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 116px 0 0 250px; }
+
+.btn {
+  background: #2390A8 !important;
+  border: #2390A8 !important;
+  font-family: 'Arial';
+  color: #fff; }
+  .btn.lighter {
+    background: #10cfbd !important;
+    border: #10cfbd !important; }
+  .btn.btn-secondary {
+    background: #c7c7c7 !important;
+    border: #c7c7c7 !important;
+    color: #626262; }
+  .btn.btn-danger {
+    background: #f55753 !important;
+    border: #f55753 !important; }
+
+.breadcrumbs {
+  margin: 0;
+  padding: 0 0 0 40px;
+  font-size: 14px;
+  background: #f0f0f0; }
+  .breadcrumbs ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 55px; }
+    .breadcrumbs ul li {
+      display: inline-block;
+      font-weight: 300;
+      height: 55px;
+      line-height: 55px;
+      font-weight: 300;
+      cursor: pointer; }
+      .breadcrumbs ul li:first-letter {
+        text-transform: capitalize; }
+      .breadcrumbs ul li:after {
+        font-family: FontAwesome;
+        content: '\f054';
+        width: 30px;
+        text-align: center;
+        display: inline-block; }
+      .breadcrumbs ul li:last-child {
+        color: #0090d9;
+        font-weight: 600;
+        cursor: default !important; }
+        .breadcrumbs ul li:last-child:after {
+          display: none; }
+
+.row {
+  padding: 30px 40px; }
+
+.right {
+  float: right; }
+
+.left {
+  float: left; }
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0; }
+  .no-padding h5 {
+    padding: 0 1.25rem; }
+
+.row {
+  width: 100%;
+  margin: 0;
+  padding: 30px 25px; }
+  .row.no-padding {
+    padding: 0; }
+    .row.no-padding .col {
+      padding: 0; }
+      .row.no-padding .col .card .card-body {
+        border-bottom: 0; }
+  .row.full-height {
+    min-height: calc(100vh - 116px);
+    height: auto;
+    overflow: hidden;
+    background: #fff; }
+    .row.full-height .card {
+      border: none;
+      border-radius: 0; }
+
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,33 @@
+header {
+  width: 100%;
+  height: 116px;
+  padding: 0 0 0 250px;
+  overflow: hidden; }
+  header .header {
+    width: 100%;
+    height: 60px;
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6; }
+  header .breadcrumbs {
+    width: 100%;
+    height: 55px;
+    background: #f0f0f0; }
+    header .breadcrumbs ul {
+      list-style: none;
+      padding: 0 40px; }
+      header .breadcrumbs ul li {
+        color: #7b7d82;
+        font-weight: 300;
+        display: inline-block;
+        height: 50px;
+        line-height: 50px; }
+        header .breadcrumbs ul li:after {
+          font-family: 'FontAwesome';
+          content: 'f105';
+          display: inline-block;
+          width: 40px;
+          text-align: center; }
+        header .breadcrumbs ul li:last-child:after {
+          display: none !important; }
+
+/*# sourceMappingURL=header.component.css.map */
