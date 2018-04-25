@@ -7,8 +7,73 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <style type="text/css">
+    #loading-intro {
+      text-align: center;
+      position: absolute;
+      top: calc(50% - 150px);
+      left: calc(50% - 150px);
+      width: 400px;
+      height: 300px;
+      z-index: 9999;
+    }
+
+    #loading-intro .loading-bar {
+      margin-top: 10px;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: #dadada;
+    }
+
+    #loading-intro .loading-bar .progress-bar {
+      width: 0%;
+      height: 6px;
+      border-radius: 3px;
+      background: #000;
+      transition: all 1s;
+    }
+
+    #loading-intro h5 {
+      font-weight: 900;
+      text-transform: uppercase;
+      color: #adadad;
+      font-size: 1em;
+    }
+
+  </style>
 </head>
 <body>
   <app-root></app-root>
+
+  <!-- Loader -->
+  <!--<div id="loading-intro">-->
+    <!--<div class="loading-bar">-->
+      <!--<div class="progress-bar"></div>-->
+    <!--</div>-->
+    <!--<h5>Chassis Automation is being loaded...</h5>-->
+  <!--</div>-->
+  <!-- /Loader -->
+
+
+  <!-- Scripts -->
+  <!-- Loader -->
+  <!--<script type="application/javascript">-->
+      <!--var introLoader = document.getElementById('loading-intro');-->
+      <!--var progress = 0;-->
+
+      <!--var interval = setInterval(function () {-->
+          <!--progress += 10;-->
+
+          <!--if (progress > 100) {-->
+              <!--clearInterval(interval);-->
+          <!--} else {-->
+              <!--introLoader.getElementsByClassName('progress-bar')[0].style.width = progress + '%';-->
+          <!--}-->
+
+      <!--}, 500);-->
+  <!--</script>-->
+  <!-- /Scripts -->
 </body>
 </html>

@@ -9,6 +9,8 @@ $color-default: #2390A8;
 $color-danger: #f55753;
 $color-success: #10cfbd;
 $color-secondary: #c7c7c7;
+$color-warning: #f8d053;
+$color-complete: #48b0f7;
 
 $darker-bg: #f0f0f0;
 $lighter-bg: #f8f8f8;
@@ -32,7 +34,7 @@ $light-border: #e6e6e6;
 }
 
 @mixin full-height {
-  min-height: calc(100vh - 116px);
+  min-height: 100%;
   height: auto;
   overflow: hidden;
 }

@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,aAAc;EACZ,cAAc,EAAE,SAAS",
+"sources": ["new-process.modal.scss"],
 "names": [],
-"file": "new-process.component.css"
+"file": "new-process.modal.css"
 }

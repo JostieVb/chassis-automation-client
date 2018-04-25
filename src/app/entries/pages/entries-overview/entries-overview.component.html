@@ -1,14 +1,27 @@
 <div class="card">
   <div class="card-body no-padding">
-    <h5 class="card-title">Entries</h5>
+    <h5 class="card-title">
+      Entries
+      <div class="dropdown">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-filter"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item selected" [ngClass]="{'selected': filter === 'all' }" (click)="setFilter('all')"><i class="fa fa-check"></i>All</a>
+          <a class="dropdown-item" [ngClass]="{'selected': filter === 'completed' }" (click)="setFilter('completed')"><i class="fa fa-check"></i>Completed</a>
+          <a class="dropdown-item" [ngClass]="{'selected': filter === 'not-completed' }" (click)="setFilter('not-completed')"><i class="fa fa-check"></i>Not completed</a>
+        </div>
+      </div>
+    </h5>
+
+    <ng-scrollbar [autoHide]="true">
 
     <ng-container *ngIf="entries.length > 0; else noEntries">
-      <div *ngFor="let entry of entries" class="entry new" id="entry-{{entry.id}}">
+      <div *ngFor="let entry of entries" class="entry" [ngClass]="{'selected': selectedEntryId == entry.id, 'unread': entry.unread === 'true'}" (click)="showDetails(entry.id)" id="entry-{{entry.id}}">
         <h6>{{entry.title}}
-          <span class="badge">{{entry.label}}</span>
+          <span [ngClass]="entry.status" class="badge">{{entry.label}}</span>
         </h6>
         <span class="meta-data">Received on {{entry.date}}</span>
-        <p>{{entry.text}}</p>
       </div>
     </ng-container>
 
@@ -17,6 +30,8 @@
         No entries to show
       </div>
     </ng-template>
+
+    </ng-scrollbar>
 
   </div>
 </div>

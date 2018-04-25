@@ -12,17 +12,39 @@ export class EntriesOverviewComponent implements OnInit, OnDestroy {
    * subs       :   component subscriptions
    * */
   protected entries = [];
+  protected selectedEntryId: number;
+  protected selectedEntry = [];
+  protected filter = 'all';
   private subs = [];
 
-  constructor(private entriesService: EntriesService) { }
+  constructor(
+      private entriesService: EntriesService
+  ) { }
 
   ngOnInit() {
+    this.entriesService.getEntries();
     this.subs.push(
-        this.entriesService.entries.subscribe(entries => this.entries = entries)
+      this.entriesService.entries.subscribe(entries => {this.entries = entries; console.log(entries);}),
+      this.entriesService.entry.subscribe(entry => this.selectedEntry = entry),
+        this.entriesService.selectedEntryId.subscribe( selectedEntryId => this.selectedEntryId = selectedEntryId)
     );
   }
 
+  showDetails(id) {
+    if (this.selectedEntryId !== id) {
+        this.entriesService.selectedEntryId.next(null);
+        this.entriesService.heightAuto.next(false);
+        this.entriesService.getEntry(id);
+    }
+  }
+
+  setFilter(filter) {
+    this.filter = filter;
+    this.entriesService.getEntries(filter);
+  }
+
   ngOnDestroy() {
+    this.entriesService.selectedEntryId.next(null);
     this.subs.forEach(sub => sub.unsubscribe());
   }
 

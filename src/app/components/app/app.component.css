@@ -4,4 +4,15 @@
   overflow: hidden;
   padding: 0 0 0 250px; }
 
+#logged-out-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #fafafa;
+  z-index: 999;
+  line-height: 100vh;
+  text-align: center; }
+
 /*# sourceMappingURL=app.component.css.map */

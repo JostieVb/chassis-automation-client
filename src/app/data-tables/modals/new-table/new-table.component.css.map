@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,CAAE;EACA,UAAU,EAAE,MAAM;EAClB,KAAK,ECMW,OAAO;EDLvB,MAAM,EAAE,CAAC",
+"sources": ["new-table.component.scss","../../../../assets/styles/global_vars.scss"],
+"names": [],
+"file": "new-table.component.css"
+}

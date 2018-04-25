@@ -1,0 +1,124 @@
+<app-edit-element-properties></app-edit-element-properties>
+
+<div [ngClass]="{'hide': !overlay }" class="block-overlay">
+    {{overlayText}}
+</div>
+
+<div id="modeler-container">
+    <div id="modeler-header">
+        <div class="name" #nameContainer>
+            <h3 (click)="editName()" [ngClass]="{'hide': editingName }">
+                <ng-container *ngIf="processName !== ''; else placeholder">
+                    {{processName}}
+                </ng-container>
+                <ng-template #placeholder>
+                    <div class="placeholder">Enter name</div>
+                </ng-template>
+                <i class="fa fa-pencil"></i>
+            </h3>
+            <input type="text" class="edit-name" placeholder="Enter name" [ngClass]="{'hide': !editingName }" name="name" [(ngModel)]="processName">
+        </div>
+        <div id="task-bar">
+            <div class="task-bar-elements">
+                <button type="button" class="btn btn-light" (click)="saveProcess()">Save</button>
+                <button type="button" class="btn btn-light"><a target="_blank" href="" id="exportXML" download="{{processName}}.bpmn">Export XML</a></button>
+                <button type="button" class="btn btn-light">Export SVG</button>
+                <button type="button" class="btn btn-light" (click)="resetZoom()"><i class="fa fa-bullseye" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="properties">
+        <ng-scrollbar>
+        <h4>Properties</h4>
+        <ng-container *ngIf="selectedProperties.length === 0; else showSelectedItem">
+            <p>{{message}}</p>
+        </ng-container>
+        <ng-template #showSelectedItem>
+        <form id="properties-form" name="properties">
+            <div class="prop-group" *ngFor="let property of selectedProperties">
+                <label for="{{property[0]}}" >{{property[0]}}</label>
+                <div class="help" *ngIf="helpers[property[0]]">
+                    ?
+                    <div class="help-message">
+                        <div class="selector"></div>
+                        {{helpers[property[0]]}}
+                    </div>
+                </div>
+                <div class="prop">
+                    <ng-container *ngIf="property[0] === 'caller'; else secondBlock">
+                        <select id="{{property[0]}}" class="form-control" name="{{property[0]}}" value="{{property[1]}}">
+                            <option selected disabled value="none">Select caller</option>
+                            <option *ngFor="let form of forms" value="{{form.identifier}}" >{{form.identifier}}</option>
+                        </select>
+                    </ng-container>
+
+                    <ng-template #secondBlock>
+                        <ng-container *ngIf="property[0] === 'assignees'; else thirdBlock">
+                            <ng-select [(ngModel)]="assignees" [ngModelOptions]="{standalone: true}" [options]="users" [multiple]="true" [placeholder]="'Select assignees'"></ng-select>
+                        </ng-container>
+                    </ng-template>
+
+                    <ng-template #thirdBlock>
+                        <ng-container *ngIf="property[0] === 'decisions'; else fourthBlock">
+                            <div class="form-control select2-free-input" (click)="focusInput()">
+                                <ng-container *ngIf="decisions.length === 0; else decisionsBlock">
+                                    <input type="text" name="decision" placeholder="Enter decisions..." [(ngModel)]="decision" (keydown)="alterDecisions($event)" />
+                                </ng-container>
+                                <ng-template #decisionsBlock>
+                                    <span class="option" *ngFor="let decision of decisions">
+                                        <span class="deselect-option" (click)="removeDecision(decision)">✕</span>
+                                        {{decision}}
+                                    </span>
+                                    <input class="min-width" onkeypress="this.style.width = ((this.value.length + 1) * 8) + 'px';" type="text" name="decision" [(ngModel)]="decision" (keydown)="alterDecisions($event)" />
+                                </ng-template>
+                            </div>
+                        </ng-container>
+                    </ng-template>
+
+                    <ng-template #fourthBlock>
+                        <ng-container *ngIf="property[0] === 'title'; else fifthBlock">
+                            <input type="text" id="{{property[0]}}" name="{{property[0]}}" placeholder="Enter a title..." class="form-control" value="{{property[1]}}">
+                        </ng-container>
+                    </ng-template>
+
+                    <ng-template #fifthBlock>
+                        <ng-container *ngIf="property[0] === 'message'; else sixthBlock">
+                            <textarea id="{{property[0]}}" name="{{property[0]}}" placeholder="Enter a message..." class="form-control textarea">{{property[1]}}</textarea>
+                        </ng-container>
+                    </ng-template>
+
+                    <ng-template #sixthBlock>
+                        <ng-container *ngIf="property[0] === 'output'; else elseBlock">
+                            <ng-container *ngIf="property[1].length === 0; else showOutput;">
+                                Link descendants to add outputs for this exclusive gateway.
+                            </ng-container>
+                            <ng-template #showOutput>
+                                <div class="" *ngFor="let output of property[1]">
+                                    <ng-container *ngIf="processItemsNames[output['id']]; else showId">
+                                        {{processItemsNames[output['id']]}}
+                                    </ng-container>
+                                    <ng-template #showId>
+                                        {{output['id']}}
+                                    </ng-template>
+                                    <select class="form-control" name="{{output['id']}}" value="{{output['value']}}">
+                                        <option *ngFor="let decision of selectableDecisions" value="{{decision}}">{{decision}}</option>
+                                    </select>
+                                </div>
+                            </ng-template>
+                        </ng-container>
+                    </ng-template>
+
+                    <ng-template #elseBlock>{{property[1]}}</ng-template>
+                </div>
+            </div>
+            <div class="prop-footer">
+                <button class="btn btn-primary" (click)="saveProperties($event)">Save properties</button>
+                <button class="btn btn-secondary" (click)="dismissProperties()">Cancel</button>
+            </div>
+        </form>
+        </ng-template>
+        </ng-scrollbar>
+    </div>
+    <div class="zoom-instructions"><i class="fa fa-info-circle"></i> Use ctrl + scroll to zoom the diagram</div>
+    <div class="canvas" (click)="checkClick($event.currentTarget)"></div>
+</div>

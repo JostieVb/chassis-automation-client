@@ -1,0 +1,15 @@
+#alert-box {
+  position: fixed;
+  z-index: 99999999;
+  bottom: 0;
+  right: 40px;
+  display: none;
+  transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out; }
+  #alert-box.show {
+    display: block; }
+
+/*# sourceMappingURL=alert.component.css.map */

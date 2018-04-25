@@ -1,0 +1,61 @@
+@import '../../../../assets/styles/global_vars';
+
+.card {
+  height: calc(100vh - 116px);
+  overflow: auto;
+  background: #fafafa;
+  .card-body {
+    position: relative;
+    padding: 0;
+    h5 {
+      margin: 0;
+      height: 50px;
+      line-height: 50px;
+    }
+    #newFormButon {
+      position: absolute;
+      right: 1.25rem;
+      top: 10px
+    }
+    .no-forms {
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+      height: 50px;
+      line-height: 50px;
+      top: 50%;
+      margin-top: -25px;
+    }
+    .ch-table {
+      .ch-row {
+        .ch-col {
+          a {
+            &:hover {
+              color: $color-secondary !important;
+            }
+          }
+          &.ch-switch {
+            padding-top: 6px;
+          }
+          &:first-child {
+            width: 40%;
+            min-width: 40%;
+            max-width: 40%;
+            @include text-overflow;
+          }
+        }
+      }
+    }
+  }
+
+  .switch-overlay {
+    position: absolute;
+    left: 0;
+    width: 35px;
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+    cursor: pointer;
+  }
+}

@@ -1,14 +1,78 @@
 <div class="card">
-  <div class="card-body no-padding">
-    <h5 class="card-title">Selected entry name</h5>
+    <ng-scrollbar [autoHide]="true">
+    <ng-container *ngIf="!loading && selectedEntryId !== null; else loadingBlock">
+    <div class="card-body no-padding">
+      <h5 class="card-title">
+          {{entry.title}}
+          <div class="dropdown">
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-ellipsis-v"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" (click)="deleteEntry(entry.id)">Delete entry</a>
+              </div>
+          </div>
+      </h5>
 
-    <div class="meta-data">
-      <p><span class="label">From:</span>bla bla bla</p>
-      <p><span class="label">On:</span>20-03-2018 10:26</p>
+      <div class="meta-data">
+        <p><span class="label">From:</span>{{entry.sender}}</p>
+        <p><span class="label">On:</span>{{entry.date}}</p>
+      </div>
+
+      <div class="content">
+        <div class="message">
+            <p>{{entry.message}}</p>
+            <div class="ch-table ch-no-padding ch-table-striped" [ngClass]="{'height-auto': heightAuto}" *ngIf="entry.content">
+                <div class="ch-row ch-head">
+                    <div class="ch-col ch-text-overflow-ellipsis" *ngFor="let key of entry.content['keys']">{{key}}</div>
+                    <i class="expand fa" [ngClass]="{'fa-compress': heightAuto, 'fa-expand': !heightAuto}" (click)="toggleContent()"></i>
+                </div>
+                <div class="ch-row">
+                    <div class="ch-col ch-text-overflow-ellipsis" *ngFor="let value of entry.content['values']">{{value}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-container" *ngIf="entry.decisions.length > 0 && entry.status !== 'completed'">
+          <form *ngIf="entry.decisions">
+              <label for="message">Optional message:</label>
+              <textarea class="form-control textarea" id="message" [(ngModel)]="response.message" name="message" placeholder="Enter a optional message..."></textarea>
+              <div class="decisions">
+                  <h6>Decisions</h6>
+                  <table>
+                      <tr *ngFor="let decision of entry.decisions">
+                          <td>
+                              <input type="radio" [(ngModel)]="response.decision" id="{{decision}}" name="decision" value="{{decision}}">
+                          </td>
+                          <td>
+                              <label for="{{decision}}">{{decision}}</label>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <button class="btn btn-primary" (click)="sendResponse(entry.id, entry.caller, entry.task, entry.dbTable, entry.contentId)">Send</button>
+              <button class="btn btn-secondary" (click)="dismissEntry()">Cancel</button>
+          </form>
+        </div>
+
+        <div class="response-container" *ngIf="entry.responseMessage">
+            {{entry.responseMessage}}
+        </div>
+
+        <div class="response-container" *ngIf="entry.status === 'completed'">
+              You already completed this entry.
+        </div>
+      </div>
     </div>
+    </ng-container>
 
-    <div class="content">
-
-    </div>
-  </div>
+    <ng-template #loadingBlock>
+      <div class="no-entry" *ngIf="loading">
+        <i class="fa fa-circle-o-notch fa-spin"></i> Loading entry
+      </div>
+        <div class="no-entry" *ngIf="selectedEntryId === null && !loading">
+            No entry selected
+        </div>
+    </ng-template>
+    </ng-scrollbar>
 </div>

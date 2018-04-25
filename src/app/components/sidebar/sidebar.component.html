@@ -1,10 +1,13 @@
 <nav class="sidebar">
   <div class="sidebar-header">Chassis Automation</div>
-  <ul>
+  <ul *ngIf="!loading">
     <ng-container *ngFor="let navItem of navItems">
       <li *ngIf="navItem.link">
         <a routerLink="{{navItem.path}}" routerLinkActive="active">
-          <span class="title">{{navItem.title}}</span>
+          <span class="title">
+            {{navItem.title}}
+          </span>
+          <span class="entries-count" *ngIf="navItem.title === 'Entries' && unreadEntries > 0">{{unreadEntries}}</span>
           <ng-container *ngIf="navItem.children.length > 0">
             <span class=" arrow"></span>
           </ng-container>

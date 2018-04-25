@@ -1,7 +1,9 @@
-<ngx-loading-bar></ngx-loading-bar>
-<app-sidebar></app-sidebar>
+<ngx-loading-bar [color]="'#2390A8'" [includeSpinner]="false"></ngx-loading-bar>
+<app-alert></app-alert>
+<app-sidebar *ngIf="loggedIn"></app-sidebar>
 <div class="page-container">
-    <app-header></app-header>
+    <div id="logged-out-overlay" *ngIf="loggingOut">Switching accounts...</div>
+    <app-header *ngIf="loggedIn"></app-header>
 
     <div class="page-content-wrapper">
         <router-outlet></router-outlet>

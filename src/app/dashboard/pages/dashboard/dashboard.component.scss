@@ -1,0 +1,13 @@
+@import '../../../../assets/styles/global_vars';
+
+h1 {
+  width: 100%;
+  font-size: 21px;
+  margin: 0;
+  padding: 20px 40px;
+}
+
+.card {
+  border-right: 1px solid $color-secondary;
+  border-bottom: 1px solid $color-secondary;
+}

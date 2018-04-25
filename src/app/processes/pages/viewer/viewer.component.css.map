@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,KAAM;EACJ,UAAU,ECYC,OAAO;;ADTpB,OAAQ;EACN,QAAQ,EAAE,QAAQ;EAClB,IAAI,EAAE,CAAC;EACP,KAAK,EAAE,CAAC;EACR,GAAG,EAAE,CAAC;EACN,MAAM,EAAE,CAAC",
+"sources": ["viewer.component.scss","../../../../assets/styles/global_vars.scss"],
+"names": [],
+"file": "viewer.component.css"
+}

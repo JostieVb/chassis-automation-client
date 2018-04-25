@@ -1,0 +1,36 @@
+<div id="background" *ngIf="!loggedIn">
+    <div id="background-overlay"></div>
+</div>
+
+<div id="login-panel" *ngIf="!loggedIn">
+    <div id="login-content-container">
+    <div class="login-panel-header">Chassis Automation</div>
+        <p>Sign in to Chassis Automation</p>
+        <div class="alert alert-danger" *ngIf="errorMsg">
+            <strong>Error!</strong> {{errorMsg}}
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="email" spellcheck="false">E-mail address</label>
+                <input type="email" id="email" class="textfield" [(ngModel)]="email" name="email" placeholder="E-mail address" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="textfield" id="password" [(ngModel)]="password" name="password" placeholder="Password" required />
+            </div>
+            <div class="form-group check-group">
+                <input class="form-check-input" type="checkbox" id="remember-login" [(ngModel)]="rememberLogin" name="rememberLogin" checked>
+                <label class="form-check-label" for="remember-login">
+                    Keep Me Signed In
+                </label>
+            </div>
+            <button type="submit" (click)="login()" class="btn btn-primary" [disabled]="signingIn">
+                <span *ngIf="!signingIn">Sign in</span>
+                <span *ngIf="signingIn">
+                    <i class="fa fa-circle-o-notch fa-spin"></i>
+                    Signing in
+                </span>
+            </button>
+        </form>
+    </div>
+</div>

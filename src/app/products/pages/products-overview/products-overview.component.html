@@ -1,17 +1,23 @@
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title">Products</h5>
-    <table class="table table-striped">
-      <tr role="row">
-        <th rowspan="1" colspan="1">#</th>
-        <th rowspan="1" colspan="1">Name</th>
-        <th rowspan="1" colspan="1">Status</th>
-      </tr>
-      <tr *ngFor="let product of products">
-        <td>{{product.id}}</td>
-        <td>{{product.name}}</td>
-        <td><span class="status">{{product.status}}</span></td>
-      </tr>
-    </table>
+<div class="card no-padding">
+  <div class="card-body no-padding">
+    <h5 class="card-title">Added products</h5>
+    <div class="ch-table ch-no-padding ch-table-striped ch-no-text-overflow ch-col-max-h">
+      <div class="ch-row ch-head">
+        <div class="ch-col">Name</div>
+        <div class="ch-col">Description</div>
+        <div class="ch-col">Status</div>
+      </div>
+      <div class="ch-row" *ngFor="let product of products">
+        <div class="ch-col">
+          {{product.ca_name}}
+        </div>
+        <div class="ch-col ch-overflow-hidden">
+          {{product.ca_description}}
+        </div>
+        <div class="ch-col">
+          <span [ngClass]="{'declined': product.status == 'declined', 'approved': product.status == 'approved' }" class="status">{{product.status}}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

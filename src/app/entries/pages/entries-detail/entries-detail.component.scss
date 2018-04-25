@@ -5,17 +5,50 @@ $margin: 0 1.25rem;
 
 .card {
   background: $lighter-bg;
+  height: calc(100vh - 116px);
+  position: relative;
+  .card-title {
+    padding: 0 !important;
+    position: relative;
+    .dropdown {
+      position: absolute;
+      right: 0;
+      top: 0;
+      button {
+        background: transparent !important;
+        color: $default-text-color;
+        &:after {
+          display: none !important;
+        }
+      }
+    }
+  }
+  .no-entry {
+    .icon {
+      width: 100%;
+      height: 50px;
+      display: inline-block;
+      font-size: 32px;
+      line-height: 50px;
+    }
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    line-height: 20px;
+    text-align: center;
+    top: 50%;
+    margin-top: - 50px;
+  }
   .card-body {
-    h5 {
+    .card-title {
       padding: $padding-bottom;
       margin: $margin;
       border-bottom: 1px solid $light-border;
+      height: 45px;
     }
     .meta-data {
-      width: 100%;
       height: auto;
       overflow: hidden;
-      color: $color-secondary;
       margin: 20px 1.25rem;
       padding: $padding-bottom;
       border-bottom: 1px solid $light-border;
@@ -26,15 +59,45 @@ $margin: 0 1.25rem;
           font-weight: bold;
           width: 50px;
           display: inline-block;
+          color: $color-secondary;
         }
       }
     }
     .content {
-      width: 100%;
       height: auto;
-      overflow: hidden;
       margin: 20px 1.25rem;
-      border-bottom: 1px solid $light-border;
+      .message, .action-container, .response-container {
+        height: auto;
+        border-bottom: 1px solid $light-border;
+        margin: 0 0 20px 0;
+        padding-bottom: 30px;
+      }
+      .action-container {
+        .decisions {
+          margin: 20px 0;
+          table {
+            padding: 10px;
+            tr {
+              background: #f2f2f2;
+              border-bottom: 1px solid $light-border;
+              &:last-child {
+                border-bottom: none;
+              }
+              td {
+                &:first-child {
+                  padding: 10px 5px 10px 10px;
+                }
+                &:last-child {
+                  padding: 10px 10px 10px 5px;
+                }
+                label {
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -1,0 +1,35 @@
+.card {
+  .card-body {
+    .card-title {
+      button {
+        position: absolute;
+        right: 1.25rem;
+        top: 10px;
+      }
+    }
+  }
+}
+
+.ch-table {
+  .ch-row {
+    &.selected {
+      background: #f2f2f2;
+    }
+    .ch-col {
+      button {
+        position: absolute;
+        right: 0;
+        top: 5px;
+      }
+    }
+  }
+}
+
+.link {
+  color: inherit !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  &:hover {
+    color: #c7c7c7 !important;
+  }
+}

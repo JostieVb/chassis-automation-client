@@ -1,0 +1,106 @@
+<div class="card full-height">
+  <ng-scrollbar [autoHide]="true">
+  <div class="card-body">
+    <h5 class="card-title">New form</h5>
+    <form>
+      <div class="form-group">
+        <label for="name">Form name</label>
+        <input type="text" class="form-control" (keyup)="generateIdentifier()" [(ngModel)]="formName" name="name" id="name" placeholder="Enter form name..." required>
+      </div>
+      <div class="form-group">
+        <label for="identifier">Unique form identifier</label>
+        <input type="text" class="form-control" name="identifier" [(ngModel)]="identifier" id="identifier" placeholder="Enter form identifier..." required>
+      </div>
+      <div class="form-group">
+        <label for="db_table">Database table</label>
+        <select [(ngModel)]="dbTable" (change)="getTableColumns()" name="db_table" id="db_table" class="form-control">
+          <option *ngFor="let table of tables" value="{{table.name}}">{{table.name}}</option>
+        </select>
+      </div>
+
+      <hr *ngIf="dbTable !== ''" />
+
+      <h6 *ngIf="dbTable !== ''">Form preview</h6>
+      <div class="no-preview" *ngIf="structure.length === 0 && dbTable !== ''">
+        No fields available for preview. Add new fields below.
+      </div>
+      <div class="form-structure" *ngIf="structure.length > 0 && dbTable !== ''">
+        <div class="form-group" *ngFor="let field of structure">
+          <div class="delete-overlay" [ngClass]="{'show': deleteOverlay === field.fieldName }">Delete this field?</div>
+          <div class="edit form-item" (click)="editFormItem(field.fieldName)"><i class="fa fa-pencil"></i></div>
+          <div class="delete form-item" (click)="deleteFormItem(field.fieldName, field.dbColumn)" (mouseenter)="deleteOverlay = field.fieldName" (mouseleave)="deleteOverlay = ''"><i class="fa fa-trash-o"></i></div>
+          <div class="label">{{field.fieldLabel}}</div>
+          <div class="form-control {{field.fieldType}}">
+            <div class="placeholder">
+              {{field.fieldPlaceholder}}
+            </div>
+            <span *ngIf="field.required">* required</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="toggle-new-field" *ngIf="!showFieldEditor && dbTable !== ''" (click)="toggleFieldEditor()">
+        <div class="plus-icon">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+        </div>
+        <span>Add new field</span>
+      </div>
+
+      <div class="new-field" [ngClass]="{'show': showFieldEditor === true }">
+        <h6>Add new field</h6>
+
+        <div class="form-group">
+          <label for="fieldLabel">Label</label>
+          <input type="text" class="form-control" [(ngModel)]="fieldLabel" name="fieldLabel" id="fieldLabel" placeholder="Enter field label..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="fieldPlaceholder">Placeholder</label>
+          <input type="text" class="form-control" [(ngModel)]="fieldPlaceholder" name="fieldPlaceholder" id="fieldPlaceholder" placeholder="Enter optional placeholder..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="fieldType">Field type</label>
+          <select [(ngModel)]="fieldType" name="fieldType" id="fieldType" class="form-control">
+            <option value="text">Text</option>
+            <option value="email">E-mail</option>
+            <option value="textarea">Textarea</option>
+            <option value="password">Password</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tableColumn">Database table column</label>
+          <select [(ngModel)]="dbColumn" name="tableColumn" id="tableColumn" class="form-control">
+            <ng-container *ngFor="let column of columns">
+              <option *ngIf="!column.taken" value="{{column.name}}">{{column.name}}</option>
+            </ng-container>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="required">Required field</label>
+          <input type="checkbox" value="required" [(ngModel)]="required" id="required" name="required" />
+        </div>
+
+        <button class="btn btn-primary" (click)="saveField()" *ngIf="editField">Save field</button>
+        <button class="btn btn-primary" (click)="addField()" *ngIf="!editField">Add field</button>
+        <button class="btn btn-secondary" (click)="dismissFields()">Cancel</button>
+      </div>
+      <hr />
+
+      <div class="alert alert-danger" *ngIf="errorMsg !== ''">
+        <strong>Error!</strong> {{errorMsg}}
+      </div>
+
+      <button type="submit" *ngIf="editingForm" [disabled]="structure.length === 0" (click)="postForm('save')" class="btn btn-primary">Save form</button>
+      <button type="submit" *ngIf="!editingForm" [disabled]="structure.length === 0" (click)="postForm('add')" class="btn btn-primary">Add form</button>
+      <button type="submit" (click)="dismissForm()" class="btn btn-secondary">
+          <ng-container *ngIf="editingForm; else notEditing">Cancel</ng-container>
+          <ng-template #notEditing>Clear</ng-template>
+      </button>
+    </form>
+
+  </div>
+  </ng-scrollbar>
+</div>

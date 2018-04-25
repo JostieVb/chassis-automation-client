@@ -1,0 +1,133 @@
+.card {
+  height: calc(100vh - 116px);
+  overflow: auto; }
+  .card .card-body h5 {
+    padding: 0 !important; }
+  .card .card-body hr {
+    width: 100%;
+    margin: 20px 0; }
+  .card .card-body .no-preview {
+    width: 100%;
+    text-align: center;
+    opacity: 0.7;
+    margin: 20px 0 0 0; }
+  .card .card-body .toggle-new-field {
+    margin: 20px 0 0 0;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out; }
+    .card .card-body .toggle-new-field:hover {
+      opacity: 1; }
+    .card .card-body .toggle-new-field .plus-icon {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      display: inline-block;
+      background: #626262;
+      color: #fff;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px; }
+    .card .card-body .toggle-new-field span {
+      width: 100%;
+      display: inline-block; }
+  .card .card-body .form-structure {
+    background: #f0f0f0;
+    height: auto;
+    margin-left: -1.25rem;
+    width: calc(100% + 2.5rem);
+    box-sizing: border-box; }
+    .card .card-body .form-structure p {
+      font-style: italic;
+      padding: 0 1.25rem; }
+    .card .card-body .form-structure .form-group {
+      padding: 10px 1.25rem 20px 1.25rem;
+      overflow: hidden;
+      position: relative;
+      margin: 0;
+      transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out; }
+      .card .card-body .form-structure .form-group .form-control {
+        position: relative; }
+        .card .card-body .form-structure .form-group .form-control .placeholder {
+          color: #d3d3d3; }
+        .card .card-body .form-structure .form-group .form-control span {
+          position: absolute;
+          right: 10px;
+          top: 5px;
+          color: #d3d3d3; }
+        .card .card-body .form-structure .form-group .form-control.textarea {
+          height: 100px; }
+      .card .card-body .form-structure .form-group .label {
+        height: 25px; }
+      .card .card-body .form-structure .form-group .delete-overlay {
+        background: rgba(103, 15, 15, 0.2);
+        text-align: center;
+        line-height: 100%;
+        color: #fff;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        z-index: 1;
+        display: none;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column; }
+        .card .card-body .form-structure .form-group .delete-overlay.show {
+          display: flex; }
+      .card .card-body .form-structure .form-group .form-item {
+        width: 40px;
+        height: 40px;
+        color: #fff;
+        position: absolute;
+        z-index: 2;
+        text-align: center;
+        line-height: 40px;
+        top: 50%;
+        margin-top: -20px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out; }
+        .card .card-body .form-structure .form-group .form-item.delete {
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+          background: #f55753;
+          right: -40px; }
+          .card .card-body .form-structure .form-group .form-item.delete:hover {
+            background: #c54d4a; }
+        .card .card-body .form-structure .form-group .form-item.edit {
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+          background: #2390A8;
+          left: -40px; }
+          .card .card-body .form-structure .form-group .form-item.edit:hover {
+            background: #24788a; }
+      .card .card-body .form-structure .form-group:hover {
+        background: #eaeaea; }
+      .card .card-body .form-structure .form-group:hover > .delete {
+        right: 0; }
+      .card .card-body .form-structure .form-group:hover > .edit {
+        left: 0; }
+  .card .card-body .new-field {
+    display: none;
+    margin: 20px 0 0 0; }
+    .card .card-body .new-field.show {
+      display: block; }
+
+/*# sourceMappingURL=forms-add.component.css.map */

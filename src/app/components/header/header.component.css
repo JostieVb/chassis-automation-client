@@ -1,13 +1,106 @@
 header {
   width: 100%;
   height: 116px;
-  padding: 0 0 0 250px;
-  overflow: hidden; }
+  padding: 0 0 0 250px; }
   header .header {
     width: 100%;
     height: 60px;
     background: #fff;
-    border-bottom: 1px solid #e6e6e6; }
+    border-bottom: 1px solid #e6e6e6;
+    box-sizing: border-box;
+    position: relative; }
+    header .header .toggle-sidebar {
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      background: #272b35;
+      border-bottom: 1px solid #232730;
+      display: none; }
+    header .header .user {
+      width: 110px;
+      height: 60px;
+      position: absolute;
+      right: 20px;
+      top: 0; }
+      header .header .user span {
+        text-transform: capitalize;
+        width: 60px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        float: left;
+        display: inline-block;
+        height: 60px;
+        line-height: 60px;
+        text-align: right; }
+      header .header .user .avatar {
+        position: absolute;
+        right: -40px;
+        width: 32px;
+        height: 32px;
+        border-radius: 32px;
+        background: #c7c7c7;
+        overflow: hidden;
+        cursor: pointer; }
+        header .header .user .avatar img {
+          width: 100%; }
+      header .header .user .user-menu {
+        position: absolute;
+        width: 100px;
+        height: auto;
+        padding: 5px 0;
+        top: 10px;
+        right: -21px;
+        border-radius: 5px;
+        background: #fff;
+        border: 1px solid #e6e6e6; }
+        header .header .user .user-menu .selector {
+          width: 20px;
+          height: 10px;
+          background-image: url("../../../assets/img/selector.png");
+          background-size: 100%;
+          background-position: center bottom;
+          position: absolute;
+          top: -10px;
+          right: 5px; }
+        header .header .user .user-menu a {
+          cursor: pointer;
+          width: 100%;
+          height: 20px;
+          line-height: 20px;
+          display: block;
+          box-sizing: border-box;
+          padding: 0 10px; }
+          header .header .user .user-menu a:hover {
+            background: #f8f8f8; }
+          header .header .user .user-menu a:active {
+            background: #eaeaea; }
+          header .header .user .user-menu a i {
+            display: inline-block;
+            width: 15px;
+            font-size: 12px; }
+    header .header .switch-account {
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: bolder;
+      line-height: 60px;
+      position: absolute;
+      right: 150px;
+      top: 0;
+      height: 59px;
+      width: auto;
+      padding: 0 20px;
+      background: #f8f8f8; }
+      header .header .switch-account .btn-group button {
+        margin-left: 20px;
+        text-transform: capitalize; }
+      header .header .switch-account .btn-group .dropdown-menu a {
+        height: 30px;
+        line-height: 25px;
+        font-size: 12px;
+        text-transform: capitalize; }
   header .breadcrumbs {
     width: 100%;
     height: 55px;

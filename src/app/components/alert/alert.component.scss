@@ -1,0 +1,13 @@
+@import '../../../assets/styles/global_vars';
+
+#alert-box {
+  position: fixed;
+  z-index: 99999999;
+  bottom: 0;
+  right: 40px;
+  display: none;
+  @include transition(.2s);
+  &.show {
+    display: block;
+  }
+}

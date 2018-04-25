@@ -1,4 +1,5 @@
 @import 'assets/styles/global_vars';
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700,800,900');
 
 html, body {
   background: #fafafa;
@@ -9,6 +10,17 @@ html, body {
 a {
   color: inherit !important;
   text-decoration: none !important;
+}
+
+.textarea {
+  min-height: 100px;
+}
+
+.required {
+  &:after {
+    content: '* required';
+    display: inline-block;
+  }
 }
 
 #page-container {
@@ -51,24 +63,29 @@ a {
     height: $breadcrumbs-height;
     li {
       display: inline-block;
-      font-weight: 300;
+      font-weight: 600;
       height: $breadcrumbs-height;
       line-height: $breadcrumbs-height;
-      font-weight: 300;
+      color: #7b7d82;
+      font-family: 'Montserrat', sans-serif;
+      text-transform: uppercase;
       cursor: pointer;
-      &:first-letter {
-        text-transform: capitalize;
+      font-size: 11px;
+      @include transition(.2s);
+      &:hover {
+        color: #0090d9;
       }
       &:after {
+        color: #000 !important;
         font-family: FontAwesome;
-        content: '\f054';
+        content: '\f105';
         width: 30px;
         text-align: center;
         display: inline-block;
       }
       &:last-child {
         color: #0090d9;
-        font-weight: 600;
+        font-weight: 700;
         cursor: default !important;
         &:after {
           display: none;
@@ -93,8 +110,10 @@ a {
 .no-padding {
   padding-left: 0;
   padding-right: 0;
-  h5 {
-    padding: 0 1.25rem;
+  border: none;
+  border-radius: 0;
+  h5, .table {
+    padding: 0 1.25rem !important;
   }
 }
 
@@ -109,16 +128,228 @@ a {
       .card {
         .card-body {
           border-bottom: 0;
+          height: calc(100vh - 116px);
+          overflow: hidden;
         }
       }
     }
   }
   &.full-height {
     @include full-height;
-    background: #fff;
+    &.max {
+      height: 100%;
+      min-height: 100%;
+      max-height: 100%;
+    }
     .card {
       border: none;
       border-radius: 0;
+    }
+  }
+}
+
+.dropdown-menu {
+  .dropdown-item {
+    cursor: pointer;
+    &:active {
+      background: #e3e3e3;
+    }
+  }
+}
+
+.loader {
+  width: 100%;
+  height: 100%;
+  background: red;
+}
+
+/* Table */
+.ch-table {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 0 1.25rem;
+  &.height-auto {
+    .ch-row, .ch-row .ch-col {
+      max-height: none !important;
+      height: auto !important;
+      &.ch-head {
+        max-height: 40px !important;
+        height: 40px !important;
+        line-height: 40px !important;
+      }
+      .ch-col {
+        white-space: normal !important;
+        overflow: auto !important;
+        line-height: 1.5;
+        margin: 10px 0;
+      }
+    }
+  }
+  &.ch-col-max-h {
+    .ch-row {
+      .ch-col {
+        max-height: 40px;
+      }
+    }
+  }
+  &.ch-no-text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &.ch-table-striped {
+    .ch-row:nth-child(odd) {
+      background: #F2F2F2;
+    }
+    .ch-row:nth-child(even) {
+      background: #fff;
+    }
+  }
+  &.ch-no-padding {
+    padding: 0;
+    .ch-row {
+      padding: 0 1.25rem;
+      &:last-child {
+        border-bottom: 1px solid $light-border;
+      }
+    }
+  }
+  .ch-row {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    border-top: 1px solid $light-border;
+    &.ch-head {
+      font-weight: bold;
+      position: relative;
+      .expand {
+        position: absolute;
+        right: 1.25rem;
+        height: 40px;
+        line-height: 40px;
+        cursor: pointer;
+      }
+    }
+    .ch-col {
+      height: auto;
+      min-height: 40px;
+      line-height: 40px;
+      width: 50%;
+      position: relative;
+      &.ch-text-overflow-ellipsis {
+        padding: 0 10px 0 0;
+        @include text-overflow;
+        &:last-child {
+          padding: 0;
+        }
+      }
+      &.ch-overflow-hidden {
+        overflow: hidden;
+      }
+    }
+  }
+}
+
+/* ng-select styles */
+ng-select{
+  .below {
+    background: #fff !important;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0.15rem .75rem !important;
+    line-height: 1.5 !important;
+    outline: none !important;
+    .multiple {
+      padding: 0 !important;
+      .option {
+        .deselect-option {
+          font-size: 12px !important;
+        }
+        background-color: #efefef !important;
+        border: 1px solid $light-border !important;
+        border-radius: 5px !important;
+        color: $default-text-color;
+        font-size: 12px !important;
+      }
+    }
+  }
+  select-dropdown {
+    .below {
+      padding: 0 !important;
+      overflow: hidden;
+      .options {
+        ul {
+          li {
+            color: $default-text-color !important;
+            padding: 0.15rem .75rem !important;
+            font-size: 14px !important;
+            &.selected {
+              display: none !important;
+            }
+            &.highlighted {
+              background: #f3f3f3 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.select2-free-input {
+  cursor: pointer;
+  .option {
+    cursor: default;
+    display: inline-block;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    line-height: 22px;
+    margin: 3px 5px 3px 0;
+    padding: 0 4px !important;
+    background-color: #efefef;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    color: #626262;
+    font-size: 12px;
+    max-width: 100%;
+    .deselect-option {
+      padding: 0 !important;
+    }
+  }
+  input {
+    min-width: 2px;
+    width: auto;
+    max-width: 100%;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    &.min-width {
+      width: 2px;
+    }
+  }
+}
+
+/* Hidden modeler items */
+.djs-palette-entries {
+  .group {
+    .bpmn-icon-connection-multi, .bpmn-icon-space-tool, .bpmn-icon-intermediate-event-none,
+    .bpmn-icon-subprocess-expanded, .bpmn-icon-data-object, .bpmn-icon-data-store, .bpmn-icon-participant {
+      display: none;
+    }
+  }
+}
+
+.djs-context-pad {
+  .group[data-group='model'] {
+    display: none;
+  }
+  .group {
+    .bpmn-icon-screw-wrench {
+      display: none;
     }
   }
 }

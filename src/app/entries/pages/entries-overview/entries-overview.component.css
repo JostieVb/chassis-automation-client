@@ -1,35 +1,79 @@
+.card .card-title {
+  height: 45px;
+  margin: 0;
+  border-bottom: 1px solid #e6e6e6; }
+  .card .card-title .dropdown {
+    float: right; }
+    .card .card-title .dropdown button {
+      background: transparent !important;
+      color: #626262; }
+    .card .card-title .dropdown .dropdown-menu .dropdown-item {
+      position: relative; }
+      .card .card-title .dropdown .dropdown-menu .dropdown-item .fa-check {
+        display: none;
+        left: 4px;
+        top: 0;
+        bottom: 0;
+        line-height: 23px;
+        position: absolute; }
+      .card .card-title .dropdown .dropdown-menu .dropdown-item.selected .fa-check {
+        display: block; }
 .card .card-body {
-  position: relative;
-  height: calc(100vh - 116px); }
+  position: relative; }
   .card .card-body .entry {
     width: 100%;
     height: auto;
     overflow: hidden;
     padding: 10px 20px;
     box-sizing: border-box;
-    border-bottom: 1px solid #e6e6e6; }
+    border-bottom: 1px solid #e6e6e6;
+    cursor: pointer;
+    position: relative; }
     .card .card-body .entry.selected {
       background: #f8f8f8; }
-    .card .card-body .entry.new h6:before {
-      content: 'o';
-      color: #dca700;
-      width: 10px;
-      min-height: 20px;
-      line-height: 20px;
-      text-align: center;
-      position: absolute;
-      left: -12px;
-      margin: 0; }
+    .card .card-body .entry:hover {
+      background: #f8f8f8; }
+      .card .card-body .entry:hover.selected {
+        cursor: default; }
+    .card .card-body .entry.unread {
+      font-weight: 500; }
+      .card .card-body .entry.unread:after {
+        display: block;
+        content: "New";
+        position: absolute;
+        width: auto;
+        height: 20px;
+        line-height: 20px;
+        color: #fff;
+        padding: 0 5px;
+        float: right;
+        font-size: 75%;
+        font-weight: bold;
+        border-radius: 5px;
+        -o-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        background: #f8d053;
+        right: 20px;
+        top: 40px; }
+      .card .card-body .entry.unread h6 {
+        font-weight: 500; }
     .card .card-body .entry h6 {
+      font-weight: 400;
       position: relative;
       min-height: 20px;
-      line-height: 20px; }
+      line-height: 20px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
       .card .card-body .entry h6 .badge {
         width: auto;
         height: 20px;
         line-height: 20px;
         color: #626262;
         padding: 0 5px;
+        float: right;
         border-radius: 5px;
         -o-border-radius: 5px;
         -ms-border-radius: 5px;
@@ -40,7 +84,7 @@
         .card .card-body .entry h6 .badge.completed {
           background: #10cfbd;
           color: #fff; }
-        .card .card-body .entry h6 .badge.denied {
+        .card .card-body .entry h6 .badge.rejected {
           background: #f55753;
           color: #fff; }
     .card .card-body .entry .meta-data {

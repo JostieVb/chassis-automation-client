@@ -1,0 +1,9 @@
+.card {
+  background: #fff;
+  height: calc(100vh - 116px);
+  .card-body {
+    h5 {
+      padding: 0 !important;
+    }
+  }
+}

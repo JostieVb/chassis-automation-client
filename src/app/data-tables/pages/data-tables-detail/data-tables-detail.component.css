@@ -1,0 +1,32 @@
+.card .card-body {
+  position: relative; }
+  .card .card-body .no-selected {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    line-height: calc(100vh - 116px); }
+  .card .card-body .new-column {
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    line-height: 40px;
+    background: #c7c7c7;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out; }
+    .card .card-body .new-column:hover {
+      background: #838383; }
+
+.right {
+  position: absolute;
+  right: 1.25rem;
+  top: 8px; }
+
+/*# sourceMappingURL=data-tables-detail.component.css.map */

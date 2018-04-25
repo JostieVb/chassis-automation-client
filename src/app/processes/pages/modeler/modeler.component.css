@@ -1,0 +1,199 @@
+#modeler-container {
+  width: 100%;
+  height: calc(100vh - 116px);
+  background: #fff;
+  position: relative; }
+  #modeler-container #modeler-header {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding: 10px 40px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #e6e6e6; }
+    #modeler-container #modeler-header .name {
+      width: 200px;
+      height: 30px;
+      line-height: 30px;
+      float: left; }
+      #modeler-container #modeler-header .name h3 {
+        cursor: pointer; }
+        #modeler-container #modeler-header .name h3 .placeholder {
+          color: #c7c7c7;
+          display: inline-block; }
+      #modeler-container #modeler-header .name h3, #modeler-container #modeler-header .name .edit-name {
+        position: relative;
+        font-family: 'Segoe UI', sans-serif;
+        color: #626262;
+        font-weight: 600;
+        margin: 0;
+        padding: 0;
+        height: 30px;
+        line-height: 30px;
+        width: 100%;
+        font-size: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+        #modeler-container #modeler-header .name h3:hover > .fa-pencil, #modeler-container #modeler-header .name .edit-name:hover > .fa-pencil {
+          color: #626262; }
+        #modeler-container #modeler-header .name h3 .fa-pencil, #modeler-container #modeler-header .name .edit-name .fa-pencil {
+          display: inline-block;
+          position: absolute;
+          right: 0;
+          height: 30px;
+          line-height: 30px;
+          color: #c7c7c7;
+          font-size: 16px;
+          transition: all 0.2s ease-in-out;
+          -o-transition: all 0.2s ease-in-out;
+          -ms-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+          -webkit-transition: all 0.2s ease-in-out; }
+    #modeler-container #modeler-header #task-bar {
+      width: calc(100% - 200px);
+      float: right;
+      height: 30px;
+      line-height: 30px; }
+      #modeler-container #modeler-header #task-bar .task-bar-elements {
+        width: auto;
+        overflow: hidden;
+        float: right; }
+        #modeler-container #modeler-header #task-bar .task-bar-elements .btn, #modeler-container #modeler-header #task-bar .task-bar-elements .dropdown {
+          float: left;
+          margin: 0 5px; }
+  #modeler-container .properties {
+    position: fixed;
+    right: 0px;
+    top: 167px;
+    bottom: 0;
+    width: 300px;
+    z-index: 99;
+    box-sizing: border-box;
+    background: #fff;
+    border-left: 1px solid #e6e6e6; }
+    #modeler-container .properties h4 {
+      margin: 0;
+      height: 60px;
+      line-height: 60px;
+      padding: 0 20px; }
+    #modeler-container .properties p {
+      padding: 0 20px; }
+    #modeler-container .properties .prop-group {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 20px;
+      background: #f8f8f8;
+      border-bottom: 1px solid #e6e6e6;
+      height: auto;
+      position: relative; }
+      #modeler-container .properties .prop-group:first-child {
+        border-top: 1px solid #e6e6e6; }
+      #modeler-container .properties .prop-group .help {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        width: 15px;
+        height: 15px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        cursor: default;
+        border-radius: 20px;
+        color: #fff;
+        line-height: 15px;
+        text-align: center;
+        font-weight: bold;
+        background: #d0d0d0;
+        transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out; }
+        #modeler-container .properties .prop-group .help:hover {
+          background: #484848; }
+        #modeler-container .properties .prop-group .help:hover > .help-message {
+          display: block; }
+        #modeler-container .properties .prop-group .help .help-message {
+          font-weight: 400;
+          z-index: 1;
+          right: -8px;
+          top: 25px;
+          font-style: italic;
+          text-align: left;
+          background: #fff;
+          position: absolute;
+          width: 275px;
+          height: auto;
+          padding: 10px;
+          color: #4f4f4f;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+          border: 1px solid #e6e6e6;
+          display: none; }
+          #modeler-container .properties .prop-group .help .help-message .selector {
+            width: 20px;
+            height: 10px;
+            background-image: url("../../../../assets/img/selector.png");
+            background-size: 100%;
+            background-position: center bottom;
+            position: absolute;
+            top: -10px;
+            right: 5px; }
+      #modeler-container .properties .prop-group label {
+        width: 100%;
+        color: #aeaeae;
+        font-style: italic;
+        margin: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+        #modeler-container .properties .prop-group label:first-letter {
+          text-transform: uppercase; }
+      #modeler-container .properties .prop-group:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 5px;
+        background: #e6e6e6;
+        display: none; }
+      #modeler-container .properties .prop-group:hover:before {
+        display: block; }
+    #modeler-container .properties .prop-footer {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 20px;
+      height: auto; }
+  #modeler-container .canvas {
+    width: calc(100% - 300px);
+    height: calc(100% - 50px);
+    background: #f8f8f8;
+    z-index: 8; }
+  #modeler-container .zoom-instructions {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    z-index: 9; }
+
+.hide {
+  display: none; }
+
+.block-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.5);
+  line-height: 100vh;
+  text-align: center;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out; }
+
+/*# sourceMappingURL=modeler.component.css.map */

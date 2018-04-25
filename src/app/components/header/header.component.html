@@ -1,4 +1,36 @@
 <header>
-    <div class="header"></div>
+    <div class="header">
+        <div class="toggle-sidebar">
+
+        </div>
+        <div class="switch-account">
+            Switch account
+            <div class="btn-group">
+                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Choose account
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a *ngFor="let user of users" class="dropdown-item" (click)="switchAccount(user.email)">{{user.name}}</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="user">
+            <span>{{user.name}}</span>
+
+            <div class="btn-group">
+                <div class="avatar dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="../../../assets/img/avatar.jpg" />
+                </div>
+                <div class="user-menu dropdown-menu dropdown-menu-right">
+                    <div class="selector"></div>
+                    <a (click)="logOut()"><i class="fa fa-power-off" aria-hidden="true"></i>Sign out</a>
+                </div>
+            </div>
+            <!--<popper-content #userMenu>-->
+
+            <!--</popper-content>-->
+        </div>
+    </div>
     <app-breadcrumbs></app-breadcrumbs>
 </header>

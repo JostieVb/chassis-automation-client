@@ -1,0 +1,41 @@
+<div class="card">
+  <div class="card-body no-padding full-height max">
+    <h5 class="card-title">
+      Forms
+    </h5>
+    <ng-container *ngIf="forms.length === 0; else showForms">
+      <div class="no-forms">No forms</div>
+    </ng-container>
+
+    <ng-scrollbar [autoHide]="true">
+      <ng-template #showForms>
+        <div class="ch-table ch-no-padding ch-table-striped ch-no-text-overflow ch-col-max-h">
+          <div class="ch-row ch-head">
+            <div class="ch-col">Name</div>
+            <div class="ch-col">Identifier</div>
+            <div class="ch-col">Data table</div>
+            <div class="ch-col">Edit</div>
+            <div class="ch-col">Delete</div>
+          </div>
+          <div class="ch-row" *ngFor="let form of forms">
+            <div class="ch-col ch-overflow-hidden">
+              {{form.name}}
+            </div>
+            <div class="ch-col ch-overflow-hidden">
+              {{form.identifier}}
+            </div>
+            <div class="ch-col ch-overflow-hidden">
+              {{form.db_table}}
+            </div>
+            <div class="ch-col">
+              <button class="btn" (click)="editForm(form.id)"><i class="fa fa-pencil"></i></button>
+            </div>
+            <div class="ch-col">
+              <button class="btn btn-danger" data-toggle="modal" data-target="#deleteFormModal"><i class="fa fa-trash"></i></button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ng-scrollbar>
+  </div>
+</div>

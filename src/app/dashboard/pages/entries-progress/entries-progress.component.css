@@ -1,0 +1,21 @@
+.card .entries-progress-indicators {
+  display: flex;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 20px; }
+  .card .entries-progress-indicators .entries-progress-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: auto;
+    display: flex;
+    height: 20px; }
+    .card .entries-progress-indicators .entries-progress-footer .indicator {
+      height: 20px;
+      line-height: 20px;
+      text-align: center; }
+
+/*# sourceMappingURL=entries-progress.component.css.map */

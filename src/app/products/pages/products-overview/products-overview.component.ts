@@ -20,6 +20,7 @@ export class ProductsOverviewComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.productsService.products.subscribe(res => this.products = res)
     );
+    this.productsService.getProducts();
   }
 
   ngOnDestroy() {

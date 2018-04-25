@@ -1,0 +1,74 @@
+@import '../../../assets/styles/global_vars';
+
+$login-panel-width: 496px;
+
+#background {
+  position: absolute;
+  left: 0;
+  right: $login-panel-width;
+  top: 0;
+  bottom: 0;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  background-image: url(../../../assets/img/login_bg.jpg);
+  #background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+#login-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: $login-panel-width;
+  background: #fff;
+  #login-content-container {
+    margin: 30px 20px 0 20px;
+    padding: 50px 50px 0 50px;
+    box-sizing: border-box;
+    .login-panel-header {
+      width: 100%;
+      height: 100px;
+      line-height: 60px;
+      font-size: 22px;
+      font-weight: 900;
+      color: #000;
+    }
+    form {
+      .check-group {
+        label, input {
+          width: auto !important;
+        }
+        .form-check-input {
+          position: static;
+          margin: 0;
+          padding: 0;
+        }
+      }
+      .textfield {
+        height: 40px;
+        box-sizing: border-box;
+        padding: 0 10px;
+        border-radius: 5px;
+        border: 1px solid $color-secondary;
+      }
+      label, input {
+        width: 100%;
+      }
+      button {
+        span {
+          i {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}

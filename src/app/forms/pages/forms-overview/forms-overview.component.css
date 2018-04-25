@@ -1,0 +1,45 @@
+.card {
+  height: calc(100vh - 116px);
+  overflow: auto;
+  background: #fafafa; }
+  .card .card-body {
+    position: relative;
+    padding: 0; }
+    .card .card-body h5 {
+      margin: 0;
+      height: 50px;
+      line-height: 50px; }
+    .card .card-body #newFormButon {
+      position: absolute;
+      right: 1.25rem;
+      top: 10px; }
+    .card .card-body .no-forms {
+      position: absolute;
+      left: 0;
+      right: 0;
+      text-align: center;
+      height: 50px;
+      line-height: 50px;
+      top: 50%;
+      margin-top: -25px; }
+    .card .card-body .ch-table .ch-row .ch-col a:hover {
+      color: #c7c7c7 !important; }
+    .card .card-body .ch-table .ch-row .ch-col.ch-switch {
+      padding-top: 6px; }
+    .card .card-body .ch-table .ch-row .ch-col:first-child {
+      width: 40%;
+      min-width: 40%;
+      max-width: 40%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis; }
+  .card .switch-overlay {
+    position: absolute;
+    left: 0;
+    width: 35px;
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+    cursor: pointer; }
+
+/*# sourceMappingURL=forms-overview.component.css.map */

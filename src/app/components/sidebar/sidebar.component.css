@@ -18,14 +18,15 @@
     overflow: hidden;
     list-style: none;
     font-family: 'Segoe UI', sans-serif;
-    padding: 0;
-    margin: 20px 0 0 0; }
+    padding: 15px 0 0 0;
+    margin: 0; }
     .sidebar ul li {
       display: block;
       padding: 0;
       margin: 0;
       clear: right;
       color: #788296;
+      position: relative;
       transition: all 0.2s ease-in-out;
       -o-transition: all 0.2s ease-in-out;
       -ms-transition: all 0.2s ease-in-out;
@@ -43,8 +44,35 @@
           float: left;
           white-space: nowrap;
           text-overflow: ellipsis;
-          overflow: hidden;
           width: 100%; }
+        .sidebar ul li a .entries-count {
+          display: inline-block;
+          background: #788296;
+          padding: 0 5px;
+          border-radius: 20px;
+          height: 17px;
+          line-height: 1.75;
+          position: absolute;
+          top: 12px;
+          left: 80px;
+          font-size: 10px;
+          font-weight: bold;
+          width: auto;
+          color: #2B303B; }
+      .sidebar ul li .icon-thumbnail {
+        display: inline-block;
+        background: #21252d;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        text-align: center;
+        vertical-align: middle;
+        position: relative;
+        left: 0;
+        float: right;
+        margin-right: 14px;
+        color: #788296;
+        font-size: 16px; }
       .sidebar ul li:hover {
         color: #fff !important; }
 

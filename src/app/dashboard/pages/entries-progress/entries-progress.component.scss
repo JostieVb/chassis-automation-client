@@ -1,0 +1,28 @@
+@import '../../../../assets/styles/global_vars';
+
+$progress-footer-height: 20px;
+
+.card {
+  .entries-progress-indicators {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 20px;
+    .entries-progress-footer {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: auto;
+      display: flex;
+      height: $progress-footer-height;
+      .indicator {
+        height: $progress-footer-height;
+        line-height: $progress-footer-height;
+        text-align: center;
+      }
+    }
+  }
+}

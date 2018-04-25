@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewProcessComponent } from './new-process.component';
+import { NewProcessModalComponent } from './new-process.modal';
 
 describe('NewProcessComponent', () => {
-  let component: NewProcessComponent;
-  let fixture: ComponentFixture<NewProcessComponent>;
+  let component: NewProcessModalComponent;
+  let fixture: ComponentFixture<NewProcessModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewProcessComponent ]
+      declarations: [ NewProcessModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewProcessComponent);
+    fixture = TestBed.createComponent(NewProcessModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

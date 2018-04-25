@@ -1,0 +1,54 @@
+#background {
+  position: absolute;
+  left: 0;
+  right: 496px;
+  top: 0;
+  bottom: 0;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  background-image: url(../../../assets/img/login_bg.jpg); }
+  #background #background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2); }
+
+#login-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 496px;
+  background: #fff; }
+  #login-panel #login-content-container {
+    margin: 30px 20px 0 20px;
+    padding: 50px 50px 0 50px;
+    box-sizing: border-box; }
+    #login-panel #login-content-container .login-panel-header {
+      width: 100%;
+      height: 100px;
+      line-height: 60px;
+      font-size: 22px;
+      font-weight: 900;
+      color: #000; }
+    #login-panel #login-content-container form .check-group label, #login-panel #login-content-container form .check-group input {
+      width: auto !important; }
+    #login-panel #login-content-container form .check-group .form-check-input {
+      position: static;
+      margin: 0;
+      padding: 0; }
+    #login-panel #login-content-container form .textfield {
+      height: 40px;
+      box-sizing: border-box;
+      padding: 0 10px;
+      border-radius: 5px;
+      border: 1px solid #c7c7c7; }
+    #login-panel #login-content-container form label, #login-panel #login-content-container form input {
+      width: 100%; }
+    #login-panel #login-content-container form button span i {
+      font-size: 12px; }
+
+/*# sourceMappingURL=login.component.css.map */

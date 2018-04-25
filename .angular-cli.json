@@ -20,17 +20,17 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/font-awesome/css/font-awesome.css",
         "../node_modules/bpmn-js/dist/assets/diagram-js.css",
         "../node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn.css",
-        "../node_modules/@fortawesome/fontawesome/styles.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "styles.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
-        "../node_modules/bpmn-js/dist/bpmn-modeler.development.js",
-        "../node_modules/@fortawesome/fontawesome/index.js",
-        "../node_modules/bootstrap/dist/js/bootstrap.js"
+        "../node_modules/bpmn-js/dist/bpmn-modeler.production.min.js",
+        "../node_modules/bpmn-js/dist/bpmn-viewer.production.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.bundle.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

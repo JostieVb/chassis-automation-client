@@ -1,0 +1,7 @@
+.card {
+  background: #fff;
+  height: calc(100vh - 116px); }
+  .card .card-body h5 {
+    padding: 0 !important; }
+
+/*# sourceMappingURL=products-add.component.css.map */
