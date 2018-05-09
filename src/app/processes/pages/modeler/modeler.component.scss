@@ -19,14 +19,16 @@ $modeler-header-inner-height: 30px;
       height: $modeler-header-inner-height;
       line-height: $modeler-header-inner-height;
       float: left;
-      h3 {
+      label {
         cursor: pointer;
         .placeholder {
           color: $color-secondary;
           display: inline-block;
+          font-size: 20px;
+          @include text-overflow;
         }
       }
-      h3, .edit-name {
+      label, .edit-name {
         position: relative;
         &:hover > .fa-pencil {
           color: $default-text-color;
@@ -79,6 +81,10 @@ $modeler-header-inner-height: 30px;
     box-sizing: border-box;
     background: #fff;
     border-left: 1px solid $light-border;
+    display: block;
+    &.show {
+      display: block;
+    }
     h4 {
       margin: 0;
       height: 60px;
@@ -214,4 +220,37 @@ $modeler-header-inner-height: 30px;
   text-align: center;
   color: #fff;
   @include transition(.2s);
+}
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  #modeler-container {
+    .properties {
+      display: none;
+    }
+    .canvas {
+      width: 100%;
+    }
+    .zoom-instructions {
+      display: none;
+    }
+  }
+  #exportXML, #exportSVG {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  #modeler-container {
+    #modeler-header {
+      .name {
+        width: 150px;
+      }
+      #task-bar {
+        .task-bar-elements {
+          width: 110px;
+        }
+      }
+    }
+  }
 }

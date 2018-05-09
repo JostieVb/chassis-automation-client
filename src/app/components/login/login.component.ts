@@ -20,7 +20,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subs.push(
-        this.auth.loggedIn.subscribe(bool => this.loggedIn = bool),
+        this.auth.loggedIn.subscribe(bool => {
+          this.loggedIn = bool;
+          console.log(bool);
+        }),
         this.auth.errorMsg.subscribe(errorMsg => this.errorMsg = errorMsg),
         this.auth.signingIn.subscribe(signingIn => this.signingIn = signingIn)
     );

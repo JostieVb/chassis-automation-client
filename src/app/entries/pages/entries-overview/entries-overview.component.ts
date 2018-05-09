@@ -24,7 +24,7 @@ export class EntriesOverviewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.entriesService.getEntries();
     this.subs.push(
-      this.entriesService.entries.subscribe(entries => {this.entries = entries; console.log(entries);}),
+      this.entriesService.entries.subscribe(entries => this.entries = entries),
       this.entriesService.entry.subscribe(entry => this.selectedEntry = entry),
         this.entriesService.selectedEntryId.subscribe( selectedEntryId => this.selectedEntryId = selectedEntryId)
     );
@@ -35,6 +35,7 @@ export class EntriesOverviewComponent implements OnInit, OnDestroy {
         this.entriesService.selectedEntryId.next(null);
         this.entriesService.heightAuto.next(false);
         this.entriesService.getEntry(id);
+        this.entriesService.showDetail.next(true);
     }
   }
 

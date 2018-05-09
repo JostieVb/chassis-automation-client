@@ -4,6 +4,21 @@
   background: #fff;
 }
 
+.hide {
+  display: block;
+}
+
 .entries-detail {
   background: $lighter-bg;
+  display: block;
+  &.show {
+    display: block;
+  }
+}
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  .entries-detail, .hide {
+    display: none;
+  }
 }

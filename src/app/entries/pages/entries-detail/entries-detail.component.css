@@ -5,6 +5,11 @@
   .card .card-title {
     padding: 0 !important;
     position: relative; }
+    .card .card-title .back-button {
+      position: absolute;
+      right: 30px;
+      top: 0;
+      display: none; }
     .card .card-title .dropdown {
       position: absolute;
       right: 0;
@@ -70,5 +75,28 @@
             padding: 10px 10px 10px 5px; }
           .card .card-body .content .action-container .decisions table tr td label {
             cursor: pointer; }
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  .card .card-title .back-button {
+    display: block; }
+
+  .card .card-body .content .message .ch-table .ch-row {
+    overflow: auto;
+    width: 80%;
+    float: left;
+    display: block;
+    padding: 0; }
+    .card .card-body .content .message .ch-table .ch-row.ch-head {
+      width: 20% !important; }
+    .card .card-body .content .message .ch-table .ch-row:last-child {
+      border-bottom: none; }
+    .card .card-body .content .message .ch-table .ch-row .expand {
+      display: none; }
+    .card .card-body .content .message .ch-table .ch-row .ch-col {
+      border-bottom: 1px solid #e6e6e6;
+      padding: 0 10px;
+      float: left;
+      min-width: 100%; } }
 
 /*# sourceMappingURL=entries-detail.component.css.map */

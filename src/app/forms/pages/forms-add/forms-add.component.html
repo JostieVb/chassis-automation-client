@@ -1,7 +1,16 @@
 <div class="card full-height">
-  <ng-scrollbar [autoHide]="true">
   <div class="card-body">
-    <h5 class="card-title">New form</h5>
+    <h5 class="card-title">
+      {{title}}
+
+      <div class="control-buttons">
+        <button type="submit" *ngIf="editingForm" [disabled]="structure.length === 0" (click)="postForm('save')" class="btn btn-primary">Save form</button>
+        <button type="submit" *ngIf="!editingForm" [disabled]="structure.length === 0" (click)="postForm('add')" class="btn btn-primary">Add form</button>
+        <button type="submit" (click)="dismissForm()" class="btn btn-secondary">Cancel</button>
+      </div>
+    </h5>
+
+    <ng-scrollbar [autoHide]="true">
     <form>
       <div class="form-group">
         <label for="name">Form name</label>
@@ -29,13 +38,16 @@
           <div class="delete-overlay" [ngClass]="{'show': deleteOverlay === field.fieldName }">Delete this field?</div>
           <div class="edit form-item" (click)="editFormItem(field.fieldName)"><i class="fa fa-pencil"></i></div>
           <div class="delete form-item" (click)="deleteFormItem(field.fieldName, field.dbColumn)" (mouseenter)="deleteOverlay = field.fieldName" (mouseleave)="deleteOverlay = ''"><i class="fa fa-trash-o"></i></div>
-          <div class="label">{{field.fieldLabel}}</div>
-          <div class="form-control {{field.fieldType}}">
-            <div class="placeholder">
-              {{field.fieldPlaceholder}}
-            </div>
-            <span *ngIf="field.required">* required</span>
+          <div class="label">
+            {{field.fieldLabel}}
+            <span *ngIf="field.required" class="required"></span>
           </div>
+          <ng-container *ngIf="field.fieldType === 'textarea'; else otherTypes">
+            <textarea placeholder="{{field.fieldPlaceholder}}" name="{{field.fieldName}}" class="form-control textarea"></textarea>
+          </ng-container>
+          <ng-template #otherTypes>
+            <input type="{{field.fieldType}}" class="form-control" name="{{field.fieldName}}" placeholder="{{field.fieldPlaceholder}}" />
+          </ng-template>
         </div>
       </div>
 
@@ -64,6 +76,7 @@
           <select [(ngModel)]="fieldType" name="fieldType" id="fieldType" class="form-control">
             <option value="text">Text</option>
             <option value="email">E-mail</option>
+            <option value="number">Numeric</option>
             <option value="textarea">Textarea</option>
             <option value="password">Password</option>
           </select>
@@ -83,24 +96,16 @@
           <input type="checkbox" value="required" [(ngModel)]="required" id="required" name="required" />
         </div>
 
+        <div class="alert alert-danger" *ngIf="errorMsg !== ''">
+          <strong>Error!</strong> {{errorMsg}}
+        </div>
+
         <button class="btn btn-primary" (click)="saveField()" *ngIf="editField">Save field</button>
         <button class="btn btn-primary" (click)="addField()" *ngIf="!editField">Add field</button>
         <button class="btn btn-secondary" (click)="dismissFields()">Cancel</button>
       </div>
-      <hr />
 
-      <div class="alert alert-danger" *ngIf="errorMsg !== ''">
-        <strong>Error!</strong> {{errorMsg}}
-      </div>
-
-      <button type="submit" *ngIf="editingForm" [disabled]="structure.length === 0" (click)="postForm('save')" class="btn btn-primary">Save form</button>
-      <button type="submit" *ngIf="!editingForm" [disabled]="structure.length === 0" (click)="postForm('add')" class="btn btn-primary">Add form</button>
-      <button type="submit" (click)="dismissForm()" class="btn btn-secondary">
-          <ng-container *ngIf="editingForm; else notEditing">Cancel</ng-container>
-          <ng-template #notEditing>Clear</ng-template>
-      </button>
     </form>
-
+    </ng-scrollbar>
   </div>
-  </ng-scrollbar>
 </div>

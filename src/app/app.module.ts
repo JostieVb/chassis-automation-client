@@ -10,9 +10,9 @@ import { ScrollbarModule } from 'ngx-scrollbar';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { UiSwitchModule } from 'ngx-toggle-switch';
 import { SelectModule } from 'ng-select';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 /* Services */
-import { ProductsService } from './products/services/products.service';
 import { ProcessService } from './processes/services/process.service';
 import { FlowLoadService } from './processes/services/flowload.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
@@ -28,13 +28,11 @@ import { SidebarService } from './components/services/sidebar.service';
 import { GuardService } from './auth/guard.service';
 import { FormLoadService } from './bpmn/services/form-load.service';
 import { FormsService } from './forms/services/forms.service';
+import { ConfirmationService } from './auth/confirmation.service';
 
 /* Directives */
 import { CallerDirective } from './bpmn/directives/caller.directive';
 import { FormDirective } from './bpmn/directives/form.directive';
-
-/* Pipes */
-import { KeysPipe } from './bpmn/pipes/keys.pipe';
 
 /* Components */
 import { AppComponent } from './components/app/app.component';
@@ -69,12 +67,14 @@ import { DataTablesDetailComponent } from './data-tables/pages/data-tables-detai
 import { NewTableComponent } from './data-tables/modals/new-table/new-table.component';
 import { NewColumnComponent } from './data-tables/modals/new-column/new-column.component';
 import { DeleteDataTableComponent } from './data-tables/modals/delete-data-table/delete-data-table.component';
+import { DeleteColumnComponent } from './data-tables/modals/delete-column/delete-column.component';
 
 /* Routes */
 const appRoutes: Routes = [
     {
       path: '',
-      component: DashboardComponent,
+      pathMatch: 'prefix',
+      redirectTo: 'dashboard',
       canActivate: [GuardService],
       data: {
         permission: 'dashboard'
@@ -115,6 +115,7 @@ const appRoutes: Routes = [
     {
       path: 'processes/:param',
       canActivate: [GuardService],
+      // canDeactivate: [GuardService],
       component: ModelerComponent,
       data: {
         permission: 'processes'
@@ -124,6 +125,7 @@ const appRoutes: Routes = [
       path: 'forms',
       component: FormsComponent,
       canActivate: [GuardService],
+      // canDeactivate: [GuardService],
       data: {
         permission: 'forms'
       }
@@ -171,13 +173,13 @@ const appRoutes: Routes = [
     LoginComponent,
     FormsOverviewComponent,
     FormsAddComponent,
-    KeysPipe,
     DataTablesComponent,
     DataTablesOverviewComponent,
     DataTablesDetailComponent,
     NewTableComponent,
     NewColumnComponent,
-    DeleteDataTableComponent
+    DeleteDataTableComponent,
+    DeleteColumnComponent
   ],
   imports: [
     BrowserModule,
@@ -197,7 +199,6 @@ const appRoutes: Routes = [
   ],
   providers: [
       FlowLoadService,
-      ProductsService,
       ProcessService,
       LoadingBarService,
       EntriesService,
@@ -212,7 +213,9 @@ const appRoutes: Routes = [
       GuardService,
       FormLoadService,
       FormsService,
-      DataTablesService
+      DataTablesService,
+      ConfirmationService,
+      {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

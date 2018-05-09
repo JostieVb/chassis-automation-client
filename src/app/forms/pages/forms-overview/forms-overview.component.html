@@ -2,29 +2,29 @@
   <div class="card-body no-padding full-height max">
     <h5 class="card-title">
       Forms
+      <button class="btn btn-primary new-form-button" (click)="newForm()"><i class="fa fa-plus"></i></button>
     </h5>
     <ng-container *ngIf="forms.length === 0; else showForms">
       <div class="no-forms">No forms</div>
     </ng-container>
 
-    <ng-scrollbar [autoHide]="true">
       <ng-template #showForms>
         <div class="ch-table ch-no-padding ch-table-striped ch-no-text-overflow ch-col-max-h">
           <div class="ch-row ch-head">
-            <div class="ch-col">Name</div>
-            <div class="ch-col">Identifier</div>
-            <div class="ch-col">Data table</div>
-            <div class="ch-col">Edit</div>
-            <div class="ch-col">Delete</div>
+            <div class="ch-col ch-text-overflow-ellipsis">Name</div>
+            <div class="ch-col ch-text-overflow-ellipsis">Identifier</div>
+            <div class="ch-col ch-text-overflow-ellipsis">Data table</div>
+            <div class="ch-col ch-text-overflow-ellipsis">Edit</div>
+            <div class="ch-col ch-text-overflow-ellipsis">Delete</div>
           </div>
           <div class="ch-row" *ngFor="let form of forms">
-            <div class="ch-col ch-overflow-hidden">
+            <div class="ch-col ch-text-overflow-ellipsis">
               {{form.name}}
             </div>
-            <div class="ch-col ch-overflow-hidden">
+            <div class="ch-col ch-text-overflow-ellipsis">
               {{form.identifier}}
             </div>
-            <div class="ch-col ch-overflow-hidden">
+            <div class="ch-col ch-text-overflow-ellipsis">
               {{form.db_table}}
             </div>
             <div class="ch-col">
@@ -36,6 +36,5 @@
           </div>
         </div>
       </ng-template>
-    </ng-scrollbar>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductsService } from '../../services/products.service';
+import { BpmnService } from '../../../bpmn/services/bpmn.service';
 
 @Component({
   selector: 'app-products-overview',
@@ -14,13 +14,15 @@ export class ProductsOverviewComponent implements OnInit, OnDestroy {
   protected products: any;
   private subs = [];
 
-  constructor(private productsService: ProductsService) { }
+  constructor(
+      private bpmn: BpmnService
+  ) { }
 
   ngOnInit() {
     this.subs.push(
-      this.productsService.products.subscribe(res => this.products = res)
+      this.bpmn.data.subscribe(data => this.products = data)
     );
-    this.productsService.getProducts();
+    this.bpmn.getData('ca_product');
   }
 
   ngOnDestroy() {

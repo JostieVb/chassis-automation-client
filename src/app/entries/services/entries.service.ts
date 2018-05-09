@@ -8,6 +8,16 @@ import { EntryResponse } from '../models/entry-response';
 
 @Injectable()
 export class EntriesService {
+
+    /**
+     * entries          :   all entries
+     * entry            :   selected entry
+     * loading          :   whether an entry is loading
+     * selectedEntryId  :   the id of the selected entry
+     * heightAuto       :   whether the entry table should be collapsed
+     * unreadEntries    :   the amount of unread entries
+     * response         :   bound to the response message input field
+     * */
     public entries: BehaviorSubject<any> = new BehaviorSubject<any>('');
     public entry: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     public loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -15,12 +25,18 @@ export class EntriesService {
     public heightAuto: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public unreadEntries: BehaviorSubject<any> = new BehaviorSubject(0);
     public response: BehaviorSubject<EntryResponse> = new BehaviorSubject<EntryResponse>(new EntryResponse());
+    public showDetail: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient,
         private auth: UserService
     ) { }
 
+    /**
+     * Get the entries based on authenticated user
+     *
+     * @param   filter - optional filters
+     * */
     public getEntries(filter?: string) {
       if (filter) {
         this.http.get(API_BASE + 'entries/filter/' + filter, {
@@ -33,6 +49,11 @@ export class EntriesService {
       }
     }
 
+    /**
+     * Get and format a single entry
+     *
+     * @param   id - id of the entry
+     * */
     public getEntry(id: number) {
         this.response.next(new EntryResponse());
         this.loading.next(true);
@@ -65,6 +86,10 @@ export class EntriesService {
         });
     }
 
+    /**
+     * Count the unread entries from the authenticated user
+     *
+     * */
     public countUnreadEntries() {
         this.http.get(
             API_BASE + 'count-unread-entries',
@@ -72,6 +97,11 @@ export class EntriesService {
         ).subscribe(unreadEntries => this.unreadEntries.next(unreadEntries));
     }
 
+    /**
+     * Set the unread status to false
+     *
+     * @param   id - id of the entry
+     * */
     private setUnreadFalse(id) {
         this.http.get(
             API_BASE + 'set-unread-false/' + id,
@@ -86,6 +116,5 @@ export class EntriesService {
             }
             this.entries.next(entries);
         });
-
     }
 }

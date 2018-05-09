@@ -7,7 +7,7 @@
 <div id="modeler-container">
     <div id="modeler-header">
         <div class="name" #nameContainer>
-            <h3 (click)="editName()" [ngClass]="{'hide': editingName }">
+            <label for="edit-name" (click)="editName()" [ngClass]="{'hide': editingName }">
                 <ng-container *ngIf="processName !== ''; else placeholder">
                     {{processName}}
                 </ng-container>
@@ -15,19 +15,19 @@
                     <div class="placeholder">Enter name</div>
                 </ng-template>
                 <i class="fa fa-pencil"></i>
-            </h3>
-            <input type="text" class="edit-name" placeholder="Enter name" [ngClass]="{'hide': !editingName }" name="name" [(ngModel)]="processName">
+            </label>
+            <input type="text" class="edit-name" id="edit-name" placeholder="Enter name" [ngClass]="{'hide': !editingName }" name="name" [(ngModel)]="processName">
         </div>
         <div id="task-bar">
             <div class="task-bar-elements">
                 <button type="button" class="btn btn-light" (click)="saveProcess()">Save</button>
-                <button type="button" class="btn btn-light"><a target="_blank" href="" id="exportXML" download="{{processName}}.bpmn">Export XML</a></button>
-                <button type="button" class="btn btn-light">Export SVG</button>
+                <button type="button" class="btn btn-light" id="exportXML"><a target="_blank" href="" download="{{processName}}.bpmn">Export XML</a></button>
+                <button type="button" class="btn btn-light" id="exportSVG">Export SVG</button>
                 <button type="button" class="btn btn-light" (click)="resetZoom()"><i class="fa fa-bullseye" aria-hidden="true"></i></button>
             </div>
         </div>
     </div>
-    <div class="properties">
+    <div class="properties {{propertiesCssClass}}">
         <ng-scrollbar>
         <h4>Properties</h4>
         <ng-container *ngIf="selectedProperties.length === 0; else showSelectedItem">

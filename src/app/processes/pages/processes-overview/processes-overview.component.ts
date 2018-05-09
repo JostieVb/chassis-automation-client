@@ -105,11 +105,13 @@ export class ProcessesOverviewComponent implements OnInit, OnDestroy {
    * @param id - process id
    * */
   loadPreview(id) {
-    this.flowLoader.load(id);
-    this.flowLoader.process.subscribe(process => {
-      this.viewer.importXML(process['process_xml'], function(err) {
+    this.flowLoader.load(id).subscribe(process => {
+      this.viewer.importXML(process[0]['process_xml'], err => {
         if (err) {
           console.log(err);
+        } else {
+          this.flowLoader.previewLoaded.next(true);
+          this.viewer.get('canvas').zoom('fit-viewport');
         }
       });
     });

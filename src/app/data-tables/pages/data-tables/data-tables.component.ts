@@ -8,11 +8,17 @@ import { DataTablesService } from '../../services/data-tables.service';
 })
 export class DataTablesComponent implements OnInit, OnDestroy {
 
+  protected showDataTable = false;
+  private subs = [];
+
   constructor(
       private dataTablesService: DataTablesService
   ) { }
 
   ngOnInit() {
+    this.subs.push(
+        this.dataTablesService.showDataTable.subscribe(show => this.showDataTable = show)
+    );
   }
 
   ngOnDestroy() {
@@ -20,6 +26,8 @@ export class DataTablesComponent implements OnInit, OnDestroy {
     this.dataTablesService.columns.next([]);
     this.dataTablesService.tableName.next('');
     this.dataTablesService.modalTableName.next('');
+
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 
 }

@@ -45,7 +45,6 @@ export class PropertiesService {
             property['decisions'] = [];
             property['title'] = '';
             property['message'] = '';
-            property['enclosure'] = '';
             break;
         default:
             break;

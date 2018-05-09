@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,mBAAmB;AACnB,yCAA0C;EACxC,QAAS;IACP,OAAO,EAAE,IAAI",
+"sources": ["processes.component.scss"],
 "names": [],
 "file": "processes.component.css"
 }

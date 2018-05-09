@@ -1,0 +1,13 @@
+.forms-add {
+  display: none;
+  &.toggle {
+    display: block;
+  }
+}
+
+.forms-overview {
+  display: block;
+  &.toggle {
+    display: none;
+  }
+}

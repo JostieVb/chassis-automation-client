@@ -13,7 +13,7 @@
         <div class="ch-row ch-head">
           <div class="ch-col">Name</div>
           <div class="ch-col">Deploy</div>
-          <div class="ch-col">Preview</div>
+          <div class="ch-col responsive-hide">Preview</div>
           <div class="ch-col">Delete</div>
         </div>
         <div class="ch-row" *ngFor="let process of processes">
@@ -32,7 +32,7 @@
               <ui-switch [checked]="false" color="#2390A8" size="small" data-id="{{process.id}}" id="switch-{{process.id}}"></ui-switch>
             </ng-template>
           </div>
-          <div class="ch-col">
+          <div class="ch-col responsive-hide">
             <button class="btn btn-secondary" (click)="loadPreview(process.id)"><i class="fa fa-eye"></i></button>
           </div>
           <div class="ch-col">

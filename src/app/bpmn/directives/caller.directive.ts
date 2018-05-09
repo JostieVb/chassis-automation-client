@@ -12,7 +12,9 @@ export class CallerDirective {
 
     @Input('caller') caller: string;
 
-    constructor(private bpmn: BpmnService) {}
+    constructor(
+        private bpmn: BpmnService
+    ) {}
 
     @HostListener('click', ['$event']) onClick(event: MouseEvent) {
         const targetElemType = $(event.target).attr('type');
@@ -21,6 +23,10 @@ export class CallerDirective {
         }
     }
 
+    /**
+     * Validate the form based on form rules set in the form builder
+     *
+     * */
     private validateForm() {
         const errors = [];
         const formData = this.getFormData();
@@ -35,6 +41,10 @@ export class CallerDirective {
         }
     }
 
+    /**
+     * Iterate through form to get the form data
+     *
+     * */
     private getFormData() {
         const formGroups = $('form[ng-reflect-form="' + this.caller + '"]').children();
         const formData = {data: []};
@@ -54,9 +64,16 @@ export class CallerDirective {
         return formData;
     }
 
+    /**
+     * Post form data. When the data is successfully posted, call to the back-end bpmn engine
+     *
+     * @param   formData - the form data
+     * */
     private postForm(formData: any) {
         this.bpmn.postData(this.caller, formData).subscribe(res => {
             if (res['status'] === 200) {
+                this.bpmn.data.next(res['data']);
+                $('form[ng-reflect-form="' + this.caller + '"]')[0].reset();
                 this.bpmn.call(this.caller, res['db_table'], res['insert_id']).subscribe(resp => {
                     console.log(resp);
                 });

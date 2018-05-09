@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,YAAa;EACX,OAAO,EAAE,KAAK;;AAId,sBAAO;EACL,OAAO,EAAE,KAAK;;AAIlB,mBAAmB;AACnB,yCAA0C;EACxC,wBAAyB;IACvB,OAAO,EAAE,IAAI",
+"sources": ["data-tables.component.scss"],
 "names": [],
 "file": "data-tables.component.css"
 }

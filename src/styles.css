@@ -11,9 +11,15 @@ a {
 .textarea {
   min-height: 100px; }
 
-.required:after {
-  content: '* required';
-  display: inline-block; }
+.required {
+  position: relative;
+  width: 100%; }
+  .required:after {
+    content: '* required';
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    color: #c7c7c7; }
 
 #page-container {
   width: 100%;
@@ -255,6 +261,9 @@ ng-select select-dropdown .below {
     .select2-free-input input.min-width {
       width: 2px; }
 
+.btn-secondary {
+  color: #fff !important; }
+
 /* Hidden modeler items */
 .djs-palette-entries .group .bpmn-icon-connection-multi, .djs-palette-entries .group .bpmn-icon-space-tool, .djs-palette-entries .group .bpmn-icon-intermediate-event-none,
 .djs-palette-entries .group .bpmn-icon-subprocess-expanded, .djs-palette-entries .group .bpmn-icon-data-object, .djs-palette-entries .group .bpmn-icon-data-store, .djs-palette-entries .group .bpmn-icon-participant {
@@ -264,5 +273,10 @@ ng-select select-dropdown .below {
   display: none; }
 .djs-context-pad .group .bpmn-icon-screw-wrench {
   display: none; }
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  .bjs-powered-by {
+    display: none !important; } }
 
 /*# sourceMappingURL=styles.css.map */

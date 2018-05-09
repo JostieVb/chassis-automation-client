@@ -58,7 +58,6 @@ export class UserService {
       res => {
         // Set token and logged in status
         this.token.next(res['access_token']);
-        this.loggedIn.next(true);
 
         // Set permissions of user
         this.getAuthUser().subscribe(user => {
@@ -76,6 +75,7 @@ export class UserService {
         this.signingIn.next(false);
         this.loggingOut.next(false);
         this.router.navigateByUrl('/');
+        this.loggedIn.next(true);
       },
     err => {
         // Reset status checks and set error message
@@ -88,6 +88,7 @@ export class UserService {
 
   /**
    * Log the user out
+   *
    */
   logOut() {
       this.token.next(null);
@@ -111,8 +112,8 @@ export class UserService {
   /**
    * Get all users
    *
-   * @param     exceptCurrentUser
-   * @return    observable users
+   * @param     exceptCurrentUser - whether the back-end should get all users except current authenticated user
+   * @return    observable      users
    */
   getUsers(exceptCurrentUser?: boolean): Observable<any> {
       if (exceptCurrentUser) {
@@ -124,7 +125,7 @@ export class UserService {
   /**
    * Get authenticated user's permissions
    *
-   * @return    observable users
+   * @return    observable   users
    */
   getUserPermissions() {
       return this.http.get(

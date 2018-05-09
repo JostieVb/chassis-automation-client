@@ -9,6 +9,8 @@ import { EMPTY_XML } from '../../../global';
 import { PropertiesService } from '../../services/properties.service';
 import { IOption } from 'ng-select';
 import { UserService } from '../../../auth/user.service';
+import { ConfirmationService } from '../../../auth/confirmation.service';
+import { Observable } from 'rxjs/Observable';
 
 declare var require: any;
 const Modeler = require('bpmn-js/lib/Modeler'),
@@ -25,27 +27,29 @@ const Modeler = require('bpmn-js/lib/Modeler'),
 export class ModelerComponent implements OnInit, OnDestroy {
 
     /**
-   * param                  :   id:number ? 'new':string
-   * subs                   :   component subscriptions
-   * modeler                :   instance of the bpmn-js modeler
-   * message                :   message that will be displayed in an empty properties panel
-   * processName            :   name of loaded process
-   * processCode            :   code of loaded process
-   * editingName            :   whether the title should be replaced by an input field for editing (true|false)
-   * overlay                :   whether an overlay is shown to temporarily block interaction (e.g. while loading) (true|false)
-   * overlayText            :   text that should be displayed in the overlay
-   * selectedProperties     :   an array that holds the properties of the selected item
-   * selectedPropertiesId   :   a string that holds the id of the selected item
-   * editableTypes          :   an array of types that should be editable within the Modeler.
-   * properties             :   an object that contains all process properties
-   * forms                  :   an array of all forms created with the form builder
-   * users                  :   an array that contains all users
-   * helpers                :   an object of help messages
-   * callers                :   an array that holds all callers that are being used by the process
-   * sequence               :   an array that holds the process sequence
-   * processItems           :   an array that holds all process items
-   * processItemsNames      :   an array that holds all the names of all process items
-   * selectableDecisions    :   an array that gets filled with decisions based on predecessor of selected gateway
+   * param                      :   id:number ? 'new':string
+   * subs                       :   component subscriptions
+   * modeler                    :   instance of the bpmn-js modeler
+   * message                    :   message that will be displayed in an empty properties panel
+   * processName                :   name of loaded process
+   * processCode                :   code of loaded process
+   * editingName                :   whether the title should be replaced by an input field for editing (true|false)
+   * overlay                    :   whether an overlay is shown to temporarily block interaction (e.g. while loading) (true|false)
+   * overlayText                :   text that should be displayed in the overlay
+   * selectedProperties         :   an array that holds the properties of the selected item
+   * selectedPropertiesId       :   a string that holds the id of the selected item
+   * editableTypes              :   an array of types that should be editable within the Modeler.
+   * properties                 :   an object that contains all process properties
+   * forms                      :   an array of all forms created with the form builder
+   * users                      :   an array that contains all users
+   * helpers                    :   an object of help messages
+   * callers                    :   an array that holds all callers that are being used by the process
+   * sequence                   :   an array that holds the process sequence
+   * processItems               :   an array that holds all process items
+   * processItemsNames          :   an array that holds all the names of all process items
+   * selectableDecisions        :   an array that gets filled with decisions based on predecessor of selected gateway
+   * saved                      :   boolean that indicates if the process has been saved
+   * propertiespanel CSS class  :   the CSS class for the propertiespanel
    * */
 
   private param: any;
@@ -69,6 +73,8 @@ export class ModelerComponent implements OnInit, OnDestroy {
   protected processItems = [];
   protected processItemsNames = {};
   protected selectableDecisions = [];
+  protected saved = false;
+  protected propertiesCssClass = '';
 
   /**
    * Form properties bindings
@@ -89,8 +95,16 @@ export class ModelerComponent implements OnInit, OnDestroy {
       private route: ActivatedRoute,
       private router: Router,
       private propertiesService: PropertiesService,
-      private auth: UserService
+      private auth: UserService,
+      private confirmationService: ConfirmationService
   ) { }
+
+  // canDeactivate(): Observable<boolean> | boolean {
+  //     if (this.saved === false) {
+  //         return this.confirmationService.confirm();
+  //     }
+  //     return true;
+  // }
 
   @ViewChild('nameContainer') nameContainer;
 
@@ -101,6 +115,7 @@ export class ModelerComponent implements OnInit, OnDestroy {
   checkClick(targetElement) {
       if (targetElement.classList.contains('canvas')) {
           this.message = 'No item selected';
+          this.propertiesCssClass = '';
           this.dismissProperties();
       }
   }
@@ -110,6 +125,7 @@ export class ModelerComponent implements OnInit, OnDestroy {
       // Toggle name edit textfield
       if (!this.nameContainer.nativeElement.contains(targetElement)) {
         this.editingName = false;
+        $('.edit-name').trigger('click');
       }
 
       // Show selected item properties
@@ -120,6 +136,7 @@ export class ModelerComponent implements OnInit, OnDestroy {
               const id = targetElement.parentElement.getAttribute('data-element-id');
               this.selectedPropertiesId = id;
               this.message = 'No item selected';
+              this.propertiesCssClass = '';
               this.getSequenceFlow();
               this.initProperties(id, type);
           }
@@ -185,9 +202,11 @@ export class ModelerComponent implements OnInit, OnDestroy {
       }
       this.linkItemIdsToNames();
       this.showProperties(id, type);
+      this.propertiesCssClass = 'show';
     } else {
       this.linkItemIdsToNames();
       this.showProperties(id, type);
+      this.propertiesCssClass = 'show';
     }
     if (this.properties[id] && type === 'exclusivegateway') {
         // If properties of selected item exist and type is 'exclusivegateway',
@@ -310,6 +329,7 @@ export class ModelerComponent implements OnInit, OnDestroy {
       this.assignees = [];
       this.decisions = [];
       this.selectedPropertiesId = '';
+      this.propertiesCssClass = '';
   }
 
   /**
@@ -504,10 +524,11 @@ export class ModelerComponent implements OnInit, OnDestroy {
     this.overlayText = 'Saving process...';
     this.overlay = true;
     let process_xml = '';
-    this.modeler.saveXML({ format: true }, function (err, xml) {
+    this.modeler.saveXML({ format: true }, (err, xml) => {
         if (err) {
             console.log(err);
         } else {
+            this.saved = true;
             process_xml = xml;
         }
     });

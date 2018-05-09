@@ -7,6 +7,9 @@ import { API_BASE } from '../../../global';
 import { UserService } from '../../../auth/user.service';
 import { DataTablesService } from '../../services/data-tables.service';
 
+declare var require;
+const $ = require('jQuery');
+
 @Component({
   selector: 'app-new-column',
   templateUrl: './new-column.component.html',
@@ -16,8 +19,7 @@ export class NewColumnComponent implements OnInit {
 
   protected types: Array<IOption> = types;
   protected column: Column = new Column();
-  protected errorMsg = '';
-  protected errorMsgClass = 'alert-danger';
+  protected loading = false;
 
   constructor(
       private http: HttpClient,
@@ -31,30 +33,28 @@ export class NewColumnComponent implements OnInit {
   addColumn() {
     if (this.column.name !== '' && this.column.type !== '') {
       const table = this.dataTablesService.tableName.getValue();
-      this.column.name = this.dataTablesService.addPrefix(this.column.name);
+      const name = this.dataTablesService.addPrefix(this.column.name);
+      this.loading = true;
       this.http.post(
           API_BASE + 'data/add-column',
-          {table: table, column: this.column},
+          {table: table, column: {name: name, type: this.column.type}},
           {headers: this.auth.authHeaders()}
       ).subscribe(res => {
         if (res['status'] === 200) {
-          this.dataTablesService.getTableColumns(table, true);
-          this.errorMsgClass = 'alert-success';
+            this.dismissModal();
+            this.dataTablesService.getTableColumns(table, true);
+            $('.close').trigger('click');
         } else {
-          this.errorMsgClass = 'alert-danger';
+          console.log(res);
         }
-        this.errorMsgClass = res['message'];
+        this.loading = false;
       });
-    } else {
-      this.errorMsg = 'Fill in all required fields.';
-      this.errorMsgClass = 'alert-danger';
     }
   }
 
   dismissModal() {
     this.column = new Column();
-    this.errorMsg = '';
-    this.errorMsgClass = 'alert-danger';
+    this.loading = false;
   }
 
 }

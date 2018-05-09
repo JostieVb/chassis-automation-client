@@ -15,29 +15,24 @@
         <div class="ch-row ch-head">
           <div class="ch-col">Field name</div>
           <div class="ch-col">Type</div>
-          <div class="ch-col">Default value</div>
+          <div class="ch-col">Delete</div>
         </div>
         <div class="ch-row" *ngFor="let column of columns">
           <div class="ch-col">{{column.Field}}</div>
           <div class="ch-col">{{column.Type}}</div>
           <div class="ch-col">
-              <ng-container *ngIf="column.Default === ''; else defaultValue">
-                  <span class="null">null</span>
-              </ng-container>
-              <ng-template #defaultValue>
-                  {{column.Default}}
-              </ng-template>
+              <button class="btn btn-danger" data-toggle="modal" data-target="#deleteColumnModal" (click)="deleteColumn(column.Field)"><i class="fa fa-trash"></i></button>
           </div>
         </div>
 
         <div class="ch-row" *ngIf="columns.length === 0">
-          <div class="ch-col">No columns available</div>
+          <div class="ch-col" *ngIf="!loading">No columns available</div>
+          <div class="ch-col" *ngIf="loading">Loading columns...</div>
           <div class="ch-col"></div>
           <div class="ch-col"></div>
         </div>
-
       </div>
-      <div class="new-column" data-toggle="modal" data-target="#newColumnModal"><i class="fa fa-plus"></i> Add new data table column</div>
+      <div *ngIf="!loading" class="new-column" data-toggle="modal" data-target="#newColumnModal"><i class="fa fa-plus"></i> Add new data table column</div>
       </ng-scrollbar>
     </ng-template>
   </div>

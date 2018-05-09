@@ -14,9 +14,18 @@ header {
       height: 60px;
       line-height: 60px;
       text-align: center;
-      background: #272b35;
-      border-bottom: 1px solid #232730;
-      display: none; }
+      color: #626262;
+      cursor: pointer;
+      display: none;
+      position: absolute;
+      left: 0;
+      transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out; }
+      header .header .toggle-sidebar.sidebar-toggled {
+        left: 250px; }
     header .header .user {
       width: 110px;
       height: 60px;
@@ -96,6 +105,8 @@ header {
       header .header .switch-account .btn-group button {
         margin-left: 20px;
         text-transform: capitalize; }
+        header .header .switch-account .btn-group button i {
+          display: none; }
       header .header .switch-account .btn-group .dropdown-menu a {
         height: 30px;
         line-height: 25px;
@@ -122,5 +133,24 @@ header {
           text-align: center; }
         header .breadcrumbs ul li:last-child:after {
           display: none !important; }
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  header {
+    padding: 0; }
+    header .header .toggle-sidebar {
+      display: block; } }
+@media only screen and (max-width: 768px) {
+  header .header .toggle-sidebar.sidebar-toggled {
+    left: 190px;
+    color: #fff;
+    z-index: 11; } }
+@media only screen and (max-width: 520px) {
+  header .header .switch-account span {
+    display: none; }
+  header .header .switch-account .btn-group button {
+    margin: 0; }
+    header .header .switch-account .btn-group button i {
+      display: inline-block; } }
 
 /*# sourceMappingURL=header.component.css.map */

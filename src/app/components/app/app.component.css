@@ -15,4 +15,9 @@
   line-height: 100vh;
   text-align: center; }
 
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  .page-content-wrapper {
+    padding: 0; } }
+
 /*# sourceMappingURL=app.component.css.map */

@@ -11,11 +11,11 @@
       margin: 0;
       height: 50px;
       line-height: 50px;
-    }
-    #newFormButon {
-      position: absolute;
-      right: 1.25rem;
-      top: 10px
+      .new-form-button {
+        position: absolute;
+        right: 1.25rem;
+        top: 10px;
+      }
     }
     .no-forms {
       position: absolute;
@@ -37,12 +37,6 @@
           }
           &.ch-switch {
             padding-top: 6px;
-          }
-          &:first-child {
-            width: 40%;
-            min-width: 40%;
-            max-width: 40%;
-            @include text-overflow;
           }
         }
       }

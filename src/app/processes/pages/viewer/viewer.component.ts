@@ -8,14 +8,19 @@ import { EMPTY_XML } from '../../../global';
   styleUrls: ['./viewer.component.scss']
 })
 export class ViewerComponent implements OnInit, OnDestroy {
+
+  /**
+   * previewLoaded      :   indicates if the flowloaders has finished loading the preview
+   * subs               :   component subscriptions
+   * */
+  protected previewLoaded = false;
   private subs = [];
-  protected process = '';
 
   constructor(private flowLoader: FlowLoadService) { }
 
   ngOnInit() {
     this.subs.push(
-      this.flowLoader.process.subscribe(res => this.process = res)
+      this.flowLoader.previewLoaded.subscribe(loaded => this.previewLoaded = loaded)
     );
   }
 

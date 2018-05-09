@@ -5,7 +5,14 @@
   overflow: auto;
   .card-body {
     h5 {
-      padding: 0 !important;
+      margin: 0 !important;
+      padding: 0 0 15px 0 !important;
+      border-bottom: 1px solid $light-border;
+      .control-buttons {
+        position: absolute;
+        right: 1.25rem;
+        top: 10px;
+      }
     }
     hr {
       width: 100%;
@@ -48,8 +55,7 @@
     .form-structure {
       background: #f0f0f0;
       height: auto;
-      margin-left: -1.25rem;
-      width: calc(100% + 2.5rem);
+      border-radius: 5px;
       box-sizing: border-box;
       p {
         font-style: italic;
@@ -63,13 +69,8 @@
         @include transition(.2s);
         .form-control {
           position: relative;
+          background: #fff !important;
           .placeholder {
-            color: #d3d3d3;
-          }
-          span {
-            position: absolute;
-            right: 10px;
-            top: 5px;
             color: #d3d3d3;
           }
           &.textarea {
@@ -78,6 +79,11 @@
         }
         .label {
           height: 25px;
+          .required {
+            position: absolute;
+            right: 1.25rem;
+            color: #bebebe;
+          }
         }
         .delete-overlay {
           background: rgba(103, 15, 15, 0.2);
@@ -99,29 +105,26 @@
           }
         }
         .form-item {
-          width: 40px;
-          height: 40px;
+          width: 30px;
+          height: 30px;
           color: #fff;
           position: absolute;
           z-index: 2;
           text-align: center;
-          line-height: 40px;
-          top: 50%;
-          margin-top: -20px;
+          line-height: 30px;
+          top: -30px;
+          border-bottom-left-radius: 3px;
+          border-bottom-right-radius: 3px;
           &.delete {
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
             background: $color-danger;
-            right: -40px;
+            right: 90px;
             &:hover {
               background: #c54d4a;
             }
           }
           &.edit {
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
             background: $color-default;
-            left: -40px;
+            right: 130px;
             &:hover {
               background: #24788a;
             }
@@ -133,10 +136,10 @@
           background: #eaeaea;
         }
         &:hover > .delete {
-          right: 0;
+          top: 0;
         }
         &:hover > .edit {
-          left: 0;
+          top: 0;
         }
       }
     }
@@ -148,4 +151,8 @@
       }
     }
   }
+}
+
+ng-scrollbar {
+  padding-bottom: 30px;
 }

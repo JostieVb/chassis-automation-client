@@ -11,6 +11,11 @@ export class FormLoadService {
     private auth: UserService
   ) { }
 
+  /**
+   * Load the form structure
+   *
+   * @param     form - name of the form
+   * */
   load(form) {
     return this.http.get(API_BASE + 'form/' + form,
         {headers: this.auth.authHeaders()}

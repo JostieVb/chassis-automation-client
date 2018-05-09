@@ -15,12 +15,16 @@
       height: 30px;
       line-height: 30px;
       float: left; }
-      #modeler-container #modeler-header .name h3 {
+      #modeler-container #modeler-header .name label {
         cursor: pointer; }
-        #modeler-container #modeler-header .name h3 .placeholder {
+        #modeler-container #modeler-header .name label .placeholder {
           color: #c7c7c7;
-          display: inline-block; }
-      #modeler-container #modeler-header .name h3, #modeler-container #modeler-header .name .edit-name {
+          display: inline-block;
+          font-size: 20px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis; }
+      #modeler-container #modeler-header .name label, #modeler-container #modeler-header .name .edit-name {
         position: relative;
         font-family: 'Segoe UI', sans-serif;
         color: #626262;
@@ -34,9 +38,9 @@
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis; }
-        #modeler-container #modeler-header .name h3:hover > .fa-pencil, #modeler-container #modeler-header .name .edit-name:hover > .fa-pencil {
+        #modeler-container #modeler-header .name label:hover > .fa-pencil, #modeler-container #modeler-header .name .edit-name:hover > .fa-pencil {
           color: #626262; }
-        #modeler-container #modeler-header .name h3 .fa-pencil, #modeler-container #modeler-header .name .edit-name .fa-pencil {
+        #modeler-container #modeler-header .name label .fa-pencil, #modeler-container #modeler-header .name .edit-name .fa-pencil {
           display: inline-block;
           position: absolute;
           right: 0;
@@ -70,7 +74,10 @@
     z-index: 99;
     box-sizing: border-box;
     background: #fff;
-    border-left: 1px solid #e6e6e6; }
+    border-left: 1px solid #e6e6e6;
+    display: block; }
+    #modeler-container .properties.show {
+      display: block; }
     #modeler-container .properties h4 {
       margin: 0;
       height: 60px;
@@ -195,5 +202,22 @@
   -ms-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out; }
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  #modeler-container .properties {
+    display: none; }
+  #modeler-container .canvas {
+    width: 100%; }
+  #modeler-container .zoom-instructions {
+    display: none; }
+
+  #exportXML, #exportSVG {
+    display: none; } }
+@media only screen and (max-width: 420px) {
+  #modeler-container #modeler-header .name {
+    width: 150px; }
+  #modeler-container #modeler-header #task-bar .task-bar-elements {
+    width: 110px; } }
 
 /*# sourceMappingURL=modeler.component.css.map */

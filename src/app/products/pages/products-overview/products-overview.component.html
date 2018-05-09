@@ -3,16 +3,24 @@
     <h5 class="card-title">Added products</h5>
     <div class="ch-table ch-no-padding ch-table-striped ch-no-text-overflow ch-col-max-h">
       <div class="ch-row ch-head">
-        <div class="ch-col">Name</div>
-        <div class="ch-col">Description</div>
-        <div class="ch-col">Status</div>
+        <div class="ch-col ch-text-overflow-ellipsis">Name</div>
+        <div class="ch-col ch-text-overflow-ellipsis">Description</div>
+        <div class="ch-col ch-text-overflow-ellipsis">Price</div>
+        <div class="ch-col ch-text-overflow-ellipsis">Specifications</div>
+        <div class="ch-col ch-text-overflow-ellipsis">Status</div>
       </div>
       <div class="ch-row" *ngFor="let product of products">
-        <div class="ch-col">
+        <div class="ch-col ch-text-overflow-ellipsis">
           {{product.ca_name}}
         </div>
-        <div class="ch-col ch-overflow-hidden">
+        <div class="ch-col ch-text-overflow-ellipsis">
           {{product.ca_description}}
+        </div>
+        <div class="ch-col ch-text-overflow-ellipsis">
+          {{product.ca_price}}
+        </div>
+        <div class="ch-col ch-text-overflow-ellipsis">
+          {{product.ca_specifications}}
         </div>
         <div class="ch-col">
           <span [ngClass]="{'declined': product.status == 'declined', 'approved': product.status == 'approved' }" class="status">{{product.status}}</span>

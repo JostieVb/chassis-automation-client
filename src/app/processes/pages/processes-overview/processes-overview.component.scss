@@ -57,3 +57,10 @@
     cursor: pointer;
   }
 }
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  .responsive-hide {
+    display: none;
+  }
+}

@@ -1,13 +1,14 @@
 <header>
     <div class="header">
-        <div class="toggle-sidebar">
-
+        <div class="toggle-sidebar" [ngClass]="{'sidebar-toggled': toggle}" (click)="toggleSidebar()">
+            <i class="fa fa-bars" aria-hidden="true"></i>
         </div>
         <div class="switch-account">
-            Switch account
+            <span>Switch account</span>
             <div class="btn-group">
                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Choose account
+                    <span>Choose account</span>
+                    <i class="fa fa-user" aria-hidden="true"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a *ngFor="let user of users" class="dropdown-item" (click)="switchAccount(user.email)">{{user.name}}</a>
@@ -27,9 +28,6 @@
                     <a (click)="logOut()"><i class="fa fa-power-off" aria-hidden="true"></i>Sign out</a>
                 </div>
             </div>
-            <!--<popper-content #userMenu>-->
-
-            <!--</popper-content>-->
         </div>
     </div>
     <app-breadcrumbs></app-breadcrumbs>

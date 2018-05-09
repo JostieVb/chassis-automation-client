@@ -38,7 +38,7 @@ export class DeleteDataTableComponent implements OnInit, OnDestroy {
    * */
   deleteDataTable(table) {
     this.http.get(
-        API_BASE + 'data/delete/' + table,
+        API_BASE + 'data/delete-table/' + table,
         {headers: this.auth.authHeaders()}
     ).subscribe(res => {
       if (this.dataTablesService.tableName.getValue() === table) {

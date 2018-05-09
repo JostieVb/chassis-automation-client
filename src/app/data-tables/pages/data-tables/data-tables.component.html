@@ -1,13 +1,14 @@
 <app-new-table></app-new-table>
 <app-new-column></app-new-column>
 <app-delete-data-table></app-delete-data-table>
+<app-delete-column></app-delete-column>
 
 <div class="row full-height no-padding max">
-  <div class="col col-lg-2">
+  <div class="col col-xl-2 col-lg-3 col-md-5 col-sm-12 col-12" [ngClass]="{'hide': showDataTable}">
     <app-data-tables-overview></app-data-tables-overview>
   </div>
 
-  <div class="col col-lg-10">
+  <div class="col col-xl-10 col-lg-9 col-md-7 col-sm-12 col-12 datatable-detail" [ngClass]="{'show': showDataTable}">
     <app-data-tables-detail></app-data-tables-detail>
   </div>
 </div>

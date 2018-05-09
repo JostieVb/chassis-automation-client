@@ -7,10 +7,13 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class DataTablesService {
 
-  tables: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-  columns: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-  tableName: BehaviorSubject<string> = new BehaviorSubject<string>('');
-  modalTableName: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public tables: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  public columns: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  public tableName: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public modalTableName: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public modalColumnName: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public showDataTable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
       private http: HttpClient,
@@ -34,7 +37,7 @@ export class DataTablesService {
             {headers: this.auth.authHeaders()}
         ).subscribe(columns => {
             this.columns.next(columns);
-            this.tableName.next(table);
+            this.loading.next(false);
         });
     }
 

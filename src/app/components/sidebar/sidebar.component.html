@@ -1,5 +1,6 @@
-<nav class="sidebar">
+<nav class="sidebar" [ngClass]="{'show': toggle}">
   <div class="sidebar-header">Chassis Automation</div>
+  <ng-scrollbar [autoHide]="true">
   <ul *ngIf="!loading">
     <ng-container *ngFor="let navItem of navItems">
       <li *ngIf="navItem.link">
@@ -27,4 +28,5 @@
       <h4 *ngIf="!navItem.link">{{navItem.title}}</h4>
     </ng-container>
   </ul>
+  </ng-scrollbar>
 </nav>

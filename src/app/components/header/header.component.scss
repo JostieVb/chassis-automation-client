@@ -16,9 +16,15 @@ header {
       height: $header-height;
       line-height: $header-height;
       text-align: center;
-      background: #272b35;
-      border-bottom: 1px solid #232730;
+      color: $default-text-color;
+      cursor: pointer;
       display: none;
+      position: absolute;
+      left: 0;
+      @include transition(.2s);
+      &.sidebar-toggled {
+        left: $sidebar-width;
+      }
     }
     .user {
       width: 110px;
@@ -108,6 +114,9 @@ header {
         button {
           margin-left: 20px;
           text-transform: capitalize;
+          i {
+            display: none;
+          }
         }
         .dropdown-menu {
           a {
@@ -147,5 +156,48 @@ header {
         }
       }
     }
+  }
+}
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  header {
+    padding: 0;
+    .header .toggle-sidebar {
+      display: block;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  header .header {
+    .toggle-sidebar {
+      &.sidebar-toggled {
+        left: 190px;
+        color: #fff;
+        z-index: 11;
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: 520px) {
+  header .header .switch-account {
+    span {
+      display: none;
+    }
+    .btn-group button {
+      margin: 0;
+      i {
+        display: inline-block;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 435px) {
+  header .header .toggle-sidebar {
+
   }
 }

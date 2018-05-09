@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class SidebarService {
-  public hideSidebar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public toggle: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 

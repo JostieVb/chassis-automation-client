@@ -5,6 +5,9 @@
 
 .ch-table .ch-row.selected {
   background: #f2f2f2; }
+  .ch-table .ch-row.selected .ch-col .link:hover {
+    color: inherit !important;
+    cursor: default; }
 .ch-table .ch-row .ch-col button {
   position: absolute;
   right: 0;

@@ -15,6 +15,11 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.2); }
+  #background .copyright {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    color: #aeaeae; }
 
 #login-panel {
   position: absolute;
@@ -50,5 +55,22 @@
       width: 100%; }
     #login-panel #login-content-container form button span i {
       font-size: 12px; }
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  #background {
+    right: 380px; }
+
+  #login-panel {
+    width: 380px; } }
+@media only screen and (max-width: 768px) {
+  #login-panel {
+    width: 100%; } }
+@media only screen and (max-width: 480px) {
+  #login-panel #login-content-container {
+    padding: 50px 0 0 0; } }
+@media only screen and (max-height: 570px) {
+  #login-panel #login-content-container {
+    padding: 0; } }
 
 /*# sourceMappingURL=login.component.css.map */

@@ -7,5 +7,13 @@
   right: 0;
   top: 0;
   bottom: 0; }
+  #canvas #placeholder {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    line-height: calc(100vh - 116px);
+    text-align: center; }
 
 /*# sourceMappingURL=viewer.component.css.map */

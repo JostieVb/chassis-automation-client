@@ -20,6 +20,12 @@ $login-panel-width: 496px;
     bottom: 0;
     background: rgba(0, 0, 0, 0.2);
   }
+  .copyright {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    color: #aeaeae;
+  }
 }
 
 #login-panel {
@@ -70,5 +76,34 @@ $login-panel-width: 496px;
         }
       }
     }
+  }
+}
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  #background {
+    right: 380px;
+  }
+
+  #login-panel {
+    width: 380px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #login-panel {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #login-panel #login-content-container {
+    padding: 50px 0 0 0;
+  }
+}
+
+@media only screen and (max-height: 570px) {
+  #login-panel #login-content-container {
+    padding: 0;
   }
 }

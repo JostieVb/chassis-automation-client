@@ -21,6 +21,11 @@ export class FormDirective implements OnInit, OnDestroy {
       );
     }
 
+    /**
+     * Append the form to the DOM
+     *
+     * @param   formObj - an object that holds the form structure
+     * */
     protected buildForm(formObj) {
         const form = JSON.parse(formObj[0]['structure']);
         const parent = $('form[ng-reflect-form="' + this.form + '"]');
@@ -31,11 +36,11 @@ export class FormDirective implements OnInit, OnDestroy {
                 required = 'required';
             }
             if (item['fieldType'] === 'textarea') {
-                html += '<div class="form-group"><label for="' + item['fieldName'] + '">' + item['fieldLabel'] + '</label>' +
-                    '<textarea data-col="' + item['dbColumn'] + '" id="' + item['fieldName'] + '" class="' + required + ' form-control input textarea" name="' + item['fieldName'] + '" placeholder="' + item['fieldPlaceholder'] + '" required="' + item['required'] + '"></textarea></div>';
+                html += '<div class="form-group"><label for="' + item['fieldName'] + '" class="' + required + '">' + item['fieldLabel'] + '</label>' +
+                    '<textarea autocorrect="off" spellcheck="off" autocomplete="off" data-col="' + item['dbColumn'] + '" id="' + item['fieldName'] + '" class="form-control input textarea" name="' + item['fieldName'] + '" placeholder="' + item['fieldPlaceholder'] + '" required="' + item['required'] + '"></textarea></div>';
             } else {
-                html += '<div class="form-group"><label for="' + item['fieldName'] + '">' + item['fieldLabel'] + '</label>' +
-                    '<input type="' + item['fieldType'] + '" data-col="' + item['dbColumn'] + '" id="' + item['fieldName'] + '" class="' + required + ' form-control input" name="' + item['fieldName'] + '" placeholder="' + item['fieldPlaceholder'] + '" required="' + item['required'] + '" /"></div>';
+                html += '<div class="form-group"><label for="' + item['fieldName'] + '" class="' + required + '">' + item['fieldLabel'] + '</label>' +
+                    '<input autocorrect="off" spellcheck="off" autocomplete="off" type="' + item['fieldType'] + '" data-col="' + item['dbColumn'] + '" id="' + item['fieldName'] + '" class="' + required + ' form-control input" name="' + item['fieldName'] + '" placeholder="' + item['fieldPlaceholder'] + '" required="' + item['required'] + '" /"></div>';
             }
         });
         parent.append(html);

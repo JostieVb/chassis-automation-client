@@ -1,14 +1,44 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
+import { CanActivate, CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanComponentDeactivate } from './can-component-deactivate';
 import { UserService } from './user.service';
 
 @Injectable()
-export class GuardService implements CanActivate {
+export class GuardService implements CanActivate, CanDeactivate<CanComponentDeactivate> {
 
-  constructor(private auth: UserService) { }
+  constructor(
+      private auth: UserService
+  ) {}
 
-  canActivate() {
-    return true;
+  /**
+   * Decide whether the authenticated user has the right to activate a route
+   *
+   * */
+  canActivate(
+      route: ActivatedRouteSnapshot
+  ) {
+    let url = 'dashboard';
+    if (route.url.length > 0) {
+      url = route.url[0].path;
+    }
+
+    const permissions = this.auth.permissions.getValue();
+    if (permissions.includes(url)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Decide whether a component can be deactivated
+   *
+   * */
+  canDeactivate(
+    component: CanComponentDeactivate,
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ) {
+    return component.canDeactivate ? component.canDeactivate() : true;
   }
 
 }

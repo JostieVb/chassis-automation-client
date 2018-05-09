@@ -27,7 +27,11 @@ export class DataTablesOverviewComponent implements OnInit, OnDestroy {
 
   protected editTable(table) {
     if (this.dataTablesService.tableName.getValue() !== table) {
+        this.dataTablesService.columns.next([]);
+        this.dataTablesService.loading.next(true);
         this.dataTablesService.getTableColumns(table, true);
+        this.dataTablesService.tableName.next(table);
+        this.dataTablesService.showDataTable.next(true);
     }
   }
 

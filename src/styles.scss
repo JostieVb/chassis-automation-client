@@ -17,9 +17,14 @@ a {
 }
 
 .required {
+  position: relative;
+  width: 100%;
   &:after {
     content: '* required';
     display: inline-block;
+    position: absolute;
+    right: 0;
+    color: $color-secondary;
   }
 }
 
@@ -333,6 +338,10 @@ ng-select{
   }
 }
 
+.btn-secondary {
+  color: #fff !important;
+}
+
 /* Hidden modeler items */
 .djs-palette-entries {
   .group {
@@ -351,5 +360,12 @@ ng-select{
     .bpmn-icon-screw-wrench {
       display: none;
     }
+  }
+}
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  .bjs-powered-by {
+    display: none !important;
   }
 }

@@ -10,6 +10,12 @@ $margin: 0 1.25rem;
   .card-title {
     padding: 0 !important;
     position: relative;
+    .back-button {
+      position: absolute;
+      right: 30px;
+      top: 0;
+      display: none;
+    }
     .dropdown {
       position: absolute;
       right: 0;
@@ -95,6 +101,42 @@ $margin: 0 1.25rem;
                 }
               }
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  .card .card-title .back-button {
+    display: block;
+  }
+
+  .card .card-body .content {
+    .message {
+      .ch-table {
+        .ch-row {
+          overflow: auto;
+          width: 80%;
+          float: left;
+          display: block;
+          padding: 0;
+          &.ch-head {
+            width: 20% !important;
+          }
+          &:last-child {
+            border-bottom: none;
+          }
+          .expand {
+            display: none;
+          }
+          .ch-col {
+            border-bottom: 1px solid $light-border;
+            padding: 0 10px;
+            float: left;
+            min-width: 100%;
           }
         }
       }

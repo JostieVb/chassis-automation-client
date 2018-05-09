@@ -17,12 +17,12 @@
       width: 100%;
       text-align: center;
       line-height: 40px;
-      background: $color-secondary;
+      background: #d7d7d7;
       color: #fff;
       cursor: pointer;
       @include transition(.2s);
       &:hover {
-        background: #838383;
+        background: #bfbfbf;
       }
     }
   }

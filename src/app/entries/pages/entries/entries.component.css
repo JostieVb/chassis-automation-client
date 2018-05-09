@@ -1,7 +1,18 @@
 .row {
   background: #fff; }
 
+.hide {
+  display: block; }
+
 .entries-detail {
-  background: #f8f8f8; }
+  background: #f8f8f8;
+  display: block; }
+  .entries-detail.show {
+    display: block; }
+
+/* Media Queries */
+@media only screen and (max-width: 980px) {
+  .entries-detail, .hide {
+    display: none; } }
 
 /*# sourceMappingURL=entries.component.css.map */

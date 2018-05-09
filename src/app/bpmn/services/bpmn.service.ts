@@ -3,9 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { API_BASE } from '../../global';
 import { Observable } from 'rxjs/Observable';
 import { UserService } from '../../auth/user.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class BpmnService {
+
+  public data: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
   constructor(
       private http: HttpClient,
@@ -13,7 +16,8 @@ export class BpmnService {
   ) { }
 
   /**
-   * Check for processes that are linked to the caller
+   * Call to the back-end bpmn engine
+   *
    * */
   call(caller: string, dbTable?: string, insertId?: number): Observable<any> {
     return this.http.post(API_BASE + 'call',
@@ -22,6 +26,12 @@ export class BpmnService {
         );
   }
 
+  /**
+   * Post the form data
+   *
+   * @param     caller - name of the caller
+   * @param     data - form data
+   * */
   postData(caller, data) {
     return this.http.post(
        API_BASE + 'post/' + caller,
@@ -30,18 +40,15 @@ export class BpmnService {
     );
   }
 
-  getData(dbTable, contentId) {
-    return this.http.post(
-        API_BASE + 'get-data',
-        {db_table: dbTable, content_id: contentId},
-        {headers: this.auth.authHeaders()}
-    );
-  }
-
-  getProcess(id) {
-    return this.http.get(
-        API_BASE + 'entries-get-process/' + id,
-        {headers: this.auth.authHeaders()}
-    );
+  /**
+   * Get data from table
+   *
+   * @param     table - the table name where the data should be selected
+   * */
+  getData(table: string) {
+      this.http.get(
+          API_BASE + 'get-data/' + table,
+          {headers: this.auth.authHeaders()}
+      ).subscribe(data => this.data.next(data));
   }
 }

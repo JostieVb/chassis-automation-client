@@ -3,23 +3,32 @@
 <head>
   <meta charset="utf-8">
   <title>Chassis Automation</title>
-  <base href="/">
+  <base href="/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <style type="text/css">
-    #loading-intro {
-      text-align: center;
-      position: absolute;
-      top: calc(50% - 150px);
-      left: calc(50% - 150px);
-      width: 400px;
-      height: 300px;
+    #loading-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: #fafafa;
       z-index: 9999;
     }
 
-    #loading-intro .loading-bar {
+    #loading-container #loading-intro {
+      text-align: center;
+      position: absolute;
+      top: calc(50% - 30px);
+      left: calc(50% - 200px);
+      width: 400px;
+      height: auto;
+    }
+
+    #loading-container #loading-intro .loading-bar {
       margin-top: 10px;
       width: 100%;
       height: 6px;
@@ -27,53 +36,62 @@
       background: #dadada;
     }
 
-    #loading-intro .loading-bar .progress-bar {
+    #loading-container #loading-intro .loading-bar .progress-bar {
       width: 0%;
       height: 6px;
       border-radius: 3px;
-      background: #000;
+      background: #2390A8;
       transition: all 1s;
     }
 
-    #loading-intro h5 {
+    #loading-container #loading-intro h5 {
       font-weight: 900;
       text-transform: uppercase;
-      color: #adadad;
+      color: #4f4f4f;
       font-size: 1em;
     }
 
+    /* Media Queries */
+    @media only screen and (max-width: 500px) {
+      #loading-container #loading-intro {
+        width: calc(100% - 100px);
+        left: 50px;
+      }
+    }
   </style>
 </head>
 <body>
   <app-root></app-root>
 
   <!-- Loader -->
-  <!--<div id="loading-intro">-->
-    <!--<div class="loading-bar">-->
-      <!--<div class="progress-bar"></div>-->
-    <!--</div>-->
-    <!--<h5>Chassis Automation is being loaded...</h5>-->
-  <!--</div>-->
+  <div id="loading-container">
+    <div id="loading-intro">
+      <h5>Chassis Automation is loading...</h5>
+      <div class="loading-bar">
+        <div class="progress-bar"></div>
+      </div>
+    </div>
+  </div>
   <!-- /Loader -->
 
 
   <!-- Scripts -->
-  <!-- Loader -->
-  <!--<script type="application/javascript">-->
-      <!--var introLoader = document.getElementById('loading-intro');-->
-      <!--var progress = 0;-->
+  <script type="text/javascript">
+      var introLoader = document.getElementById('loading-container');
+      var progress = 0;
 
-      <!--var interval = setInterval(function () {-->
-          <!--progress += 10;-->
+      var interval = setInterval(function () {
+          progress += 10;
 
-          <!--if (progress > 100) {-->
-              <!--clearInterval(interval);-->
-          <!--} else {-->
-              <!--introLoader.getElementsByClassName('progress-bar')[0].style.width = progress + '%';-->
-          <!--}-->
+          if (progress > 100) {
+              clearInterval(interval);
+              introLoader.style.display = 'none';
+          } else {
+              introLoader.getElementsByClassName('progress-bar')[0].style.width = progress + '%';
+          }
 
-      <!--}, 500);-->
-  <!--</script>-->
+      }, 500);
+  </script>
   <!-- /Scripts -->
 </body>
 </html>

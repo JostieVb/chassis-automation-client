@@ -14,6 +14,14 @@
   .ch-row {
     &.selected {
       background: #f2f2f2;
+      .ch-col {
+        .link {
+          &:hover {
+            color: inherit !important;
+            cursor: default;
+          }
+        }
+      }
     }
     .ch-col {
       button {

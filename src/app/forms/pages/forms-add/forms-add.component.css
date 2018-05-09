@@ -2,7 +2,13 @@
   height: calc(100vh - 116px);
   overflow: auto; }
   .card .card-body h5 {
-    padding: 0 !important; }
+    margin: 0 !important;
+    padding: 0 0 15px 0 !important;
+    border-bottom: 1px solid #e6e6e6; }
+    .card .card-body h5 .control-buttons {
+      position: absolute;
+      right: 1.25rem;
+      top: 10px; }
   .card .card-body hr {
     width: 100%;
     margin: 20px 0; }
@@ -42,8 +48,7 @@
   .card .card-body .form-structure {
     background: #f0f0f0;
     height: auto;
-    margin-left: -1.25rem;
-    width: calc(100% + 2.5rem);
+    border-radius: 5px;
     box-sizing: border-box; }
     .card .card-body .form-structure p {
       font-style: italic;
@@ -59,18 +64,18 @@
       -moz-transition: all 0.2s ease-in-out;
       -webkit-transition: all 0.2s ease-in-out; }
       .card .card-body .form-structure .form-group .form-control {
-        position: relative; }
+        position: relative;
+        background: #fff !important; }
         .card .card-body .form-structure .form-group .form-control .placeholder {
-          color: #d3d3d3; }
-        .card .card-body .form-structure .form-group .form-control span {
-          position: absolute;
-          right: 10px;
-          top: 5px;
           color: #d3d3d3; }
         .card .card-body .form-structure .form-group .form-control.textarea {
           height: 100px; }
       .card .card-body .form-structure .form-group .label {
         height: 25px; }
+        .card .card-body .form-structure .form-group .label .required {
+          position: absolute;
+          right: 1.25rem;
+          color: #bebebe; }
       .card .card-body .form-structure .form-group .delete-overlay {
         background: rgba(103, 15, 15, 0.2);
         text-align: center;
@@ -89,15 +94,16 @@
         .card .card-body .form-structure .form-group .delete-overlay.show {
           display: flex; }
       .card .card-body .form-structure .form-group .form-item {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         color: #fff;
         position: absolute;
         z-index: 2;
         text-align: center;
-        line-height: 40px;
-        top: 50%;
-        margin-top: -20px;
+        line-height: 30px;
+        top: -30px;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
         cursor: pointer;
         transition: all 0.2s ease-in-out;
         -o-transition: all 0.2s ease-in-out;
@@ -105,29 +111,28 @@
         -moz-transition: all 0.2s ease-in-out;
         -webkit-transition: all 0.2s ease-in-out; }
         .card .card-body .form-structure .form-group .form-item.delete {
-          border-top-left-radius: 5px;
-          border-bottom-left-radius: 5px;
           background: #f55753;
-          right: -40px; }
+          right: 90px; }
           .card .card-body .form-structure .form-group .form-item.delete:hover {
             background: #c54d4a; }
         .card .card-body .form-structure .form-group .form-item.edit {
-          border-top-right-radius: 5px;
-          border-bottom-right-radius: 5px;
           background: #2390A8;
-          left: -40px; }
+          right: 130px; }
           .card .card-body .form-structure .form-group .form-item.edit:hover {
             background: #24788a; }
       .card .card-body .form-structure .form-group:hover {
         background: #eaeaea; }
       .card .card-body .form-structure .form-group:hover > .delete {
-        right: 0; }
+        top: 0; }
       .card .card-body .form-structure .form-group:hover > .edit {
-        left: 0; }
+        top: 0; }
   .card .card-body .new-field {
     display: none;
     margin: 20px 0 0 0; }
     .card .card-body .new-field.show {
       display: block; }
+
+ng-scrollbar {
+  padding-bottom: 30px; }
 
 /*# sourceMappingURL=forms-add.component.css.map */
