@@ -8,8 +8,11 @@ import { EntriesService } from '../../services/entries.service';
 })
 export class EntriesOverviewComponent implements OnInit, OnDestroy {
   /**
-   * entries    :   all entries
-   * subs       :   component subscriptions
+   * entries            :   an array that holds all entries
+   * selectedEntryId    :   the id of the selected entry
+   * selectedEntry      :   an array that holds the selected entry's data
+   * filter             :   the
+   * subs               :   component subscriptions
    * */
   protected entries = [];
   protected selectedEntryId: number;
@@ -21,6 +24,11 @@ export class EntriesOverviewComponent implements OnInit, OnDestroy {
       private entriesService: EntriesService
   ) { }
 
+  /**
+   * On initialization, get entries from the entriesService
+   * and subscribe to required data from the entriesService
+   *
+   * */
   ngOnInit() {
     this.entriesService.getEntries();
     this.subs.push(
@@ -30,7 +38,12 @@ export class EntriesOverviewComponent implements OnInit, OnDestroy {
     );
   }
 
-  showDetails(id) {
+  /**
+   * Show entry details
+   *
+   * @param   id - id of the entry
+   * */
+  showDetails(id: number) {
     if (this.selectedEntryId !== id) {
         this.entriesService.selectedEntryId.next(null);
         this.entriesService.heightAuto.next(false);
@@ -39,11 +52,21 @@ export class EntriesOverviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  setFilter(filter) {
+  /**
+   * Set the filter and get entries by filter
+   *
+   * @param   filter - the filter where the entries should be filtered
+   * */
+  setFilter(filter: string) {
     this.filter = filter;
     this.entriesService.getEntries(filter);
   }
 
+  /**
+   * On destroy, unsubscribe component subscriptions and set
+   * selected entry to null
+   *
+   * */
   ngOnDestroy() {
     this.entriesService.selectedEntryId.next(null);
     this.subs.forEach(sub => sub.unsubscribe());

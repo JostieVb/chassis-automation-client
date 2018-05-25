@@ -28,32 +28,43 @@
     font-family: 'Segoe UI', sans-serif;
     padding: 15px 0 0 0;
     margin: 0; }
-    .sidebar ul li {
+    .sidebar ul a {
+      font-family: Arial, sans-serif;
+      width: 100%;
+      height: 40px;
       display: block;
-      padding: 0;
-      margin: 0;
-      clear: right;
-      color: #788296;
+      overflow: hidden;
       position: relative;
-      transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      -ms-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      -webkit-transition: all 0.2s ease-in-out; }
-      .sidebar ul li a {
-        font-family: Arial, sans-serif;
-        display: inline-block;
-        padding: 0 3px 0 32px;
-        min-height: 40px;
-        line-height: 40px;
+      line-height: 40px;
+      margin-bottom: 5px; }
+      .sidebar ul a.active li {
+        color: #fff;
+        cursor: default; }
+      .sidebar ul a li {
         font-size: 14px;
-        clear: both; }
-        .sidebar ul li a .title {
-          float: left;
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          width: 100%; }
-        .sidebar ul li a .entries-count {
+        margin: 0;
+        position: absolute;
+        color: #788296;
+        left: 32px;
+        right: 0;
+        transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out; }
+        .sidebar ul a li .icon-thumbnail {
+          width: 40px;
+          height: 40px;
+          background: #21252d;
+          text-align: center;
+          line-height: 40px;
+          display: inline-block;
+          position: absolute;
+          right: 14px;
+          font-size: 16px; }
+        .sidebar ul a li:hover {
+          color: #fff !important; }
+        .sidebar ul a li .entries-count {
           display: inline-block;
           background: #788296;
           padding: 0 5px;
@@ -67,22 +78,6 @@
           font-weight: bold;
           width: auto;
           color: #2B303B; }
-      .sidebar ul li .icon-thumbnail {
-        display: inline-block;
-        background: #21252d;
-        height: 40px;
-        width: 40px;
-        line-height: 40px;
-        text-align: center;
-        vertical-align: middle;
-        position: relative;
-        left: 0;
-        float: right;
-        margin-right: 14px;
-        color: #788296;
-        font-size: 16px; }
-      .sidebar ul li:hover {
-        color: #fff !important; }
 
 h4 {
   text-transform: uppercase;

@@ -5,7 +5,7 @@
 
       <div class="control-buttons">
         <button type="submit" *ngIf="editingForm" [disabled]="structure.length === 0" (click)="postForm('save')" class="btn btn-primary">Save form</button>
-        <button type="submit" *ngIf="!editingForm" [disabled]="structure.length === 0" (click)="postForm('add')" class="btn btn-primary">Add form</button>
+        <button type="submit" *ngIf="!editingForm" [disabled]="structure.length === 0" (click)="postForm('add')" class="btn btn-primary">Save form</button>
         <button type="submit" (click)="dismissForm()" class="btn btn-secondary">Cancel</button>
       </div>
     </h5>

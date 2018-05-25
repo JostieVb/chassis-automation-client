@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { DomSanitizer } from '@angular/platform-browser';
-
-declare var require;
-const $ = require('jQuery');
+import { Alert } from '../alert/alert';
 
 @Injectable()
 export class AlertService {
-  public alert: BehaviorSubject<any> = new BehaviorSubject<any>('');
 
-  constructor(private sanitizer: DomSanitizer) { }
+  /**
+   * alert    :   the variable where the alert message is being stored.
+   * */
+  public alert: BehaviorSubject<Alert> = new BehaviorSubject<Alert>(new Alert('', ''));
 
-  buildAlert(alert) {
-    const html = '<div class="alert alert-' + alert.color + ' alert-dismissible fade" role="alert">' + alert.text + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-    this.alert.next(this.sanitizer.bypassSecurityTrustHtml(html));
-  }
+  constructor() { }
 
 }

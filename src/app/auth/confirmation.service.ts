@@ -11,7 +11,7 @@ export class ConfirmationService {
    * Prompt the user before leaving a component
    *
    * @param     message - an optional message to prompt
-   * @return    observable<boolean>
+   * @return    Observable<boolean>
    * */
   confirm(message?: string): Observable<boolean> {
       const confirmation = window.confirm(message || 'Are you sure you want to leave this page?');

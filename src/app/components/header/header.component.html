@@ -11,7 +11,11 @@
                     <i class="fa fa-user" aria-hidden="true"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a *ngFor="let user of users" class="dropdown-item" (click)="switchAccount(user.email)">{{user.name}}</a>
+                    <ng-container *ngFor="let ca_user of users">
+                        <a *ngIf="ca_user.id !== user.id" class="dropdown-item" (click)="switchAccount(ca_user.email)">{{ca_user.name}}</a>
+                        <a *ngIf="ca_user.id === user.id" class="dropdown-item selected">{{ca_user.name}}</a>
+                    </ng-container>
+
                 </div>
             </div>
         </div>

@@ -14,4 +14,10 @@
     background-color: #f55753;
     color: #fff; }
 
+.no-products {
+  width: 100%;
+  text-align: center;
+  height: 40px;
+  line-height: 40px; }
+
 /*# sourceMappingURL=products-overview.component.css.map */

@@ -338,8 +338,37 @@ ng-select{
   }
 }
 
+.no-form-msg {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background: #fddddd;
+  color: #933432;
+  .head {
+    padding: 5px 10px;
+    font-weight: bold;
+  }
+  .body {
+    padding: 0 10px 5px 10px;
+    span {
+      display: inline-block;
+      background: white;
+      padding: 0 5px;
+      margin: 0 2px;
+      border: 1px solid #d0d0d0;
+      font-family: 'Courier New';
+      border-radius: 2px;
+      color: $default-text-color;
+    }
+  }
+}
+
 .btn-secondary {
   color: #fff !important;
+}
+
+*[data-form] {
+  display: none;
 }
 
 /* Hidden modeler items */

@@ -27,7 +27,7 @@ export class FlowLoadService {
    * @param     id - the id of the process
    * @return    Observable<any>
    * */
-  load(id) {
+  load(id: number) {
       return this.http.get(
           API_BASE + 'get-process/' + id,
           {headers: this.auth.authHeaders()}

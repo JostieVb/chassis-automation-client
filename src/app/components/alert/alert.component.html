@@ -1,3 +1,9 @@
-<div id="alert-box" [ngClass]="{'show': showAlertBox}" (change)="alertChanged()">
-  {{alert}}
+<div id="alert-box" [ngClass]="{'show': showAlertBox}">
+  <div *ngFor="let key of keys" id="{{key}}" [ngClass]="{'not-dismissable': alerts[key].dismissable === false}" class="alert {{alerts[key].type}}">
+    <p>
+      <b *ngIf="alerts[key].prefix !== '' && alerts[key].prefix !== undefined">{{alerts[key].prefix}} </b>
+      {{alerts[key].message}}
+    </p>
+    <span class="close" (click)="hideAlert(key)">&times;</span>
+  </div>
 </div>

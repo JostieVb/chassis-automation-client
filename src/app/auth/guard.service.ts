@@ -14,9 +14,8 @@ export class GuardService implements CanActivate, CanDeactivate<CanComponentDeac
    * Decide whether the authenticated user has the right to activate a route
    *
    * */
-  canActivate(
-      route: ActivatedRouteSnapshot
-  ) {
+  canActivate(route: ActivatedRouteSnapshot) {
+    console.log(route);
     let url = 'dashboard';
     if (route.url.length > 0) {
       url = route.url[0].path;

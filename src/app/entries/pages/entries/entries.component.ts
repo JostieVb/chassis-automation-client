@@ -8,6 +8,10 @@ import { EntriesService } from '../../services/entries.service';
 })
 export class EntriesComponent implements OnInit, OnDestroy {
 
+  /**
+   * showDetail       :   indicates if the selected entry's details should be displayed
+   * subs             :   component subscriptions
+   * */
   protected showDetail = false;
   private subs = [];
 
@@ -15,12 +19,19 @@ export class EntriesComponent implements OnInit, OnDestroy {
       private entriesService: EntriesService
   ) { }
 
+  /**
+   * On initialization, subscribe to the showDetail observable
+   * */
   ngOnInit() {
     this.subs.push(
       this.entriesService.showDetail.subscribe(show => this.showDetail = show)
     );
   }
 
+  /**
+   * When the component get's destroyed, unsubscribe all component subscriptions
+   *
+   * */
   ngOnDestroy() {
     this.subs.forEach(sub => sub.unsubscribe());
   }

@@ -3,11 +3,69 @@
 #alert-box {
   position: fixed;
   z-index: 99999999;
-  bottom: 0;
+  bottom: 10px;
   right: 40px;
+  width: 400px;
+  height: auto;
+  overflow: hidden;
   display: none;
-  @include transition(.2s);
   &.show {
     display: block;
+  }
+  .alert {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding: 10px 15px;
+    position: relative;
+    background: #fff;
+    color: $default-text-color;
+    opacity: 0;
+    @include transition(.5s);
+    &.show {
+      opacity: 1;
+    }
+    &.not-dismissable {
+      .close {
+        display: none;
+      }
+      p {
+        width: 100% !important;
+      }
+    }
+    .close {
+      position: absolute;
+      right: 15px;
+      top: 10px;
+      height: 20px;
+      width: 10px;
+      text-align: center;
+      line-height: 20px;
+    }
+    p {
+      padding: 0;
+      margin: 0;
+      width: calc(100% - 20px);
+      float: left;
+      b {
+        text-transform: capitalize;
+      }
+    }
+    &.danger {
+      color: #933432;
+      background: #fddddd;
+    }
+    &.success {
+      color: #0a7c71;
+      background: #cff5f2;
+    }
+    &.info {
+      color: #2b6a94;
+      background: #daeffd;
+    }
+    &.warning {
+      color: #957d32;
+      background: #fef6dd;
+    }
   }
 }

@@ -124,6 +124,11 @@ header {
             line-height: 25px;
             font-size: 12px;
             text-transform: capitalize;
+            &.selected {
+              background: #f0f0f0;
+              color: #bebebe !important;
+              cursor: default;
+            }
           }
         }
       }

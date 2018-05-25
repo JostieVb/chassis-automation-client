@@ -6,15 +6,32 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DashboardService {
+
+  /**
+   * entries            :     all entries
+   * entriesNumbers     :     number of entries
+   * */
   entries: BehaviorSubject<any> = new BehaviorSubject<any>({});
   entriesNumbers: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
+  /**
+   * Get number of entries based on status
+   *
+   * */
   getEntriesNumbersByStatus() {
     this.http.get(API_BASE + 'get-entries-numbers-by-status').map(res => this.entriesNumbers.next(res));
   }
 
+  /**
+   * Get entries by status
+   *
+   * @param   column - column indicates the status
+   *
+   * */
   getEntriesByStatus(column?: string) {
     if (column) {
       this.http.get(API_BASE + 'get-entries-by-status/' + column).subscribe(entries => this.entries.next(entries));

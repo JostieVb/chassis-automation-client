@@ -31,13 +31,11 @@ export class AppComponent implements OnInit, OnDestroy {
   /**
    * On component initialization, count unread entries and set
    * loggedIn to true if the user is authenticated
+   *
    * */
   ngOnInit() {
     this.subs.push(
-      this.auth.loggedIn.subscribe(bool => {
-        this.loggedIn = bool;
-        console.log('logged in: ' + bool);
-      }),
+      this.auth.loggedIn.subscribe(bool => this.loggedIn = bool),
       this.auth.loggingOut.subscribe(bool => this.loggingOut = bool),
       this.sidebar.toggle.subscribe(toggle => this.toggle = toggle),
       this.router.events.subscribe(event => {

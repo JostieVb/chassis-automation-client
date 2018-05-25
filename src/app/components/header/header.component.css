@@ -112,6 +112,10 @@ header {
         line-height: 25px;
         font-size: 12px;
         text-transform: capitalize; }
+        header .header .switch-account .btn-group .dropdown-menu a.selected {
+          background: #f0f0f0;
+          color: #bebebe !important;
+          cursor: default; }
   header .breadcrumbs {
     width: 100%;
     height: 55px;

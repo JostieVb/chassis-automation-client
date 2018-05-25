@@ -18,12 +18,20 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
   constructor(private flowLoader: FlowLoadService) { }
 
+  /**
+   * On initialization, subscribe to the preview that was loaded by the flowLoader
+   *
+   * */
   ngOnInit() {
     this.subs.push(
       this.flowLoader.previewLoaded.subscribe(loaded => this.previewLoaded = loaded)
     );
   }
 
+  /**
+   * On destroy, unsubscribe all subscriptions
+   *
+   * */
   ngOnDestroy() {
     this.flowLoader.process.next(EMPTY_XML);
     this.subs.forEach(sub => sub.unsubscribe());

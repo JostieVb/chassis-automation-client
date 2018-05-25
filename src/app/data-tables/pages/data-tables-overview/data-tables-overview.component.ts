@@ -8,6 +8,11 @@ import { DataTablesService } from '../../services/data-tables.service';
 })
 export class DataTablesOverviewComponent implements OnInit, OnDestroy {
 
+  /**
+   * selectedTable        :     name of the selected data table
+   * tables               :     an array that holds all data tables
+   * subs                 :     components subscriptions
+   * */
   protected selectedTable = '';
   protected tables = [];
   private subs = [];
@@ -16,6 +21,11 @@ export class DataTablesOverviewComponent implements OnInit, OnDestroy {
       private dataTablesService: DataTablesService
   ) { }
 
+  /**
+   * On initialization, subscribe to the tables and tableName and
+   * get de data tables from the service
+   *
+   * */
   ngOnInit() {
     this.dataTablesService.columns.next([]);
     this.subs.push(
@@ -25,6 +35,11 @@ export class DataTablesOverviewComponent implements OnInit, OnDestroy {
     this.dataTablesService.getDbTables();
   }
 
+  /**
+   * Load data table for editing
+   *
+   * @param   table - table name
+   * */
   protected editTable(table) {
     if (this.dataTablesService.tableName.getValue() !== table) {
         this.dataTablesService.columns.next([]);
@@ -35,10 +50,19 @@ export class DataTablesOverviewComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Delete data table
+   *
+   * @param   table - table name
+   * */
   protected deleteTable(table) {
     this.dataTablesService.modalTableName.next(table);
   }
 
+  /**
+   * On destroy, unsubscribe all subscriptions
+   *
+   * */
   ngOnDestroy() {
     this.subs.forEach(sub => sub.unsubscribe());
   }

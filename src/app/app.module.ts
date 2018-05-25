@@ -59,7 +59,7 @@ import { NewProcessModalComponent } from './processes/modals/new-process/new-pro
 import { ViewerComponent } from './processes/pages/viewer/viewer.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsOverviewComponent } from './forms/pages/forms-overview/forms-overview.component';
-import { FormsAddComponent } from './forms/pages/forms-add/forms-add.component';
+import { FormBuilderComponent } from './forms/pages/form-builder/form-builder.component';
 import { DataTablesComponent } from './data-tables/pages/data-tables/data-tables.component';
 import { DataTablesService } from './data-tables/services/data-tables.service';
 import { DataTablesOverviewComponent } from './data-tables/pages/data-tables-overview/data-tables-overview.component';
@@ -75,7 +75,7 @@ const appRoutes: Routes = [
       path: '',
       pathMatch: 'prefix',
       redirectTo: 'dashboard',
-      canActivate: [GuardService],
+      canActivate: [],
       data: {
         permission: 'dashboard'
       }
@@ -83,7 +83,7 @@ const appRoutes: Routes = [
     {
       path: 'dashboard',
       component: DashboardComponent,
-      canActivate: [GuardService],
+      canActivate: [],
       data: {
         permission: 'dashboard'
       }
@@ -91,7 +91,7 @@ const appRoutes: Routes = [
     {
       path: 'entries',
       component: EntriesComponent,
-      canActivate: [GuardService],
+      canActivate: [],
       data: {
         permission: 'entries'
       }
@@ -99,7 +99,7 @@ const appRoutes: Routes = [
     {
       path: 'products',
       component: ProductsComponent,
-      canActivate: [GuardService],
+      canActivate: [],
       data: {
         permission: 'products'
       }
@@ -107,15 +107,14 @@ const appRoutes: Routes = [
     {
       path: 'processes',
       component: ProcessesComponent,
-      canActivate: [GuardService],
+      canActivate: [],
       data: {
         permission: 'processes'
       }
     },
     {
       path: 'processes/:param',
-      canActivate: [GuardService],
-      // canDeactivate: [GuardService],
+      canActivate: [],
       component: ModelerComponent,
       data: {
         permission: 'processes'
@@ -124,8 +123,7 @@ const appRoutes: Routes = [
     {
       path: 'forms',
       component: FormsComponent,
-      canActivate: [GuardService],
-      // canDeactivate: [GuardService],
+      canActivate: [],
       data: {
         permission: 'forms'
       }
@@ -133,7 +131,7 @@ const appRoutes: Routes = [
     {
         path: 'data-tables',
         component: DataTablesComponent,
-        canActivate: [GuardService],
+        canActivate: [],
         data: {
             permission: 'data-tables'
         }
@@ -172,7 +170,7 @@ const appRoutes: Routes = [
     ViewerComponent,
     LoginComponent,
     FormsOverviewComponent,
-    FormsAddComponent,
+    FormBuilderComponent,
     DataTablesComponent,
     DataTablesOverviewComponent,
     DataTablesDetailComponent,

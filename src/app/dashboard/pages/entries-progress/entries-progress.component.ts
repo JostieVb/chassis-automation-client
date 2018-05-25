@@ -8,11 +8,22 @@ import { DashboardService } from '../../services/dashboard.service';
 })
 
 export class EntriesProgressComponent implements OnInit, OnDestroy {
-  subs = [];
-  entriesNumbers: any = {};
 
-  constructor(private dashboardService: DashboardService) { }
+  /**
+   * entriesNumbers     :   number of unread entries
+   * subs               :   component subscriptions
+   * */
+  public entriesNumbers: any = {};
+  private  subs = [];
 
+  constructor(
+    private dashboardService: DashboardService
+  ) { }
+
+  /**
+   * On initialization, get the number of unread entries
+   *
+   * */
   ngOnInit() {
     this.dashboardService.getEntriesNumbersByStatus();
       this.subs.push(
@@ -22,6 +33,10 @@ export class EntriesProgressComponent implements OnInit, OnDestroy {
       );
   }
 
+  /**
+   * On destroy, unsubscribe all subscriptions
+   *
+   * */
   ngOnDestroy() {
     this.subs.forEach(sub => sub.unsubscribe());
   }

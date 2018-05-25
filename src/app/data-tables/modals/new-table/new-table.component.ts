@@ -14,6 +14,12 @@ const $ = require('jQuery');
 })
 export class NewTableComponent implements OnInit {
 
+  /**
+   * tableName      :     name of the table
+   * errorMsg       :     the error message
+   * errorMsgClass  :     CSS class for the error message
+   * succes         :     indicates if a new table was succesfully added
+   * */
   protected tableName = '';
   protected errorMsg = '';
   protected errorMsgClass = '';
@@ -28,6 +34,10 @@ export class NewTableComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Create the data table
+   *
+   * */
   protected createDataTable() {
     this.tableName = this.dataTablesService.addPrefix(this.tableName);
     this.http.post(
@@ -47,6 +57,10 @@ export class NewTableComponent implements OnInit {
     });
   }
 
+  /**
+   * Dismiss the modal
+   *
+   * */
   protected dismissModal() {
     $('.close').trigger('click');
     this.tableName = '';

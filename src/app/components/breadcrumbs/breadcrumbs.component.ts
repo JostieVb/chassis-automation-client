@@ -7,9 +7,7 @@ import { BreadcrumbService } from 'ng5-breadcrumb';
   styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent implements OnInit {
-  /**
-  * params  :   segments of current route as an array of UrlSegment Objects
-   */
+
   constructor(private breadcrumbService: BreadcrumbService) { }
 
   ngOnInit() {

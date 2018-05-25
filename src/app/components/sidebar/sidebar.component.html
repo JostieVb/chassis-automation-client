@@ -3,27 +3,15 @@
   <ng-scrollbar [autoHide]="true">
   <ul *ngIf="!loading">
     <ng-container *ngFor="let navItem of navItems">
-      <li *ngIf="navItem.link">
-        <a routerLink="{{navItem.path}}" routerLinkActive="active">
+      <a routerLink="{{navItem.path}}" routerLinkActive="active">
+        <li *ngIf="navItem.link">
           <span class="title">
             {{navItem.title}}
           </span>
           <span class="entries-count" *ngIf="navItem.title === 'Entries' && unreadEntries > 0">{{unreadEntries}}</span>
-          <ng-container *ngIf="navItem.children.length > 0">
-            <span class=" arrow"></span>
-          </ng-container>
-        </a>
-        <span class="icon-thumbnail"><i class="{{navItem.icon}}"></i></span>
-
-        <ul *ngIf="navItem.children.length > 0" class="sub-menu">
-          <li *ngFor="let subItem of navItem.children">
-            <a routerLink="{{subItem.path}}">
-              <span class="title">{{subItem.title}}</span>
-            </a>
-            <span class="icon-thumbnail"><i class="{{subItem.icon}}"></i></span>
-          </li>
-        </ul>
-      </li>
+          <span class="icon-thumbnail"><i class="{{navItem.icon}}"></i></span>
+        </li>
+      </a>
 
       <h4 *ngIf="!navItem.link">{{navItem.title}}</h4>
     </ng-container>

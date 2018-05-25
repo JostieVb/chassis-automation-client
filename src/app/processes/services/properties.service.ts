@@ -15,9 +15,9 @@ export class PropertiesService {
   /**
    * Generate an array of data for the property
    *
-   * id         :       string
-   * type       :       string
-   * sequence   :       object
+   * @param     id - id of the item
+   * @param     type - type of the item
+   * @param     sequence - process sequence
    *
    * */
   generatePropertiesByType(id: string, type: string, sequence: any) {
@@ -78,6 +78,7 @@ export class PropertiesService {
   /**
    * Get all forms that were created with the form builder
    *
+   * @return    Observable
    * */
   getForms(): Observable<any> {
       return this.http.get(API_BASE + 'forms/get-forms', {headers: this.auth.authHeaders()});
@@ -86,10 +87,11 @@ export class PropertiesService {
   /**
    * Get predecessor of selected item
    *
-   * return     :       string
-   *
+   * @param     id - id of item
+   * @param     sequence - process sequence
+   * @return    string
    * */
-  getPredecessor(id, sequence) {
+  getPredecessor(id: string, sequence: any) {
     for (const item of sequence) {
       if (item['targetRef'] === id) {
         return item['sourceRef'];
@@ -101,10 +103,11 @@ export class PropertiesService {
   /**
    * Get descendant of selected item
    *
-   * return     :       array
-   *
+   * @param     id - id of the item
+   * @param     sequence - process sequence
+   * @return    array
    * */
-  getDescendants(id, sequence) {
+  getDescendants(id: string, sequence: any) {
     const descendants = [];
     for (const item of sequence) {
       if (item['sourceRef'] === id) {

@@ -18,6 +18,9 @@ export class ProductsOverviewComponent implements OnInit, OnDestroy {
       private bpmn: BpmnService
   ) { }
 
+  /**
+   * On initialization, subscribe to the data from the bpmnService
+   * */
   ngOnInit() {
     this.subs.push(
       this.bpmn.data.subscribe(data => this.products = data)
@@ -25,7 +28,11 @@ export class ProductsOverviewComponent implements OnInit, OnDestroy {
     this.bpmn.getData('ca_product');
   }
 
+  /**
+   * On destroy, unsubscribe all subscriptions
+   * */
   ngOnDestroy() {
+    this.bpmn.data.next([]);
     this.subs.forEach(sub => sub.unsubscribe());
   }
 }

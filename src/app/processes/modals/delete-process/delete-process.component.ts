@@ -9,6 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./delete-process.component.scss']
 })
 export class DeleteProcessComponent implements OnInit, OnDestroy {
+
+  /**
+   * content      :   the content that should be displayed in the modal
+   * subs         :   modal subscriptions
+   * */
   protected content = {};
   private subs = [];
 
@@ -19,7 +24,8 @@ export class DeleteProcessComponent implements OnInit, OnDestroy {
   ) { }
 
   /**
-   * On modal initialization, get the content by subscribing to the service content
+   * On modal initialization, get the content by subscribing to the deleteService 'content' variable
+   *
    * */
   ngOnInit() {
     this.subs.push(
@@ -27,7 +33,12 @@ export class DeleteProcessComponent implements OnInit, OnDestroy {
     );
   }
 
-  deleteProcess(id) {
+  /**
+   * Delete process and get new overview from processes on callback
+   *
+   * @param   id - id of the process
+   * */
+  deleteProcess(id: number) {
     this.deleteService.deleteProcess(id).subscribe((res) => {
       if (res['status'] === 200) {
         this.processService.getProcesses();
@@ -35,6 +46,9 @@ export class DeleteProcessComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * On destroy, unsubscribe all subscriptions
+   * */
   ngOnDestroy() {
     this.subs.forEach(sub => sub.unsubscribe());
   }

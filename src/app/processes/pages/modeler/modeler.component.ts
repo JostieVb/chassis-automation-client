@@ -9,8 +9,8 @@ import { EMPTY_XML } from '../../../global';
 import { PropertiesService } from '../../services/properties.service';
 import { IOption } from 'ng-select';
 import { UserService } from '../../../auth/user.service';
-import { ConfirmationService } from '../../../auth/confirmation.service';
-import { Observable } from 'rxjs/Observable';
+import { AlertService } from '../../../components/services/alert.service';
+import { Alert } from '../../../components/alert/alert';
 
 declare var require: any;
 const Modeler = require('bpmn-js/lib/Modeler'),
@@ -96,7 +96,7 @@ export class ModelerComponent implements OnInit, OnDestroy {
       private router: Router,
       private propertiesService: PropertiesService,
       private auth: UserService,
-      private confirmationService: ConfirmationService
+      private alert: AlertService
   ) { }
 
   // canDeactivate(): Observable<boolean> | boolean {
@@ -447,6 +447,7 @@ export class ModelerComponent implements OnInit, OnDestroy {
    * @param     id - selected item id
    * */
   private checkIfDescendantsExist(id) {
+      console.log(id);
     const descendants = [];
     this.getSequenceFlow();
     this.sequence.forEach((item) => {
@@ -547,6 +548,7 @@ export class ModelerComponent implements OnInit, OnDestroy {
     } else {
       this.processService.saveProcess(this.param, this.processName, this.processCode, process_xml, this.properties, this.callers).subscribe((res) => {
           this.overlay = false;
+          this.alert.alert.next(new Alert('The process was successfully saved.', 'success', '', false, false));
       });
     }
   }

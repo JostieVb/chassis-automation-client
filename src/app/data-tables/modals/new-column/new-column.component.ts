@@ -17,6 +17,11 @@ const $ = require('jQuery');
 })
 export class NewColumnComponent implements OnInit {
 
+  /**
+   * types      :     an array of types that can be chosen from
+   * column     :     a model that holds properties of the new column
+   * loading    :     indicates if the modal is loading
+   * */
   protected types: Array<IOption> = types;
   protected column: Column = new Column();
   protected loading = false;
@@ -30,6 +35,10 @@ export class NewColumnComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Add a column to the data table
+   *
+   * */
   addColumn() {
     if (this.column.name !== '' && this.column.type !== '') {
       const table = this.dataTablesService.tableName.getValue();
@@ -52,6 +61,10 @@ export class NewColumnComponent implements OnInit {
     }
   }
 
+  /**
+   * Dismiss the modal
+   *
+   * */
   dismissModal() {
     this.column = new Column();
     this.loading = false;

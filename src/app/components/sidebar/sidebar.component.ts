@@ -18,10 +18,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
      * subs             :   Component subscriptions
      * */
     protected fillables = [
-      {link: true, title: 'Products', path: '/products', permissions: 'products', icon: 'fa fa-shopping-basket', children: []},
-      {link: false, title: 'Automation', path: '', icon: '', permissions: 'automation', children: []},
       {link: true, title: 'Dashboard', path: '/dashboard', permissions: 'dashboard', icon: 'fa fa-columns', children: []},
       {link: true, title: 'Processes', path: '/processes', permissions: 'processes', icon: 'fa fa-cogs', children: []},
+      {link: true, title: 'Products', path: '/products', permissions: 'products', icon: 'fa fa-shopping-basket', children: []},
       {link: true, title: 'Entries', path: '/entries', permissions: 'entries', icon: 'fa fa-inbox', children: []},
       {link: true, title: 'Forms', path: '/forms', permissions: 'forms', icon: 'fa fa-list', children: []},
       {link: true, title: 'Data tables', path: '/data-tables', permissions: 'data-tables', icon: 'fa fa-database', children: []},

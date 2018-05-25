@@ -15,7 +15,6 @@ export class DeleteDataTableComponent implements OnInit, OnDestroy {
    * tableName      :       name of table that will be prompted for deletion
    * subs           :       all component subscriptions
    * */
-
   protected tableName = '';
   private subs = [];
 
@@ -58,6 +57,10 @@ export class DeleteDataTableComponent implements OnInit, OnDestroy {
     this.dataTablesService.modalTableName.next('');
   }
 
+  /**
+   * When the modal get's destroyed, unsubscribe all subscriptions
+   *
+   * */
   ngOnDestroy() {
     this.subs.forEach(sub => sub.unsubscribe());
   }

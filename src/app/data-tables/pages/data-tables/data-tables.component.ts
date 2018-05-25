@@ -8,6 +8,10 @@ import { DataTablesService } from '../../services/data-tables.service';
 })
 export class DataTablesComponent implements OnInit, OnDestroy {
 
+  /**
+   * showDataTable      :   indicates if the data table is shown
+   * subs               :   component subscriptions
+   * */
   protected showDataTable = false;
   private subs = [];
 
@@ -15,12 +19,20 @@ export class DataTablesComponent implements OnInit, OnDestroy {
       private dataTablesService: DataTablesService
   ) { }
 
+  /**
+   * On initialization, subscribe to the showDataTable boolean from the dataTablesService
+   *
+   * */
   ngOnInit() {
     this.subs.push(
         this.dataTablesService.showDataTable.subscribe(show => this.showDataTable = show)
     );
   }
 
+  /**
+   * On destroy, reset default values and unsubscribe all component subscriptions
+   *
+   * */
   ngOnDestroy() {
     this.dataTablesService.tables.next([]);
     this.dataTablesService.columns.next([]);

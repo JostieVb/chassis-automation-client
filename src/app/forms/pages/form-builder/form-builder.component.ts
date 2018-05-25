@@ -1,13 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsService } from '../../services/forms.service';
 import { DataTablesService } from '../../../data-tables/services/data-tables.service';
+import { Alert } from '../../../components/alert/alert';
+import { AlertService } from '../../../components/services/alert.service';
 
 @Component({
-  selector: 'app-forms-add',
-  templateUrl: './forms-add.component.html',
-  styleUrls: ['./forms-add.component.scss']
+  selector: 'app-form-builder',
+  templateUrl: './form-builder.component.html',
+  styleUrls: ['./form-builder.component.scss']
 })
-export class FormsAddComponent implements OnInit, OnDestroy {
+export class FormBuilderComponent implements OnInit, OnDestroy {
 
   /**
    * title              :       the title that should be displayed above the form builder
@@ -58,7 +60,8 @@ export class FormsAddComponent implements OnInit, OnDestroy {
 
   constructor(
     private formsService: FormsService,
-    private dataTablesService: DataTablesService
+    private dataTablesService: DataTablesService,
+    private alert: AlertService
   ) { }
 
   /**
@@ -237,6 +240,7 @@ export class FormsAddComponent implements OnInit, OnDestroy {
     if (this.validateForm()) {
         this.formsService.postForm(this.formName, this.identifier, this.dbTable, this.structure, action, this.formId).subscribe(res => {
             if (res['status'] === 200) {
+                this.alert.alert.next(new Alert('The form was successfully saved.', 'success'));
                 this.dismissForm();
                 this.formsService.getForms();
             } else {

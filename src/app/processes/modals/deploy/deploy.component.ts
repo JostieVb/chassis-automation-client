@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { DeployService } from '../../services/deploy.service';
 
 declare var require;
@@ -9,14 +9,25 @@ const $ = require('jQuery');
   templateUrl: './deploy.component.html',
   styleUrls: ['./deploy.component.scss']
 })
-export class DeployComponent implements OnInit {
+export class DeployComponent implements OnInit, OnDestroy {
 
-  subs = [];
+  /**
+   * content            :       the content that should be displayed in the modal
+   * deployment         :       indicates if the process will be deployed or undeployed
+   * subs               :       modal subscriptions
+   * */
   protected content = {};
   protected deployment: any;
+  private subs = [];
 
-  constructor(private  deployService: DeployService) { }
+  constructor(
+    private  deployService: DeployService
+  ) { }
 
+  /**
+   * On initialization, subscribe to the data from the deployService
+   *
+   * */
   ngOnInit() {
     this.subs.push(
         this.deployService.deployModelContent.subscribe(content => this.content = content),
@@ -24,7 +35,12 @@ export class DeployComponent implements OnInit {
     );
   }
 
-  deployProcess(id) {
+  /**
+   * Deploy process
+   *
+   * @param     id - id of the process
+   * */
+  deployProcess(id: number) {
     this.deployService.deploy(id).subscribe((res) => {
         if (res['status'] === 200) {
             const deployment = this.deployment;
@@ -35,6 +51,11 @@ export class DeployComponent implements OnInit {
     });
   }
 
+  /**
+   * Undeploy process
+   *
+   * @param     id - id of the process
+   * */
   undeployProcess(id) {
       this.deployService.undeploy(id).subscribe((res) => {
           if (res['status'] === 200) {
@@ -44,6 +65,13 @@ export class DeployComponent implements OnInit {
               $('#switch-' + id).trigger('click');
           }
       });
+  }
+
+  /**
+   * On destroy, unsubscribe all subscriptions
+   * */
+  ngOnDestroy() {
+      this.subs.forEach(sub => sub.unsubscribe());
   }
 
 }

@@ -31,9 +31,9 @@ export class UserService {
   /**
    * Retrieve a Bearer token and try to log in
    *
-   * @param email           email
-   * @param password        password
-   * @param rememberLogin   true|false
+   * @param     email - email
+   * @param     password - password
+   * @param     rememberLogin - whether the user should be remembered or not
    */
   logIn(email: string, password: string, rememberLogin: boolean) {
     this.signingIn.next(true);

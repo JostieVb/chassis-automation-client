@@ -10,6 +10,10 @@ import { Observable } from 'rxjs/Observable';
 })
 export class FormsComponent implements OnInit, OnDestroy {
 
+  /**
+   * showForm     :   indicates whether the form should be displayed
+   * subs         :   components subscriptions
+   * */
   protected showForm = false;
   private subs = [];
 
@@ -30,6 +34,11 @@ export class FormsComponent implements OnInit, OnDestroy {
   //   return true;
   // }
 
+  /**
+   * On initialization, subscribe to the showForm variable
+   * from the formsService
+   *
+   * */
   ngOnInit() {
     this.formsService.showForm.subscribe(show => this.showForm = show);
   }

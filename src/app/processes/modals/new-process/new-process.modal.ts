@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class NewProcessModalComponent implements OnInit {
   /**
-   * name   :   name of new process
+   * nameField        :   bound to the name input field
+   * codeField        :   bound to the code input field
+   * codeChanged      :   indicates whether the process code was changed by the user
    * */
   protected nameField = '';
   protected codeField = '';
@@ -23,6 +25,10 @@ export class NewProcessModalComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Create new process
+   *
+   * */
   newProcess() {
     if (this.nameField !== '' && this.codeField !== '') {
       this.processService.processName.next(this.nameField);
@@ -32,6 +38,10 @@ export class NewProcessModalComponent implements OnInit {
     }
   }
 
+  /**
+   * Generate process code
+   *
+   * */
   generateProcessCode() {
     if (this.nameField === '') {
       this.codeField = '';
@@ -48,16 +58,28 @@ export class NewProcessModalComponent implements OnInit {
     }
   }
 
+  /**
+   * When code is changed by the user, set this in codeChanged
+   *
+   * */
   setCodeChanged() {
     if (this.codeField !== '') {
         this.codeChanged = true;
     }
   }
 
+  /**
+   * Formate the process code
+   *
+   * */
   formatProcessCode() {
     this.codeField = this.codeField.replace('-', '_');
   }
 
+  /**
+   * Dismiss the modal
+   *
+   * */
   dismissModal() {
     this.nameField = '';
     this.codeField = '';

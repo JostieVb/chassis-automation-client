@@ -6,6 +6,10 @@ import { UserService } from '../../auth/user.service';
 
 @Injectable()
 export class DeleteService {
+
+  /**
+   * content      :   the content that should be displayed in the modal
+   * */
   content: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
   constructor(
@@ -13,7 +17,13 @@ export class DeleteService {
       private auth: UserService
   ) { }
 
-  deleteProcess(id) {
+  /**
+   * Delete process
+   *
+   * @param   id - the process id
+   * @return  Observable<any>
+   * */
+  deleteProcess(id: number) {
     return this.http.get(
         API_BASE + 'delete-process/' + id,
         {headers: this.auth.authHeaders()}
