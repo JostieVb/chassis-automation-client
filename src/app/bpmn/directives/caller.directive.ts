@@ -2,6 +2,7 @@ import { Directive, Input, HostListener } from '@angular/core';
 import { BpmnService } from '../services/bpmn.service';
 import { Alert } from '../../components/alert/alert';
 import { AlertService } from '../../components/services/alert.service';
+import { EntriesService } from '../../entries/services/entries.service';
 
 declare var require;
 const $ = require('jQuery');
@@ -16,7 +17,8 @@ export class CallerDirective {
 
     constructor(
         private bpmn: BpmnService,
-        private alert: AlertService
+        private alert: AlertService,
+        private entries: EntriesService
     ) {}
 
     @HostListener('click', ['$event']) onClick(event: MouseEvent) {
@@ -52,7 +54,7 @@ export class CallerDirective {
             } else {
                 alertMessage = errors.join(', ') + ' are required fields.';
             }
-            this.alert.alert.next(new Alert(alertMessage, 'danger', 'Error:', true, false));
+            this.alert.alert.next(new Alert(alertMessage, 'danger', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>', true, false));
         }
     }
 
@@ -92,10 +94,22 @@ export class CallerDirective {
                 this.alert.alert.next(new Alert('The form was successfully submitted.', 'success', '', true, false));
                 this.bpmn.data.next(res['data']);
                 $('form[ng-reflect-form="' + this.caller + '"]')[0].reset();
-                this.bpmn.call(this.caller, res['db_table'], res['insert_id']).subscribe(resp => {
+                this.bpmn.call(this.caller, res['insert_id']).subscribe(resp => {
+                    if (resp['status'] !== 200) {
+                        this.alert.alert.next(new Alert(
+                           'Something went wrong during the execution of the process in the background: ' + resp['message'],
+                           'danger',
+                           'Error ' + resp['status'],
+                           false,
+                            true,
+                            false,
+                            0
+                        ));
+                    }
                 });
+                this.entries.countUnreadEntries();
             } else {
-                this.alert.alert.next(new Alert('The form couldn\'t be submitted due to an unknown error.', 'danger', 'Error:', true, true, 0));
+                this.alert.alert.next(new Alert('The form couldn\'t be submitted due to an unknown error.', 'danger', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>', true, true, false, 0));
             }
             target.html(oldBtnText);
             target.prop('disabled', false);

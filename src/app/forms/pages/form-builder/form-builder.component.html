@@ -1,111 +1,70 @@
-<div class="card full-height">
-  <div class="card-body">
-    <h5 class="card-title">
-      {{title}}
+<app-edit-form-item></app-edit-form-item>
 
-      <div class="control-buttons">
-        <button type="submit" *ngIf="editingForm" [disabled]="structure.length === 0" (click)="postForm('save')" class="btn btn-primary">Save form</button>
-        <button type="submit" *ngIf="!editingForm" [disabled]="structure.length === 0" (click)="postForm('add')" class="btn btn-primary">Save form</button>
-        <button type="submit" (click)="dismissForm()" class="btn btn-secondary">Cancel</button>
-      </div>
-    </h5>
+<div class="row no-padding max full-height">
+  <div class="col col-xl-8 col-lg-8 forms-add no-padding full-height">
+    <div class="card full-height">
+      <div class="card-body no-padding">
+        <h5 class="card-title margin">
+          <i class="fa fa-circle-o-notch fa-spin" *ngIf="loading"></i>
+          <ng-container *ngIf="!loading">Edit '{{form.name}}' form</ng-container>
 
-    <ng-scrollbar [autoHide]="true">
-    <form>
-      <div class="form-group">
-        <label for="name">Form name</label>
-        <input type="text" class="form-control" (keyup)="generateIdentifier()" [(ngModel)]="formName" name="name" id="name" placeholder="Enter form name..." required>
-      </div>
-      <div class="form-group">
-        <label for="identifier">Unique form identifier</label>
-        <input type="text" class="form-control" name="identifier" [(ngModel)]="identifier" id="identifier" placeholder="Enter form identifier..." required>
-      </div>
-      <div class="form-group">
-        <label for="db_table">Database table</label>
-        <select [(ngModel)]="dbTable" (change)="getTableColumns()" name="db_table" id="db_table" class="form-control">
-          <option *ngFor="let table of tables" value="{{table.name}}">{{table.name}}</option>
-        </select>
-      </div>
-
-      <hr *ngIf="dbTable !== ''" />
-
-      <h6 *ngIf="dbTable !== ''">Form preview</h6>
-      <div class="no-preview" *ngIf="structure.length === 0 && dbTable !== ''">
-        No fields available for preview. Add new fields below.
-      </div>
-      <div class="form-structure" *ngIf="structure.length > 0 && dbTable !== ''">
-        <div class="form-group" *ngFor="let field of structure">
-          <div class="delete-overlay" [ngClass]="{'show': deleteOverlay === field.fieldName }">Delete this field?</div>
-          <div class="edit form-item" (click)="editFormItem(field.fieldName)"><i class="fa fa-pencil"></i></div>
-          <div class="delete form-item" (click)="deleteFormItem(field.fieldName, field.dbColumn)" (mouseenter)="deleteOverlay = field.fieldName" (mouseleave)="deleteOverlay = ''"><i class="fa fa-trash-o"></i></div>
-          <div class="label">
-            {{field.fieldLabel}}
-            <span *ngIf="field.required" class="required"></span>
+          <div class="control-buttons">
+            <button type="submit" [disabled]="formItemsKeys.length === 0 || savingForm" (click)="saveForm()" class="btn btn-primary">Save form</button>
+            <button type="submit" class="btn btn-secondary" (click)="dismissFormBuilder()">Close without saving</button>
           </div>
-          <ng-container *ngIf="field.fieldType === 'textarea'; else otherTypes">
-            <textarea placeholder="{{field.fieldPlaceholder}}" name="{{field.fieldName}}" class="form-control textarea"></textarea>
-          </ng-container>
-          <ng-template #otherTypes>
-            <input type="{{field.fieldType}}" class="form-control" name="{{field.fieldName}}" placeholder="{{field.fieldPlaceholder}}" />
-          </ng-template>
+        </h5>
+
+        <ng-scrollbar [autoHide]="true" *ngIf="!loading">
+          <div class="form-structure" *ngIf="formItemsKeys.length > 0">
+            <div class="form-group" *ngFor="let id of formItemsKeys" draggable droppable (onDrop)="dropExistingItem($event)" [dragOverClass]="'drop-hover'" [dragData]="id" [dragHandle]="'.drag-handle'">
+              <div class="drop-overlay" droppable></div>
+              <div class="drag-handle"><span></span><span></span><span></span></div>
+
+              <div class="input-field-example">
+                <div class="edit form-item" (click)="editFormField(id)"><i class="fa fa-pencil"></i></div>
+                <div class="delete form-item" (click)="deleteFormField(id)"><i class="fa fa-trash-o"></i></div>
+                <div class="label" *ngIf="fields[id].type !== 'title' && fields[id].type !== 'subtitle'">
+                  {{fields[id].name}}
+                  <span *ngIf="fields[id].required" class="required"></span>
+                </div>
+                <h5 *ngIf="fields[id].type === 'title'">{{fields[id].name}}</h5>
+
+                <p *ngIf="fields[id].type === 'subtitle'">{{fields[id].name}}</p>
+
+                <input *ngIf="fields[id].type === 'text'" type="{{fields[id].type}}" class="form-control" name="{{id}}" placeholder="{{fields[id].description}}" disabled />
+
+                <textarea *ngIf="fields[id].type === 'textarea'" placeholder="{{fields[id].description}}" name="{{id}}" class="form-control textarea" disabled></textarea>
+
+                <quill-editor *ngIf="fields[id].type === 'wysiwyg'" (onEditorCreated)="initEditor($event)" [placeholder]="fields[id].description" class="form-quill form-builder" [ngClass]="{'hideToolbar': !fields[id].showToolbar}" [modules]="quillModules"></quill-editor>
+
+                <input *ngIf="fields[id].type === 'numeric'" type="{{fields[id].type}}" class="form-control" name="{{id}}" placeholder="{{fields[id].description}}" disabled />
+              </div>
+            </div>
+          </div>
+          <div id="drop-field" *ngIf="!loading" droppable [dropScope]="'new-item'" [dragOverClass]="'hover'" (onDrop)="dropNewItem($event)" [ngClass]="{'dragging': draggingNewItem}">
+            Drop a new field here
+          </div>
+        </ng-scrollbar>
+        <div class="placeholder" *ngIf="loading">
+          <i class="fa fa-circle-o-notch fa-spin" *ngIf="loading"></i> Loading
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="toggle-new-field" *ngIf="!showFieldEditor && dbTable !== ''" (click)="toggleFieldEditor()">
-        <div class="plus-icon">
-          <i class="fa fa-plus" aria-hidden="true"></i>
+  <div class="col col-xl-4 col-lg-4">
+    <div class="card full-height bg-transparent">
+      <div class="card-body">
+        <h5 class="card-title">Add new field</h5>
+        <div class="new-fields-container">
+          <h6>Drag and drop a new field</h6>
+          <div class="new-field" *ngFor="let item of formBuilderItems" draggable [dragScope]="'new-item'" [dragData]="item.data" (onDragStart)="draggingNewItem = true" (onDragEnd)="draggingNewItem = false">
+            <span class="field-type">{{item.type}}</span>
+            <span class="field-description">{{item.description}}</span>
+            <span class="field-icon"><i class="fa {{item.icon}}"></i></span>
+          </div>
         </div>
-        <span>Add new field</span>
       </div>
-
-      <div class="new-field" [ngClass]="{'show': showFieldEditor === true }">
-        <h6>Add new field</h6>
-
-        <div class="form-group">
-          <label for="fieldLabel">Label</label>
-          <input type="text" class="form-control" [(ngModel)]="fieldLabel" name="fieldLabel" id="fieldLabel" placeholder="Enter field label..." required>
-        </div>
-
-        <div class="form-group">
-          <label for="fieldPlaceholder">Placeholder</label>
-          <input type="text" class="form-control" [(ngModel)]="fieldPlaceholder" name="fieldPlaceholder" id="fieldPlaceholder" placeholder="Enter optional placeholder..." required>
-        </div>
-
-        <div class="form-group">
-          <label for="fieldType">Field type</label>
-          <select [(ngModel)]="fieldType" name="fieldType" id="fieldType" class="form-control">
-            <option value="text">Text</option>
-            <option value="email">E-mail</option>
-            <option value="number">Numeric</option>
-            <option value="textarea">Textarea</option>
-            <option value="password">Password</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="tableColumn">Database table column</label>
-          <select [(ngModel)]="dbColumn" name="tableColumn" id="tableColumn" class="form-control">
-            <ng-container *ngFor="let column of columns">
-              <option *ngIf="!column.taken" value="{{column.name}}">{{column.name}}</option>
-            </ng-container>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="required">Required field</label>
-          <input type="checkbox" value="required" [(ngModel)]="required" id="required" name="required" />
-        </div>
-
-        <div class="alert alert-danger" *ngIf="errorMsg !== ''">
-          <strong>Error!</strong> {{errorMsg}}
-        </div>
-
-        <button class="btn btn-primary" (click)="saveField()" *ngIf="editField">Save field</button>
-        <button class="btn btn-primary" (click)="addField()" *ngIf="!editField">Add field</button>
-        <button class="btn btn-secondary" (click)="dismissFields()">Cancel</button>
-      </div>
-
-    </form>
-    </ng-scrollbar>
+    </div>
   </div>
 </div>

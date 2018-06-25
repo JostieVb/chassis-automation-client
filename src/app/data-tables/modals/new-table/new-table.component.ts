@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { API_BASE } from '../../../global';
 import { UserService } from '../../../auth/user.service';
 import { DataTablesService } from '../../services/data-tables.service';
+import { Alert } from '../../../components/alert/alert';
+import { AlertService } from '../../../components/services/alert.service';
 
 declare var require;
 const $ = require('jQuery');
@@ -28,7 +30,8 @@ export class NewTableComponent implements OnInit {
   constructor(
       private http: HttpClient,
       private auth: UserService,
-      private dataTablesService: DataTablesService
+      private dataTablesService: DataTablesService,
+      private alert: AlertService
   ) { }
 
   ngOnInit() {
@@ -49,9 +52,11 @@ export class NewTableComponent implements OnInit {
       if (res['status'] === 200) {
         this.errorMsgClass = 'alert-success';
         this.success = true;
+        this.alert.alert.next(new Alert('Data table successfully created.', 'success', '', true, false));
       } else {
         this.errorMsgClass = 'alert-danger';
         this.success = false;
+          this.alert.alert.next(new Alert('Could not create data table.', 'danger', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>', true, false));
       }
       this.errorMsg = res['message'];
     });

@@ -13,7 +13,8 @@ export class DataTablesService {
    * tableName          :       the selected data table name
    * modalTableName     :       the table name that should be displayed in the modal
    * modalColumnName    :       the column name that should be displayed in the modal
-   * loading            :       indicates whether something is loading
+   * loading            :       indicates whether columns of a data table are loading
+   * loadingTables      :       indicates whether the data tables are loading
    * showDataTable      :       indicates if the selected data table should be displayed
    * */
   public tables: BehaviorSubject<any> = new BehaviorSubject<any>([]);
@@ -22,6 +23,7 @@ export class DataTablesService {
   public modalTableName: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public modalColumnName: BehaviorSubject<string> = new BehaviorSubject<string>('');
   public loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public loadingTables: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public showDataTable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
@@ -34,10 +36,14 @@ export class DataTablesService {
    *
    * */
   getDbTables() {
+    this.loadingTables.next(true);
     this.http.get(
         API_BASE + 'data/get-tables',
         {headers: this.auth.authHeaders()}
-    ).subscribe(tables => this.tables.next(tables));
+    ).subscribe(tables => {
+      this.tables.next(tables);
+      this.loadingTables.next(false);
+    });
   }
 
   /**

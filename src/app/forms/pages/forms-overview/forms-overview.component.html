@@ -2,10 +2,11 @@
   <div class="card-body no-padding full-height max">
     <h5 class="card-title">
       Forms
-      <button class="btn btn-primary new-form-button" (click)="newForm()"><i class="fa fa-plus"></i></button>
+      <button class="btn btn-primary new-form-button"  id="newFormButton" data-toggle="modal" data-target="#newFormModal">New form</button>
     </h5>
     <ng-container *ngIf="forms.length === 0; else showForms">
-      <div class="no-forms">No forms</div>
+      <div *ngIf="!loadingForms" class="placeholder">No forms</div>
+      <div *ngIf="loadingForms" class="placeholder"><i class="fa fa-circle-o-notch fa-spin"></i> Loading forms...</div>
     </ng-container>
 
       <ng-template #showForms>
@@ -13,25 +14,25 @@
           <div class="ch-row ch-head">
             <div class="ch-col ch-text-overflow-ellipsis">Name</div>
             <div class="ch-col ch-text-overflow-ellipsis">Identifier</div>
-            <div class="ch-col ch-text-overflow-ellipsis">Data table</div>
             <div class="ch-col ch-text-overflow-ellipsis">Edit</div>
             <div class="ch-col ch-text-overflow-ellipsis">Delete</div>
           </div>
           <div class="ch-row" *ngFor="let form of forms">
             <div class="ch-col ch-text-overflow-ellipsis">
-              {{form.name}}
+              <a routerLink="/forms/{{form.id}}" class="link">
+                {{form.name}}
+              </a>
             </div>
             <div class="ch-col ch-text-overflow-ellipsis">
               {{form.identifier}}
             </div>
-            <div class="ch-col ch-text-overflow-ellipsis">
-              {{form.db_table}}
+            <div class="ch-col">
+              <a routerLink="/forms/{{form.id}}" class="link">
+                <button class="btn"><i class="fa fa-pencil"></i></button>
+              </a>
             </div>
             <div class="ch-col">
-              <button class="btn" (click)="editForm(form.id)"><i class="fa fa-pencil"></i></button>
-            </div>
-            <div class="ch-col">
-              <button class="btn btn-danger" data-toggle="modal" data-target="#deleteFormModal"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-danger" data-toggle="modal" data-target="#deleteFormModal" (click)="deleteForm(form.id, form.name, form.identifier)"><i class="fa fa-trash"></i></button>
             </div>
           </div>
         </div>

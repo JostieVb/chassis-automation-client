@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { API_BASE } from '../../../global';
 import { UserService } from '../../../auth/user.service';
 import { DataTablesService } from '../../services/data-tables.service';
+import { Alert } from '../../../components/alert/alert';
+import { AlertService } from '../../../components/services/alert.service';
 
 declare var require;
 const $ = require('jQuery');
@@ -29,7 +31,8 @@ export class NewColumnComponent implements OnInit {
   constructor(
       private http: HttpClient,
       private auth: UserService,
-      private dataTablesService: DataTablesService
+      private dataTablesService: DataTablesService,
+      private alert: AlertService
   ) { }
 
   ngOnInit() {
@@ -53,8 +56,9 @@ export class NewColumnComponent implements OnInit {
             this.dismissModal();
             this.dataTablesService.getTableColumns(table, true);
             $('.close').trigger('click');
+            this.alert.alert.next(new Alert('Column successfully added.', 'success', '', true, false));
         } else {
-          console.log(res);
+            this.alert.alert.next(new Alert('Column could not be added: ' + res['message'], 'danger', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>', true, false));
         }
         this.loading = false;
       });

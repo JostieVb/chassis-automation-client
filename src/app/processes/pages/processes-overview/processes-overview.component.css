@@ -11,7 +11,7 @@
       position: absolute;
       right: 1.25rem;
       top: 10px; }
-    .card .card-body .no-processes {
+    .card .card-body .placeholder {
       position: absolute;
       left: 0;
       right: 0;
@@ -24,10 +24,9 @@
       color: #c7c7c7 !important; }
     .card .card-body .ch-table .ch-row .ch-col.ch-switch {
       padding-top: 6px; }
+      .card .card-body .ch-table .ch-row .ch-col.ch-switch ui-switch.hide {
+        display: none; }
     .card .card-body .ch-table .ch-row .ch-col:first-child {
-      width: 40%;
-      min-width: 40%;
-      max-width: 40%;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis; }

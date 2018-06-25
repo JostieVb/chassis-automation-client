@@ -11,10 +11,12 @@ export class DataTablesOverviewComponent implements OnInit, OnDestroy {
   /**
    * selectedTable        :     name of the selected data table
    * tables               :     an array that holds all data tables
+   * loadingTables        :     indicates whether data tables are loading
    * subs                 :     components subscriptions
    * */
   protected selectedTable = '';
   protected tables = [];
+  protected loadingTables = true;
   private subs = [];
 
   constructor(
@@ -30,7 +32,8 @@ export class DataTablesOverviewComponent implements OnInit, OnDestroy {
     this.dataTablesService.columns.next([]);
     this.subs.push(
       this.dataTablesService.tables.subscribe(tables => this.tables = tables),
-      this.dataTablesService.tableName.subscribe(tableName => this.selectedTable = tableName)
+      this.dataTablesService.tableName.subscribe(tableName => this.selectedTable = tableName),
+      this.dataTablesService.loadingTables.subscribe(value => this.loadingTables = value)
     );
     this.dataTablesService.getDbTables();
   }
@@ -65,6 +68,8 @@ export class DataTablesOverviewComponent implements OnInit, OnDestroy {
    * */
   ngOnDestroy() {
     this.subs.forEach(sub => sub.unsubscribe());
+    this.dataTablesService.tables.next([]);
+    this.dataTablesService.columns.next([]);
   }
 
 }

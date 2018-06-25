@@ -1,14 +1,21 @@
 <nav class="sidebar" [ngClass]="{'show': toggle}">
   <div class="sidebar-header">Chassis Automation</div>
   <ng-scrollbar [autoHide]="true">
-  <ul *ngIf="!loading">
+  <div *ngIf="loadingSidebarItems" class="placeholder">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul *ngIf="!loadingSidebarItems">
     <ng-container *ngFor="let navItem of navItems">
       <a routerLink="{{navItem.path}}" routerLinkActive="active">
         <li *ngIf="navItem.link">
           <span class="title">
             {{navItem.title}}
           </span>
-          <span class="entries-count" *ngIf="navItem.title === 'Entries' && unreadEntries > 0">{{unreadEntries}}</span>
+          <span class="entries-count" *ngIf="navItem.title === 'Inbox' && unreadEntries > 0">{{unreadEntries}}</span>
           <span class="icon-thumbnail"><i class="{{navItem.icon}}"></i></span>
         </li>
       </a>

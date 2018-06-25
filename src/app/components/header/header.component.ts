@@ -2,9 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '../../auth/user.service';
 import { Router } from '@angular/router';
 import { SidebarService } from '../services/sidebar.service';
-import { GuardService } from '../../auth/guard.service';
-import { AlertService } from '../services/alert.service';
-import { Alert } from '../alert/alert';
 
 @Component({
   selector: 'app-header',
@@ -28,9 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
       private auth: UserService,
       private router: Router,
-      private sidebar: SidebarService,
-      private guard: GuardService,
-      private alert: AlertService
+      private sidebar: SidebarService
   ) { }
 
   ngOnInit() {

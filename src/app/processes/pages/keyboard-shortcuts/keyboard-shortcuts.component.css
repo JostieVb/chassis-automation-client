@@ -1,0 +1,34 @@
+.keyboard-shortcuts-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999; }
+  .keyboard-shortcuts-overlay .keyboard-shortcuts {
+    position: fixed;
+    top: 200px;
+    left: 50%;
+    margin-left: -250px;
+    width: 500px;
+    height: auto;
+    overflow: hidden;
+    padding: 30px;
+    background: #f8f8f8;
+    z-index: 9999;
+    border: 1px solid #ced4da;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px; }
+    .keyboard-shortcuts-overlay .keyboard-shortcuts table tr td {
+      padding-right: 10px; }
+      .keyboard-shortcuts-overlay .keyboard-shortcuts table tr td span {
+        font-family: 'Courier New';
+        display: inline-block;
+        background: #fff;
+        border: 1px solid #e7e7e7;
+        padding: 0 5px;
+        border-radius: 5px; }
+
+/*# sourceMappingURL=keyboard-shortcuts.component.css.map */

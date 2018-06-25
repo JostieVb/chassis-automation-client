@@ -1,0 +1,398 @@
+@import 'global_vars';
+
+/* Meta data section styling */
+.meta-data {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background: #f7f7f7;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  &.open {
+    .meta-data-content-wrapper {
+      height: auto;
+    }
+    .toggle-meta-data i {
+      transform: rotate(180deg);
+      line-height: 22px;
+    }
+  }
+  .meta-data-content-wrapper {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    @include transition(.2s);
+    h5 {
+      padding: 20px 1.25rem 0 1.25rem;
+    }
+    .columns {
+      width: 100%;
+      height: auto;
+      padding: 0 1.25rem;
+      @include transition(.2s);
+      .column {
+        width: 50%;
+        height: auto;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        &:first-child {
+          padding-right: 0.625rem;
+        }
+        &:last-child {
+          padding-left: 0.625rem;
+        }
+        .column-row {
+          width: 100%;
+          height: 40px;
+          margin-bottom: 10px;
+          label {
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            margin: 0;
+          }
+          .value {
+            width: calc(100% - 100px);
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            input, select {
+              height: 40px;
+            }
+          }
+        }
+        &.left {
+          float: left;
+          table {
+            padding-right: 0.625rem;
+          }
+        }
+        &.right {
+          float: right;
+          table {
+            padding-left: 0.625rem;
+          }
+        }
+      }
+    }
+  }
+  .toggle-meta-data {
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid #ced4da;
+    @include transition(.2s);
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    i {
+      @include transition(.2s);
+    }
+  }
+}
+.meta-data-overlay {
+  z-index: 8;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+ng-scrollbar {
+  padding-top: 20px;
+}
+
+/* --------------------------------------- */
+/* Normal text input section styling start */
+.text-input {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem;
+  overflow: hidden;
+}
+/*  Normal text input section styling end */
+/* -------------------------------------- */
+
+/* ----------------------------- */
+/* Message section styling start */
+.message {
+  padding: 10px 1.25rem;
+  .message-data {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    .message-row {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid #e6e6e6;
+      position: relative;
+      label {
+        width: 150px;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      input {
+        border: none;
+        outline: none;
+        background: transparent;
+        width: calc(100% - 150px);
+        height: 40px;
+        line-height: 40px;
+        position: absolute;
+        left: 150px;
+        top: 0;
+      }
+      ng-select {
+        width: calc(100% - 150px) !important;
+        border: none !important;
+        float: right;
+        padding: 5px 0;
+        height: 30px !important;
+        line-height: 30px;
+        .ng-select-container .ng-value-container .ng-value {
+          height: 30px !important;
+          line-height: 30px !important;
+          margin-right: 10px !important;
+          overflow: hidden !important;
+        }
+      }
+    }
+  }
+}
+/* Message section styling end */
+/* --------------------------- */
+
+/* --------------------------------- */
+/* Attach form content styling start */
+.attach-content {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem;
+  .attach-content-wrapper {
+    padding: 1.25rem;
+    background: #f0f0f0;
+    input {
+      display: block;
+      float: left;
+      margin: 5px 10px 0 0;
+    }
+  }
+}
+/* Attach form content styling end */
+/* ------------------------------- */
+
+/* ------------------------------- */
+/* Decisions section styling start */
+.decisions {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem;
+  .decision-wrapper {
+    padding: 1.25rem;
+    background: #f0f0f0;
+    .decision {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      background: #fff;
+      border-radius: 5px;
+    }
+  }
+  .new-decision {
+    width: 100%;
+    height: 50px;
+    text-align: center;
+  }
+}
+/* Decisions section styling end */
+/* ----------------------------- */
+
+/* ------------------------------------ */
+/* Forms dropdown section styling start */
+.form {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem;
+}
+
+/* DForms dropdown section styling end */
+/* ----------------------------------- */
+
+
+/* -------------------------------- */
+/* Continue condition styling start */
+
+.continue {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem;
+}
+
+/* Continue condition styling end */
+/* ------------------------------ */
+
+/* -------------------------------- */
+/* Conditions section styling start */
+.conditions {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem;
+  .condition-wrapper {
+    border: 1px solid #ced4da;
+    height: auto;
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+    .condition-header {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      overflow: hidden;
+      border-bottom: 1px solid #ced4da;
+      background: #f7f7f7;
+      .field {
+        height: 40px;
+        line-height: 40px;
+        border-right: 1px solid #ced4da;
+        float: left;
+        font-weight: bold;
+        padding: 0 10px;
+        &.input, &.value {
+          width: calc(40% - 40px);
+        }
+        &.equation {
+          width: 20%;
+        }
+      }
+    }
+    .condition {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      border-bottom: 1px solid #ced4da;
+      ng-select, .input {
+        float: left;
+        width: calc(40% - 40px);
+        height: 40px;
+        border-radius: 0;
+        border-top: none;
+        border-left: none;
+        border-bottom: none;
+        border-right: 1px solid #ced4da;
+      }
+      select {
+        option {
+          height: 40px;
+          &.option-title {
+            font-weight: bold;
+          }
+          &.none {
+            font-style: italic;
+          }
+        }
+      }
+      select, input {
+        float: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 40px;
+        border-radius: 0;
+        border-top: none;
+        border-left: none;
+        border-bottom: none;
+        border-right: 1px solid #ced4da;
+        &.operator {
+          width: 20%;
+        }
+        &.decisions {
+          width: calc(40% - 40px);
+        }
+      }
+      input {
+        width: calc(40% - 40px);
+      }
+      button {
+        background: #fff !important;
+        border: none;
+        width: 40px;
+        height: 40px;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        float: left;
+        @include transition(.2s);
+        &.input-style {
+          color: $color-default;
+          border-right: 1px solid #ced4da !important;
+        }
+        &.delete {
+          color: $color-danger;
+          &.disabled {
+            opacity: 0.2;
+          }
+        }
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
+  .new-condition {
+    width: 100%;
+    background: #fff;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ced4da;
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+    color: $color-default;
+    @include transition(.2s);
+    &:hover {
+      background: #f7f7f7;
+    }
+  }
+}
+/* Conditions section styling end */
+/* ------------------------------ */
+
+/* ------------------------ */
+/* Date input styling start */
+.date-input {
+  .input-db {
+    width: calc(100% - 80px);
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    float: left;
+  }
+  .btn-dp {
+    background: #fff !important;
+    color: $default-text-color;
+    width: 40px;
+    border-radius: 0;
+    border: 1px solid #ced4da !important;
+    float: left;
+    height: 33px;
+    border-left: none !important;
+    &.calendar {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+    &:hover {
+      background: #f1f1f1 !important;
+    }
+  }
+}
+/* Date input styling end */
+/* ---------------------- */

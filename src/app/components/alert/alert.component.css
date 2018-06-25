@@ -18,6 +18,7 @@
     background: #fff;
     color: #626262;
     opacity: 0;
+    border: none !important;
     transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
@@ -43,18 +44,33 @@
       width: calc(100% - 20px);
       float: left; }
       #alert-box .alert p b {
-        text-transform: capitalize; }
+        margin-right: 5px; }
     #alert-box .alert.danger {
       color: #933432;
       background: #fddddd; }
+      #alert-box .alert.danger .duration-indicator {
+        background: #933432; }
     #alert-box .alert.success {
       color: #0a7c71;
       background: #cff5f2; }
+      #alert-box .alert.success .duration-indicator {
+        background: #0a7c71; }
     #alert-box .alert.info {
       color: #2b6a94;
       background: #daeffd; }
+      #alert-box .alert.info .duration-indicator {
+        background: #2b6a94; }
     #alert-box .alert.warning {
       color: #957d32;
       background: #fef6dd; }
+      #alert-box .alert.warning .duration-indicator {
+        background: #957d32; }
+    #alert-box .alert .duration-indicator {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: #626262; }
 
 /*# sourceMappingURL=alert.component.css.map */

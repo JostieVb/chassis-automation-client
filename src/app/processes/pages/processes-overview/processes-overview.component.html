@@ -5,38 +5,47 @@
       Processes
     </h5>
     <ng-container *ngIf="processes.length === 0; else showProcesses">
-      <div class="no-processes">No processes</div>
+      <div *ngIf="!loading" class="placeholder">No processes</div>
+      <div *ngIf="loading" class="placeholder"><i class="fa fa-circle-o-notch fa-spin"></i> Loading processes...</div>
     </ng-container>
 
     <ng-template #showProcesses>
       <div class="ch-table ch-no-padding ch-table-striped ch-no-text-overflow ch-col-max-h">
         <div class="ch-row ch-head">
           <div class="ch-col">Name</div>
+          <div class="ch-col">Code</div>
+          <div class="ch-col">Form</div>
           <div class="ch-col">Deploy</div>
           <div class="ch-col responsive-hide">Preview</div>
+          <div class="ch-col">Edit</div>
           <div class="ch-col">Delete</div>
         </div>
-        <div class="ch-row" *ngFor="let process of processes">
-          <div class="ch-col ch-overflow-hidden">
-            <a routerLink="/processes/{{process.id}}" class="link">
-            {{process.name}}
+        <div class="ch-row" *ngFor="let key of keys">
+          <div class="ch-col ch-overflow-hidden ch-text-overflow-ellipsis">
+            <a routerLink="/processes/{{processes[key].id}}" class="link">
+            {{processes[key].name}}
             </a>
           </div>
+          <div class="ch-col ch-overflow-hidden ch-text-overflow-ellipsis">
+              {{processes[key].code}}
+          </div>
+          <div class="ch-col ch-overflow-hidden ch-text-overflow-ellipsis">
+            {{processes[key].caller}}
+          </div>
           <div class="ch-col ch-switch">
-            <ng-container *ngIf="process.deploy == 'true'; else notDeployed">
-              <div class="switch-overlay" (click)="deployModal(deployment[process.id], process.id, process.name)" data-toggle="modal" data-target="#deployModal"></div>
-              <ui-switch [checked]="true" color="#2390A8"  size="small" data-id="{{process.id}}" id="switch-{{process.id}}"></ui-switch>
-            </ng-container>
-            <ng-template #notDeployed>
-              <div class="switch-overlay" (click)="deployModal(deployment[process.id], process.id, process.name)" data-toggle="modal" data-target="#deployModal"></div>
-              <ui-switch [checked]="false" color="#2390A8" size="small" data-id="{{process.id}}" id="switch-{{process.id}}"></ui-switch>
-            </ng-template>
+              <div class="switch-overlay" (click)="deployModal($event, processes[key].deploy, key, processes[key].name)" data-toggle="modal" data-target="#deployModal"></div>
+              <ui-switch [disabled]="deploying === key" [checked]="processes[key].deploy === 'true'" color="#2390A8" size="small" data-id="{{key}}}" id="switch-{{key}}"></ui-switch>
           </div>
           <div class="ch-col responsive-hide">
-            <button class="btn btn-secondary" (click)="loadPreview(process.id)"><i class="fa fa-eye"></i></button>
+            <button class="btn btn-primary" (click)="loadPreview(key)"><i class="fa fa-eye"></i></button>
+          </div>
+          <div class="ch-col responsive-hide">
+            <a routerLink="/processes/{{processes[key].id}}" class="link">
+              <button class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+            </a>
           </div>
           <div class="ch-col">
-            <button (click)="deleteProcess(process.id, process.name)" class="btn btn-danger" data-toggle="modal" data-target="#deleteProcessModal"><i class="fa fa-trash"></i></button>
+            <button (click)="deleteProcess(key, processes[key].name)" class="btn btn-danger" data-toggle="modal" data-target="#deleteProcessModal"><i class="fa fa-trash"></i></button>
           </div>
         </div>
       </div>

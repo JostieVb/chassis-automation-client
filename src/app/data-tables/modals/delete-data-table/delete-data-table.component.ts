@@ -3,6 +3,8 @@ import { DataTablesService } from '../../services/data-tables.service';
 import { UserService } from '../../../auth/user.service';
 import { HttpClient } from '@angular/common/http';
 import { API_BASE } from '../../../global';
+import { Alert } from '../../../components/alert/alert';
+import { AlertService } from '../../../components/services/alert.service';
 
 @Component({
   selector: 'app-delete-data-table',
@@ -21,7 +23,8 @@ export class DeleteDataTableComponent implements OnInit, OnDestroy {
   constructor(
       private dataTablesService: DataTablesService,
       private http: HttpClient,
-      private auth: UserService
+      private auth: UserService,
+      private alert: AlertService
   ) { }
 
   ngOnInit() {
@@ -46,6 +49,7 @@ export class DeleteDataTableComponent implements OnInit, OnDestroy {
       }
       this.dataTablesService.getDbTables();
       this.dismissModal();
+      this.alert.alert.next(new Alert('Data tables successfully deleted.', 'success', '', true, false));
     });
   }
 

@@ -9,11 +9,13 @@ import { UserService } from '../../auth/user.service';
 export class FlowLoadService {
 
   /**
+   * previewLoaded    :   indicates whether the flowloader is finished loading the preview
    * process          :   the loaded process for the modeler
-   * previewLoaded    :   indicates if the viewer has finished loading the preview
+   * loadingPreview   :   indicates if the flowloader is loading a preview
    * */
-  public process: BehaviorSubject<any> = new BehaviorSubject<any>({});
   public previewLoaded: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public process: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  public loadingPreview: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
       private http: HttpClient,

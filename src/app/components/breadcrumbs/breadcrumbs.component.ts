@@ -13,6 +13,7 @@ export class BreadcrumbsComponent implements OnInit {
   ngOnInit() {
     this.breadcrumbService.addFriendlyNameForRouteRegex('/processes/[0-9]', 'Process');
     this.breadcrumbService.addFriendlyNameForRouteRegex('/processes/new', 'New');
+    this.breadcrumbService.addFriendlyNameForRouteRegex('/forms/[0-9]', 'Form');
     this.breadcrumbService.addFriendlyNameForRoute('/', 'Dashboard');
   }
 }

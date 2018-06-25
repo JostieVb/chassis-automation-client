@@ -23,7 +23,7 @@ export class FormDirective implements OnInit, OnDestroy {
       this.showLoadingIndicator();
       this.subs.push(
         this.formLoader.load(this.form).subscribe(form => {
-            if (Object.keys(form).length > 0) {
+            if (Object.keys(form[0]['structure']).length > 0) {
                 this.buildForm(form);
             } else {
                 this.showPlaceholder();
@@ -39,23 +39,44 @@ export class FormDirective implements OnInit, OnDestroy {
      * */
     protected buildForm(formObj) {
         const form = JSON.parse(formObj[0]['structure']);
+        const ids = this.sortFields(form);
         const parent = $('form[ng-reflect-form="' + this.form + '"]');
         let html = '';
-        form.forEach(item => {
+        ids.forEach(id => {
+            const item = form[id];
             let required = '';
             if (item['required']) {
                 required = 'required';
             }
-            if (item['fieldType'] === 'textarea') {
-                html += '<div class="form-group"><label for="' + item['fieldName'] + '" class="' + required + '">' + item['fieldLabel'] + '</label>' +
-                    '<textarea autocorrect="off" spellcheck="off" data-req="' + item['required'] + '" autocomplete="off" data-col="' + item['dbColumn'] + '" id="' + item['fieldName'] + '" class="form-control input textarea" name="' + item['fieldName'] + '" placeholder="' + item['fieldPlaceholder'] + '" required="' + item['required'] + '"></textarea></div>';
+            if (item['type'] === 'textarea') {
+                html += '<div class="form-group"><label for="' + id + '" class="' + required + '">' + item['name'] + '</label>' +
+                    '<textarea autocorrect="off" spellcheck="off" data-req="' + item['required'] + '" autocomplete="off" id="' + id + '" class="form-control input textarea" name="' + id+ '" placeholder="' + item['description'] + '" required="' + item['required'] + '"></textarea></div>';
+            } else if (item['type'] === 'title') {
+                html += '<div class="form-group"><h5 style="padding: 0 !important; margin: 0 !important;">' + item['name'] + '</h5></div>';
+            }  else if (item['type'] === 'subtitle') {
+                html += '<div class="form-group"><p>' + item['name'] + '</p></div>';
             } else {
-                html += '<div class="form-group"><label for="' + item['fieldName'] + '" class="' + required + '">' + item['fieldLabel'] + '</label>' +
-                    '<input autocorrect="off" spellcheck="off" data-req="' + item['required'] + '" autocomplete="off" type="' + item['fieldType'] + '" data-col="' + item['dbColumn'] + '" id="' + item['fieldName'] + '" class="' + required + ' form-control input" name="' + item['fieldName'] + '" placeholder="' + item['fieldPlaceholder'] + '" required="' + item['required'] + '" /"></div>';
+                html += '<div class="form-group"><label for="' + id + '" class="' + required + '">' + item['name'] + '</label>' +
+                    '<input autocorrect="off" spellcheck="off" data-req="' + item['required'] + '" autocomplete="off" type="' + item['type'] + '" id="' + id + '" class="' + required + ' form-control input" name="' + id + '" placeholder="' + item['description'] + '" required="' + item['required'] + '" /"></div>';
             }
         });
         $('*[data-form]').show();
         parent.append(html);
+    }
+
+    private sortFields(fields: any) {
+      const sortables = [];
+      const keys = [];
+      for (const key in fields) {
+        if (key in fields) {
+          sortables.push([key, fields[key]['sort']]);
+        }
+      }
+      sortables.sort(function(a, b) {
+        return a[1] - b[1];
+      });
+      sortables.forEach(sortable => keys.push(sortable[0]));
+      return keys;
     }
 
     /**

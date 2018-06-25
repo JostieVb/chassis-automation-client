@@ -1,21 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ConfirmationService } from '../../../auth/confirmation.service';
 import { FormsService } from '../../services/forms.service';
-import { Observable } from 'rxjs/Observable';
+import { Form } from '../../models/form';
 
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
   styleUrls: ['./forms.component.scss']
 })
-export class FormsComponent implements OnInit, OnDestroy {
-
-  /**
-   * showForm     :   indicates whether the form should be displayed
-   * subs         :   components subscriptions
-   * */
-  protected showForm = false;
-  private subs = [];
+export class FormsComponent implements OnDestroy {
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -35,22 +28,11 @@ export class FormsComponent implements OnInit, OnDestroy {
   // }
 
   /**
-   * On initialization, subscribe to the showForm variable
-   * from the formsService
-   *
-   * */
-  ngOnInit() {
-    this.formsService.showForm.subscribe(show => this.showForm = show);
-  }
-
-  /**
    * Unsubscribe all component subscription on destroy
    * */
   ngOnDestroy() {
-    this.formsService.form.next([]);
+    this.formsService.form.next(new Form(0, '', '', []));
     this.formsService.formId.next(0);
-    this.formsService.showForm.next(false);
-
-    this.subs.forEach(sub => sub.unsubscribe());
+    this.formsService.forms.next([]);
   }
 }

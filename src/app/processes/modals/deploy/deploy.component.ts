@@ -1,5 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { DeployService } from '../../services/deploy.service';
+import { Alert } from '../../../components/alert/alert';
+import { AlertService } from '../../../components/services/alert.service';
+import { ProcessService } from '../../services/process.service';
 
 declare var require;
 const $ = require('jQuery');
@@ -13,15 +16,15 @@ export class DeployComponent implements OnInit, OnDestroy {
 
   /**
    * content            :       the content that should be displayed in the modal
-   * deployment         :       indicates if the process will be deployed or undeployed
    * subs               :       modal subscriptions
    * */
   protected content = {};
-  protected deployment: any;
   private subs = [];
 
   constructor(
-    private  deployService: DeployService
+    private deployService: DeployService,
+    private alert: AlertService,
+    private processService: ProcessService
   ) { }
 
   /**
@@ -30,8 +33,7 @@ export class DeployComponent implements OnInit, OnDestroy {
    * */
   ngOnInit() {
     this.subs.push(
-        this.deployService.deployModelContent.subscribe(content => this.content = content),
-        this.deployService.deployment.subscribe(deployment => this.deployment = deployment)
+        this.deployService.deployModelContent.subscribe(content => this.content = content)
     );
   }
 
@@ -41,13 +43,18 @@ export class DeployComponent implements OnInit, OnDestroy {
    * @param     id - id of the process
    * */
   deployProcess(id: number) {
+    this.deployService.deploying.next(id);
     this.deployService.deploy(id).subscribe((res) => {
         if (res['status'] === 200) {
-            const deployment = this.deployment;
-            deployment[id] = 'true';
-            this.deployService.deployment.next(deployment);
+            const processes = this.processService.processes.getValue();
+            processes[id].deploy = 'true';
+            this.processService.processes.next(processes);
             $('#switch-' + id).trigger('click');
+            this.alert.alert.next(new Alert('Process \'' + this.content['name'] + '\' successfully deployed.', 'success', '', true, false));
+        } else {
+            this.alert.alert.next(new Alert('Process \'' + this.content['name'] + '\' could not be deployed.', 'danger', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>', true, false));
         }
+        this.deployService.deploying.next(0);
     });
   }
 
@@ -57,13 +64,18 @@ export class DeployComponent implements OnInit, OnDestroy {
    * @param     id - id of the process
    * */
   undeployProcess(id) {
+      this.deployService.deploying.next(id);
       this.deployService.undeploy(id).subscribe((res) => {
           if (res['status'] === 200) {
-              const deployment = this.deployment;
-              deployment[id] = 'false';
-              this.deployService.deployment.next(deployment);
+              const processes = this.processService.processes.getValue();
+              processes[id].deploy = 'false';
+              this.processService.processes.next(processes);
               $('#switch-' + id).trigger('click');
+              this.alert.alert.next(new Alert('Process \'' + this.content['name'] + '\' successfully undeployed.', 'success', ' ', true, false));
+          } else {
+              this.alert.alert.next(new Alert('Process \'' + this.content['name'] + '\' could not be undeployed.', 'danger', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>', true, false));
           }
+          this.deployService.deploying.next(0);
       });
   }
 

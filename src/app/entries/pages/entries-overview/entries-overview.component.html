@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-body no-padding">
     <h5 class="card-title">
-      Entries
+      Inbox
       <div class="dropdown">
         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-filter"></i>
@@ -14,24 +14,28 @@
       </div>
     </h5>
 
-    <ng-scrollbar [autoHide]="true">
+    <div class="entries-wrapper">
+      <ng-scrollbar [autoHide]="true">
+      <ng-container *ngIf="entries.length > 0; else noEntries">
+        <div *ngFor="let entry of entries" class="entry" [ngClass]="{'selected': selectedEntryId == entry.id, 'unread': entry.unread === 'true'}" (click)="showDetails(entry.id)" id="entry-{{entry.id}}">
+          <h6>{{entry.title}}
+            <span [ngClass]="entry.status" class="badge">{{entry.label}}</span>
+          </h6>
+          <span class="meta-data">Received on {{entry.date}}</span>
+        </div>
+      </ng-container>
 
-    <ng-container *ngIf="entries.length > 0; else noEntries">
-      <div *ngFor="let entry of entries" class="entry" [ngClass]="{'selected': selectedEntryId == entry.id, 'unread': entry.unread === 'true'}" (click)="showDetails(entry.id)" id="entry-{{entry.id}}">
-        <h6>{{entry.title}}
-          <span [ngClass]="entry.status" class="badge">{{entry.label}}</span>
-        </h6>
-        <span class="meta-data">Received on {{entry.date}}</span>
-      </div>
-    </ng-container>
+      <ng-template #noEntries>
+        <div *ngIf="!loadingEntries" class="placeholder">
+          No tasks or messages to show
+        </div>
+        <div *ngIf="loadingEntries" class="placeholder">
+          <i class="fa fa-circle-o-notch fa-spin"></i> Loading inbox...
+        </div>
+      </ng-template>
 
-    <ng-template #noEntries>
-      <div id="no-entries">
-        No entries to show
-      </div>
-    </ng-template>
-
-    </ng-scrollbar>
+      </ng-scrollbar>
+    </div>
 
   </div>
 </div>

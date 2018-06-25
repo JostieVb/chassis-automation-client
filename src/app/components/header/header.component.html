@@ -15,7 +15,6 @@
                         <a *ngIf="ca_user.id !== user.id" class="dropdown-item" (click)="switchAccount(ca_user.email)">{{ca_user.name}}</a>
                         <a *ngIf="ca_user.id === user.id" class="dropdown-item selected">{{ca_user.name}}</a>
                     </ng-container>
-
                 </div>
             </div>
         </div>

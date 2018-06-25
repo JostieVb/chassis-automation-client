@@ -1,0 +1,90 @@
+<div id="edit-form-item-modal-overlay" [ngClass]="{'show': editFormItem}"></div>
+<div id="edit-form-item-modal" [ngClass]="{'show': editFormItem}">
+    <div class="modal-header">
+        <ng-container *ngIf="editField; else newField">
+            Edit form field
+        </ng-container>
+        <ng-template #newField>
+            Add form field
+        </ng-template>
+    </div>
+
+    <form>
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="name" class="col-form-label">
+                <ng-container *ngIf="field.type !== 'title' && field.type !== 'subtitle'">Field name *</ng-container>
+                <ng-container *ngIf="field.type === 'title'">Title text *</ng-container>
+                <ng-container *ngIf="field.type === 'subtitle'">Sub-title text *</ng-container>
+                <div class="help" *ngIf="field.type !== 'title'">
+                    ?
+                    <div class="help-message">
+                        <div class="selector"></div>
+                        Enter a name for the field.
+                    </div>
+                </div>
+            </label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="field.name" />
+        </div>
+        <div class="form-group">
+            <label for="type" class="col-form-label">
+                Field type
+                <div class="help">
+                    ?
+                    <div class="help-message">
+                        <div class="selector"></div>
+                        You can change the type of the field
+                    </div>
+                </div>
+            </label>
+            <select class="form-control" id="type" name="type" [(ngModel)]="field.type">
+                <option *ngFor="let item of formBuilderItems" value="{{item.data}}">{{item.type}}</option>
+            </select>
+        </div>
+        <div class="form-group" *ngIf="field.type !== 'title' && field.type !== 'subtitle'">
+            <label for="description" class="col-form-label">
+                Description
+                <div class="help">
+                    ?
+                    <div class="help-message">
+                        <div class="selector"></div>
+                        Provide optional information about this field
+                    </div>
+                </div>
+            </label>
+            <input type="text" class="form-control" id="description" name="description" [(ngModel)]="field.description" />
+        </div>
+        <div class="form-group" *ngIf="field.type === 'wysiwyg'">
+            <label for="showToolbar" class="col-form-label">{{field.showToolbar}}
+                <input type="checkbox" id="showToolbar" name="required" [(ngModel)]="field.showToolbar" />
+                Show WYSIWYG toolbar
+                <div class="help">
+                    ?
+                    <div class="help-message">
+                        <div class="selector"></div>
+                        A setting that indicates whether the toolbar of the WYSIWYG editor should be shown
+                    </div>
+                </div>
+            </label>
+        </div>
+        <div class="form-group" *ngIf="field.type !== 'title' && field.type !== 'subtitle'">
+            <label for="required" class="col-form-label">
+                <input type="checkbox" id="required" name="required" [(ngModel)]="field.required" />
+                Required field
+                <div class="help">
+                    ?
+                    <div class="help-message">
+                        <div class="selector"></div>
+                        Check the checkbox if this has to be a required field.
+                    </div>
+                </div>
+            </label>
+        </div>
+        <div class="required-help">* = required field</div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" (click)="saveFormField(field)">Save form field</button>
+        <button class="btn btn-secondary" (click)="dismissModal()">Cancel</button>
+    </div>
+    </form>
+</div>

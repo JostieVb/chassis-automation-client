@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AlertService } from '../services/alert.service';
 
+declare var require;
+const $ = require('jQuery');
+
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
@@ -48,10 +51,11 @@ export class AlertComponent implements OnInit, OnDestroy {
   showAlert(alert) {
     const uniqueId = this.generateAlertId();
     this.showAlertBox = true;
-    let prefix = '';
+    const prefix = {html: false, content: ''};
     let interval = 5000;
     let dismissable = true;
     let timer = null;
+    let showDurationIndicator = false;
 
     if ('clearAlertBox' in alert && alert['clearAlertBox'] === true) {
       this.alerts = {};
@@ -59,7 +63,8 @@ export class AlertComponent implements OnInit, OnDestroy {
     }
 
     if ('prefix' in alert && alert['prefix'] !== '' && alert['prefix'] !== undefined && alert['prefix'] !== null) {
-      prefix = alert['prefix'];
+      prefix.content = alert['prefix'];
+      prefix.html = /<[a-z][\s\S]*>/i.test(prefix.content);
     }
 
     if ('interval' in alert && alert['interval'] !== '' && alert['interval'] !== undefined && alert['interval'] !== null) {
@@ -80,15 +85,23 @@ export class AlertComponent implements OnInit, OnDestroy {
       dismissable = false;
     }
 
+    if ('showDurationIndicator' in alert && alert['showDurationIndicator'] === true) {
+        showDurationIndicator = true;
+    }
+
     this.alerts[uniqueId] = {
       message: alert.message,
       type: alert.type,
       fadeIn: setTimeout(() => {
         document.getElementById(uniqueId).classList.add('show');
       }),
+      animation: setTimeout(() => {
+          $('#indicator-' + uniqueId).animate({width: '100%'}, interval);
+      }, 1),
       timer: timer,
       prefix: prefix,
-      dismissable: dismissable
+      dismissable: dismissable,
+      showDurationIndicator: showDurationIndicator
     };
   }
 

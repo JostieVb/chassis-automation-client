@@ -1,5 +1,8 @@
 <div id="canvas">
-    <div id="placeholder" *ngIf="!previewLoaded">
+    <div class="placeholder" *ngIf="!loadingPreview && !previewLoaded">
         Select a process for preview
+    </div>
+    <div class="placeholder" *ngIf="loadingPreview && !previewLoaded">
+        <i class="fa fa-circle-o-notch fa-spin"></i> Loading preview...
     </div>
 </div>

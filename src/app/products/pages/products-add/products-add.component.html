@@ -1,8 +1,6 @@
 <div class="card full-height">
     <ng-scrollbar>
     <div class="card-body">
-        <h5 class="card-title" data-form="form-new-product">New product</h5>
-        <p class="card-text" data-form="form-new-product">Add a new product.</p>
         <form [form]="'form-new-product'"></form>
         <button [caller]="'form-new-product'" data-form="form-new-product" type="submit" class="btn btn-primary">Add product</button>
     </div>

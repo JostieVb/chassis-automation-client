@@ -3,6 +3,8 @@ import { DataTablesService } from '../../services/data-tables.service';
 import { API_BASE } from '../../../global';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../auth/user.service';
+import { Alert } from '../../../components/alert/alert';
+import { AlertService } from '../../../components/services/alert.service';
 
 @Component({
   selector: 'app-delete-column',
@@ -20,7 +22,8 @@ export class DeleteColumnComponent implements OnInit, OnDestroy {
   constructor(
       private dataTablesService: DataTablesService,
       private http: HttpClient,
-      private auth: UserService
+      private auth: UserService,
+      private alert: AlertService
   ) { }
 
   /**
@@ -45,6 +48,7 @@ export class DeleteColumnComponent implements OnInit, OnDestroy {
           {headers: this.auth.authHeaders()}
       ).subscribe(res => {
           this.dataTablesService.getTableColumns(table, true);
+          this.alert.alert.next(new Alert('Column successfully deleted.', 'success', '', true, false));
       });
   }
 

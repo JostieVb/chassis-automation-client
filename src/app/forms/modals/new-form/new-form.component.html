@@ -1,0 +1,49 @@
+<div class="modal fade" id="newFormModal" tabindex="-1" role="dialog" aria-labelledby="newFormModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newFormModalTitle">New form</h5>
+        <button type="button" class="close" id="closeNewFormModal" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="process-name" class="col-form-label has-help">
+              Form name
+              <div class="help">
+                ?
+                <div class="help-message">
+                  <div class="selector"></div>
+                  Enter a logical name for the form that will explain largely what the form is about.
+                </div>
+              </div>
+            </label>
+
+            <input type="text" (keyup)="generateIdentifier()" name="process-name" [(ngModel)]="name" class="form-control" id="process-name">
+          </div>
+
+          <div class="form-group">
+            <label for="process-code" class="col-form-label has-help">
+              Unique form identifier
+              <div class="help">
+                ?
+                <div class="help-message">
+                  <div class="selector"></div>
+                  The identifier has to be unique. The identifier will be automatically generated when you enter a form name above.
+                </div>
+              </div>
+            </label>
+
+            <input type="text" name="process-code" [(ngModel)]="identifier" class="form-control" id="process-code">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="dismissModal()" class="btn btn-secondary" data-dismiss="modal" [disabled]="creating">Cancel</button>
+        <button type="button" class="btn" (click)="createForm()" [disabled]="creating"><i class="fa fa-circle-o-notch fa-spin" *ngIf="creating"></i> Create form</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,62 @@
 #process-code {
   text-transform: uppercase; }
 
+.full-width {
+  width: 100%; }
+
+label {
+  width: 100%;
+  position: relative; }
+  label .help {
+    position: absolute;
+    right: 0;
+    top: 8px;
+    width: 15px;
+    height: 15px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    cursor: default;
+    border-radius: 20px;
+    color: #fff;
+    line-height: 15px;
+    text-align: center;
+    font-weight: bold;
+    background: #d0d0d0;
+    transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out; }
+    label .help:hover {
+      background: #484848; }
+    label .help:hover > .help-message {
+      display: block; }
+    label .help .help-message {
+      font-weight: 400;
+      z-index: 1;
+      right: -8px;
+      top: 25px;
+      font-style: italic;
+      text-align: left;
+      background: #fff;
+      position: absolute;
+      width: 275px;
+      height: auto;
+      padding: 10px;
+      color: #4f4f4f;
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      border: 1px solid #e6e6e6;
+      display: none; }
+      label .help .help-message .selector {
+        width: 20px;
+        height: 10px;
+        background-image: url("../../../../assets/img/selector.png");
+        background-size: 100%;
+        background-position: center bottom;
+        position: absolute;
+        top: -10px;
+        right: 5px; }
+
 /*# sourceMappingURL=new-process.modal.css.map */

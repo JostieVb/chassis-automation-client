@@ -1,0 +1,42 @@
+<div class="meta-data" [ngClass]="{'open': metaDataOpen}">
+  <div class="meta-data-content-wrapper">
+    <h5>Meta data</h5>
+    <div class="columns">
+      <div class="column left">
+        <div class="column-row">
+          <label>Identifier:</label>
+          <div class="value">{{id}}</div>
+        </div>
+        <div class="column-row">
+          <label>Type:</label>
+          <div class="value">
+            Startevent
+          </div>
+        </div>
+      </div>
+      <div class="column right">
+      </div>
+    </div>
+  </div>
+  <div class="toggle-meta-data" (click)="metaDataOpen = !metaDataOpen"><i class="fa fa-chevron-down"></i></div>
+</div>
+<div class="meta-data-overlay" *ngIf="metaDataOpen" (click)="metaDataOpen = false"></div>
+
+<div class="form">
+
+</div>
+
+<ng-scrollbar [autoHide]="true">
+  <div class="text-input">
+    <h5>Name of the start event</h5>
+    <input type="text" name="name" [(ngModel)]="fieldBindings['name']" (ngModelChange)="updateProperty('name', true)" class="form-control" placeholder="Enter a name for this start event" />
+  </div>
+
+  <div class="text-input">
+    <h5>Form</h5>
+    <select name="form" class="form-control" [(ngModel)]="fieldBindings['caller']" (ngModelChange)="updateProperty('caller')">
+      <option value="" disabled selected>Select a form</option>
+      <option *ngFor="let form of forms" [value]="form.value">{{form.label}}</option>
+    </select>
+  </div>
+</ng-scrollbar>

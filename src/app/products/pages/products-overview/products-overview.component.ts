@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BpmnService } from '../../../bpmn/services/bpmn.service';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-products-overview',
@@ -11,7 +12,9 @@ export class ProductsOverviewComponent implements OnInit, OnDestroy {
    * products   :   all products
    * subs       :   component subscriptions
    * */
-  protected products: any;
+  protected content = [];
+  protected structure = [];
+  protected structureKeys = [];
   private subs = [];
 
   constructor(
@@ -23,9 +26,22 @@ export class ProductsOverviewComponent implements OnInit, OnDestroy {
    * */
   ngOnInit() {
     this.subs.push(
-      this.bpmn.data.subscribe(data => this.products = data)
+      this.bpmn.data.subscribe(data => {
+          const structure = data['structure'];
+          const content = data['content'];
+          if (structure !== undefined) {
+              this.structure = structure;
+              this.structureKeys = Object.keys(structure);
+          }
+          if (content !== undefined) {
+              this.content = [];
+              for (const item of content) {
+                  this.content.push(item['data']);
+              }
+          }
+      })
     );
-    this.bpmn.getData('ca_product');
+    this.bpmn.getData('form-new-product');
   }
 
   /**

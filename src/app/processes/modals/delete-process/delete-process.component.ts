@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DeleteService } from '../../services/delete.service';
 import { ProcessService } from '../../services/process.service';
 import { Router } from '@angular/router';
+import { AlertService } from '../../../components/services/alert.service';
+import {Alert} from '../../../components/alert/alert';
 
 @Component({
   selector: 'app-delete-process',
@@ -20,7 +22,8 @@ export class DeleteProcessComponent implements OnInit, OnDestroy {
   constructor(
       private router: Router,
       private deleteService: DeleteService,
-      private processService: ProcessService
+      private processService: ProcessService,
+      private alert: AlertService
   ) { }
 
   /**
@@ -42,6 +45,9 @@ export class DeleteProcessComponent implements OnInit, OnDestroy {
     this.deleteService.deleteProcess(id).subscribe((res) => {
       if (res['status'] === 200) {
         this.processService.getProcesses();
+        this.alert.alert.next(new Alert('Process \'' + this.content['name'] + '\' successfully deleted.', 'success', '', true, false));
+      } else {
+        this.alert.alert.next(new Alert('Process \'' + this.content['name'] + '\' could not be deleted.', 'danger', '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>', true, false));
       }
     });
   }

@@ -6,12 +6,11 @@ export class Entry {
     date: any;
     label: string;
     status: string;
-    task: string;
+    task_id: string;
     message: string;
-    responseMessage: string;
+    response_message: string;
     decisions: any;
-    dbTable: string;
-    contentId: number;
+    content_id: number;
     title: string;
     content: any;
 }

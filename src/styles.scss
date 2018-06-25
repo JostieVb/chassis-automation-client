@@ -7,13 +7,110 @@ html, body {
   font-size: 14px;
 }
 
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 a {
   color: inherit !important;
   text-decoration: none !important;
 }
 
+/* ------------------------------ */
+/* ng-select global styling start */
+
+::placeholder, .ng-placeholder {
+  color: #7d858c !important;
+}
+
+ng-select {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  z-index: 2 !important;
+}
+
+.ng-placeholder {
+  z-index: 1 !important;
+}
+
+.ng-input input, ng-select {
+  cursor: text !important;
+}
+
+.ng-input input, .ng-placeholder, .ng-value {
+  margin: 5px 0;
+}
+
+ng-dropdown-panel {
+  z-index: 9;
+}
+
+.ng-clear-wrapper {
+  padding-top: 7px;
+}
+
+.ng-dropdown-panel {
+  left: 0;
+  z-index: 1 !important;
+}
+
+.ng-value {
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  background: #f4f4f4;
+  margin-right: 10px;
+}
+
+.ng-value-icon {
+  width: 20px;
+  text-align: center;
+  border-right: 1px solid #d1d1d1;
+}
+
+.ng-value-label {
+  margin: 0 10px;
+}
+
+.ng-select-container {
+  &.ng-has-value {
+    .ng-placeholder {
+      display: none;
+    }
+  }
+}
+
+.ng-optgroup {
+  font-weight: bold;
+  color: $default-text-color;
+}
+
+.ng-option {
+  color: #a8a8a8;
+  height: 30px;
+  line-height: 30px;
+  @include transition(.2s);
+  &.ng-option-marked {
+    font-weight: bold;
+    color: #2b2b2b;
+  }
+  &:hover {
+    &.ng-option-disabled {
+      color: #a8a8a8 !important;
+    }
+    color: #2b2b2b;
+  }
+}
+
+/* ng-select global styling end */
+/* ---------------------------- */
+
 .textarea {
   min-height: 100px;
+}
+
+.bjs-container a {
+  z-index: 0 !important;
 }
 
 .required {
@@ -258,53 +355,6 @@ a {
   }
 }
 
-/* ng-select styles */
-ng-select{
-  .below {
-    background: #fff !important;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    padding: 0.15rem .75rem !important;
-    line-height: 1.5 !important;
-    outline: none !important;
-    .multiple {
-      padding: 0 !important;
-      .option {
-        .deselect-option {
-          font-size: 12px !important;
-        }
-        background-color: #efefef !important;
-        border: 1px solid $light-border !important;
-        border-radius: 5px !important;
-        color: $default-text-color;
-        font-size: 12px !important;
-      }
-    }
-  }
-  select-dropdown {
-    .below {
-      padding: 0 !important;
-      overflow: hidden;
-      .options {
-        ul {
-          li {
-            color: $default-text-color !important;
-            padding: 0.15rem .75rem !important;
-            font-size: 14px !important;
-            &.selected {
-              display: none !important;
-            }
-            &.highlighted {
-              background: #f3f3f3 !important;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 .select2-free-input {
   cursor: pointer;
   .option {
@@ -338,6 +388,7 @@ ng-select{
   }
 }
 
+/* Error message when no form is available for rendering by the form directive */
 .no-form-msg {
   width: 100%;
   height: auto;
@@ -362,6 +413,24 @@ ng-select{
     }
   }
 }
+/* End error message styling */
+
+/* DateTime picker styling */
+
+owl-date-time-container {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.owl-dt-container-buttons {
+  color: $color-default !important;
+}
+
+.owl-dt-calendar-cell-selected {
+  background: $color-default !important;
+}
 
 .btn-secondary {
   color: #fff !important;
@@ -374,7 +443,7 @@ ng-select{
 /* Hidden modeler items */
 .djs-palette-entries {
   .group {
-    .bpmn-icon-connection-multi, .bpmn-icon-space-tool, .bpmn-icon-intermediate-event-none,
+    .bpmn-icon-connection-multi, .bpmn-icon-intermediate-event-none,
     .bpmn-icon-subprocess-expanded, .bpmn-icon-data-object, .bpmn-icon-data-store, .bpmn-icon-participant {
       display: none;
     }
@@ -390,6 +459,145 @@ ng-select{
       display: none;
     }
   }
+}
+
+.djs-search-container {
+  margin: 0;
+  left: 90px;
+  .djs-search-input {
+    input {
+      display: block;
+      width: 100%;
+      padding: .375rem .75rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+      outline: none !important;
+    }
+  }
+}
+
+.cdk-overlay-backdrop {
+  opacity: 0 !important;
+}
+
+/* -------------------------- */
+/* Quill editor styling start */
+
+.message-quill {
+  .ql-toolbar {
+    position: absolute !important;
+    top: 300px;
+    left: 1.25rem;
+    right: 1.25rem;
+    border: none;
+    background: #f0f0f0;
+    border-bottom: none !important;
+    z-index: 1;
+  }
+  .ql-container {
+    border: none !important;
+    margin-top: 70px;
+    .ql-editor {
+      padding: 0 !important;
+      font-family: 'Segoe UI' !important;
+      font-size: 14px;
+      overflow: hidden !important;
+      margin-bottom: 10px;
+      &:before {
+        font-style: normal !important;
+      }
+      a {
+        text-decoration: underline !important;
+        color: $color-default !important;
+      }
+    }
+  }
+}
+
+.response-message-quill {
+  .ql-toolbar {
+    border: none;
+    background: #f0f0f0;
+    border-bottom: none !important;
+  }
+  .ql-container {
+    border: none !important;
+    .ql-editor {
+      padding: 0 !important;
+      font-family: 'Segoe UI' !important;
+      font-size: 14px;
+      overflow: hidden !important;
+      margin: 20px 0 0 0;
+      &:before {
+        font-style: normal !important;
+      }
+      a {
+        text-decoration: underline !important;
+        color: $color-default !important;
+      }
+    }
+  }
+}
+
+.form-quill {
+  &.form-builder {
+    cursor: default !important;
+  }
+  &.hideToolbar {
+    .ql-toolbar {
+      display: none !important;
+    }
+    .ql-container {
+      border: none !important;
+      .ql-editor {
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+      }
+    }
+  }
+  .ql-toolbar {
+    background: #f0f0f0;
+    border-bottom: none !important;
+  }
+  .ql-container {
+    .ql-editor {
+      font-family: 'Segoe UI' !important;
+      font-size: 14px;
+      overflow: hidden !important;
+      background: #fff;
+      padding: .375rem .75rem;
+      min-height: 100px;
+      &:before {
+        font-style: normal !important;
+      }
+      a {
+        text-decoration: underline !important;
+        color: $color-default !important;
+      }
+    }
+  }
+}
+
+.ql-tooltip {
+  left: 50% !important;
+  margin-left: -154px !important;
+}
+
+/* Quill editor styling end */
+/* ------------------------- */
+
+.response-message-content p, .message p {
+  margin: 0 !important;
+}
+
+.response-message-content a, .message a {
+  text-decoration: underline;
+  color: $color-default;
 }
 
 /* Media Queries */

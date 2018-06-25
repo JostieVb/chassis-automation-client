@@ -10,24 +10,6 @@ $margin: 0 1.25rem;
   .card-title {
     padding: 0 !important;
     position: relative;
-    .back-button {
-      position: absolute;
-      right: 30px;
-      top: 0;
-      display: none;
-    }
-    .dropdown {
-      position: absolute;
-      right: 0;
-      top: 0;
-      button {
-        background: transparent !important;
-        color: $default-text-color;
-        &:after {
-          display: none !important;
-        }
-      }
-    }
   }
   .no-entry {
     .icon {
@@ -46,60 +28,218 @@ $margin: 0 1.25rem;
     margin-top: - 50px;
   }
   .card-body {
+    position: relative;
     .card-title {
       padding: $padding-bottom;
       margin: $margin;
-      border-bottom: 1px solid $light-border;
       height: 45px;
+      .responsive-back-button {
+        float: right;
+        display: none;
+      }
     }
-    .meta-data {
+    .entry-wrapper {
+      position: absolute;
+      left: 0;
+      right: 0;
       height: auto;
       overflow: hidden;
-      margin: 20px 1.25rem;
-      padding: $padding-bottom;
-      border-bottom: 1px solid $light-border;
-      box-sizing: border-box;
-      p {
-        margin: 0;
-        .label {
-          font-weight: bold;
-          width: 50px;
-          display: inline-block;
-          color: $color-secondary;
+      @include transition(.2s);
+      &.attachment-open {
+        width: 40%;
+      }
+      .entry {
+        background: #fff;
+        margin: 0 1.25rem;
+        padding: 1.25rem;
+        border: 1px solid $light-border;
+        .meta-data {
+          height: auto;
+          overflow: hidden;
+          box-sizing: border-box;
+          .attachments {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            margin: 10px 0;
+            .attachment {
+              width: 200px;
+              height: 60px;
+              background: #fff;
+              float: left;
+              margin: 0 10px 0 0;
+              border: 1px solid $light-border;
+              @include transition(.2s);
+              cursor: pointer;
+              position: relative;
+              .icon {
+                position: absolute;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                width: 50px;
+                text-align: center;
+                line-height: 60px;
+              }
+              .label {
+                position: absolute;
+                left: 50px;
+                top: 0;
+                bottom: 0;
+                line-height: 60px;
+                @include text-overflow;
+              }
+              .click-to-open {
+                display: none;
+                position: absolute;
+                top: 35px;
+                left: 50px;
+                height: 10px;
+                font-size: 12px;
+                color: #b0b0b0;
+              }
+              &:hover {
+                background: #f9f9f9;
+                .click-to-open {
+                  display: block;
+                }
+              }
+              &.open {
+                background: #f9f9f9;
+                cursor: default;
+                .click-to-open {
+                  display: none !important;
+                }
+              }
+            }
+          }
+          p {
+            margin: 0;
+            .label {
+              font-weight: bold;
+              width: 50px;
+              display: inline-block;
+            }
+          }
+        }
+        .content {
+          height: auto;
+          margin: 20px 0;
+          .message, .action-container, .response-container {
+            height: auto;
+            overflow: hidden;
+          }
+          .response-message-container {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            padding: 1.25rem;
+            margin: 20px 0 0 0;
+            border-left: 3px solid #e6e6e6;
+            .response-message-header {
+              margin-bottom: 10px;
+              font-weight: bold;
+            }
+            .response-message-content {
+              width: 100%;
+              height: auto;
+              overflow: hidden;
+            }
+          }
+        }
+      }
+      .response {
+        background: #fff;
+        margin: 1.25rem;
+        padding: 1.25rem;
+        border: 1px solid $light-border;
+        position: relative;
+        &.show-action-bar {
+          padding: 1.25rem 1.25rem 70px 1.25rem;
+        }
+        h4 {
+          font-size: 16px;
+          margin: 0;
+          cursor: pointer;
+          @include transition(.2s);
+          i {
+            font-size: 14px;
+          }
+          &:hover {
+            color: $color-default;
+          }
+        }
+        h3 {
+          font-size: 16px;
+          margin: 0;
+        }
+        .response-message {
+          width: 100%;
+          height: auto;
+          overflow: hidden;
+          margin: 20px 0;
+        }
+        .decisions {
+          border-top: 1px solid #d9d9d9;
+          padding: 20px 0 0 0;
+        }
+        .response-action-bar {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 50px;
+          padding: 10px 1.25rem;
+          box-sizing: border-box;
+          background: #f0f0f0;
         }
       }
     }
-    .content {
-      height: auto;
-      margin: 20px 1.25rem;
-      .message, .action-container, .response-container {
-        height: auto;
-        border-bottom: 1px solid $light-border;
-        margin: 0 0 20px 0;
-        padding-bottom: 30px;
+    .attachment-container {
+      position: absolute;
+      right: -60%;
+      top: 0;
+      bottom: 0;
+      width: 60%;
+      background: #525659;
+      &.open {
+        right: 0;
       }
-      .action-container {
-        .decisions {
-          margin: 20px 0;
-          table {
-            padding: 10px;
-            tr {
-              background: #f2f2f2;
-              border-bottom: 1px solid $light-border;
-              &:last-child {
-                border-bottom: none;
-              }
-              td {
-                &:first-child {
-                  padding: 10px 5px 10px 10px;
-                }
-                &:last-child {
-                  padding: 10px 10px 10px 5px;
-                }
-                label {
-                  cursor: pointer;
-                }
-              }
+      .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+        line-height: 40px;
+        text-align: center;
+        height: 40px;
+        background: transparent;
+        color: #fff;
+        font-size: 14px;
+        @include transition(.2s);
+        &:hover {
+          background: $color-danger;
+        }
+      }
+      .attachment-bg {
+        position: absolute;
+        top: 50px;
+        bottom: 50px;
+        left: 1.25rem;
+        right: 1.25rem;
+        padding: 50px;
+        background: #fff;
+        -webkit-box-shadow: 0 0 32px -2px rgba(0,0,0,1);
+        -moz-box-shadow: 0 0 32px -2px rgba(0,0,0,1);
+        box-shadow: 0 0 32px -2px rgba(0,0,0,1);
+        table {
+          tr {
+            th, td {
+              border: 1px solid #e3e3e3;
+              padding: 0 5px;
+            }
+            th {
+              background: #f8f8f8;
             }
           }
         }
@@ -110,36 +250,7 @@ $margin: 0 1.25rem;
 
 /* Media Queries */
 @media only screen and (max-width: 980px) {
-  .card .card-title .back-button {
+  .card .card-body .card-title .responsive-back-button {
     display: block;
-  }
-
-  .card .card-body .content {
-    .message {
-      .ch-table {
-        .ch-row {
-          overflow: auto;
-          width: 80%;
-          float: left;
-          display: block;
-          padding: 0;
-          &.ch-head {
-            width: 20% !important;
-          }
-          &:last-child {
-            border-bottom: none;
-          }
-          .expand {
-            display: none;
-          }
-          .ch-col {
-            border-bottom: 1px solid $light-border;
-            padding: 0 10px;
-            float: left;
-            min-width: 100%;
-          }
-        }
-      }
-    }
   }
 }

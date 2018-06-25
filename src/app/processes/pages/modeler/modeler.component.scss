@@ -21,6 +21,7 @@ $modeler-header-inner-height: 30px;
       float: left;
       label {
         cursor: pointer;
+        border-bottom: 1px solid #b0b0b0;
         .placeholder {
           color: $color-secondary;
           display: inline-block;
@@ -191,16 +192,27 @@ $modeler-header-inner-height: 30px;
     }
   }
   .canvas {
-    width: calc(100% - 300px);
+    width: 100%;
     height: calc(100% - 50px);
     background: $lighter-bg;
     z-index: 8;
   }
-  .zoom-instructions {
+  .instructions {
     position: absolute;
     bottom: 10px;
     left: 20px;
     z-index: 9;
+    span {
+      margin-right: 50px;
+      display: inline-block;
+      a {
+        text-decoration: underline !important;
+        cursor: pointer;
+        &:hover {
+          text-decoration: none !important;
+        }
+      }
+    }
   }
 }
 
@@ -231,7 +243,7 @@ $modeler-header-inner-height: 30px;
     .canvas {
       width: 100%;
     }
-    .zoom-instructions {
+    .instructions {
       display: none;
     }
   }

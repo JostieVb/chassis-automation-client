@@ -1,0 +1,74 @@
+<div class="meta-data" [ngClass]="{'open': metaDataOpen}">
+    <div class="meta-data-content-wrapper">
+      <h5>Meta data</h5>
+      <div class="columns">
+          <div class="column left">
+              <div class="column-row">
+                  <label>Identifier</label>
+                  <div class="value">{{id}}</div>
+              </div>
+              <div class="column-row">
+                  <label>Task type</label>
+                  <div class="value">
+                      <select class="form-control" name="type" [(ngModel)]="fieldBindings['type']" (ngModelChange)="updateProperty('type', true)">
+                          <option value="task">Task</option>
+                          <option value="sendtask">Send Task</option>
+                          <option value="receivetask">Receive Task</option>
+                          <option value="usertask">User Task</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+          <div class="column right">
+          </div>
+      </div>
+    </div>
+    <div class="toggle-meta-data" (click)="metaDataOpen = !metaDataOpen"><i class="fa fa-chevron-down"></i></div>
+</div>
+<div class="meta-data-overlay" *ngIf="metaDataOpen" (click)="metaDataOpen = false"></div>
+
+<ng-scrollbar [autoHide]="true" (scrollState)="onScroll()" id="scroll-ref">
+    <div class="text-input">
+        <h5>Name of the task</h5>
+        <input type="text" name="name" [(ngModel)]="fieldBindings['name']" (ngModelChange)="updateProperty('name', true)" class="form-control" placeholder="Enter a name for this task" />
+    </div>
+
+    <div class="text-input">
+        <h5>Due date</h5>
+        <div class="value date-input">
+            <input class="form-control input-db" [(ngModel)]="fieldBindings['due']" (ngModelChange)="updateProperty('due')" [owlDateTime]="dt2" placeholder="Set an optional due date for this task" readonly />
+            <button class="btn btn-dp clear" (click)="clearDatePicker('due');"><i class="fa fa-close"></i></button>
+            <button [owlDateTimeTrigger]="dt2" class="btn btn-dp calendar"><i class="fa fa-calendar"></i></button>
+            <owl-date-time [firstDayOfWeek]="1" [pickerMode]="'dialog'" #dt2></owl-date-time>
+        </div>
+    </div>
+
+
+    <div class="message">
+      <h5>Message</h5>
+      <div class="message-data">
+        <div class="message-row">
+          <label>Assignee(s)</label>
+          <ng-select class="form-control" [(ngModel)]="fieldBindings['assignees']" (ngModelChange)="updateProperty('assignees')" notFoundText="No users found" [items]="users" [multiple]="true" [hideSelected]="true" [placeholder]="'Select assignee(s)'"></ng-select>
+        </div>
+        <div class="message-row">
+          <label>Subject</label>
+          <input type="text" name="subject" [(ngModel)]="fieldBindings['subject']" (ngModelChange)="updateProperty('subject')"  placeholder="Enter subject">
+        </div>
+      </div>
+      <quill-editor [modules]="quillModules" [(ngModel)]="fieldBindings['message']" (ngModelChange)="updateProperty('message')" spellcheck="false" (onEditorCreated)="initEditor($event)" class="message-quill" [placeholder]="'Enter message...'"> </quill-editor>
+    </div>
+
+    <div class="attach-content">
+        <div class="attach-content-wrapper">
+            <input type="checkbox" [(ngModel)]="fieldBindings['attach-form-contents']" (ngModelChange)="updateProperty('attach-form-contents')" id="attach-content" name="attach-content" /><label for="attach-content">Attach form contents</label>
+        </div>
+    </div>
+
+    <div class="decisions" *ngIf="showDecisions">
+        <div class="decision-wrapper">
+            <h5>Decisions</h5>
+            <ng-select class="form-control decisions-input" notFoundText="Start typing a decision. Press 'Enter' to add the decision" [(ngModel)]="fieldBindings['decisions']" (ngModelChange)="updateProperty('message')" (change)="resetItems()" [ngModelOptions]="{standalone: true}" (keyup)="decisionInput($event)" [items]="decisionsItems" [multiple]="true" [placeholder]="'Enter decisions'"></ng-select>
+        </div>
+    </div>
+</ng-scrollbar>

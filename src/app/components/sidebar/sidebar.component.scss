@@ -2,6 +2,12 @@
 @import '../../../assets/styles/global_vars';
 $nav-item-height: 40px;
 
+@keyframes loading-animation {
+  0%   {background-color: #474e5e;}
+  50%  {background-color: #80848d;}
+  100% {background-color: #474e5e;}
+}
+
 .sidebar {
   background: #2B303B;
   height: 100vh;
@@ -11,6 +17,42 @@ $nav-item-height: 40px;
   @include transition(.2s);
   &.show {
     left: 0;
+  }
+  .placeholder {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding: 30px;
+    span {
+      display: block;
+      height: 15px;
+      margin-bottom: 15px;
+      background: #474e5e;
+      position: relative;
+      animation-name: loading-animation;
+      animation-iteration-count: infinite;
+      animation-duration: 2s;
+      &:first-child {
+        width: calc(70% - 30px);
+        animation-delay: .2s;
+      }
+      &:nth-child(2) {
+        width: calc(60% - 30px);
+        animation-delay: .4s;
+      }
+      &:nth-child(3) {
+        width: calc(100% - 30px);
+        animation-delay: .6s;
+      }
+      &:nth-child(4) {
+        width: calc(70% - 30px);
+        animation-delay: .8s;
+      }
+      &:last-child {
+        width: calc(65% - 30px);
+        animation-delay: 1s;
+      }
+    }
   }
   .sidebar-header {
     width: 100%;
@@ -71,18 +113,19 @@ $nav-item-height: 40px;
         }
         .entries-count {
           display: inline-block;
-          background: #788296;
+          background: #f8d053;
           padding: 0 5px;
           border-radius: 20px;
           height: 17px;
           line-height: 1.75;
           position: absolute;
-          top: 12px;
-          left: 80px;
+          top: 23px;
+          right: 7px;
           font-size: 10px;
           font-weight: bold;
           width: auto;
-          color: #2B303B;
+          color: #fff;
+          z-index: 4;
         }
       }
     }

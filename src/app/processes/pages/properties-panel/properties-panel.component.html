@@ -1,0 +1,13 @@
+<div id="properties-panel" [ngClass]="{'show': id !== ''}">
+        <div class="modal-header">
+            Edit '{{id}}'
+            <span (click)="dismissPropertiesPanel()">&times;</span>
+        </div>
+
+
+    <div class="modal-body">
+        <app-task *ngIf="type === 'task'" [data]="data"></app-task>
+        <app-sequenceflow *ngIf="type === 'sequenceflow'" [data]="data"></app-sequenceflow>
+        <app-startevent *ngIf="type === 'startevent'" [data]="data"></app-startevent>
+    </div>
+</div>

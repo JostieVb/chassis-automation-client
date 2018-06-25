@@ -1,0 +1,349 @@
+/* Meta data section styling */
+.meta-data {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  background: #f7f7f7;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9; }
+  .meta-data.open .meta-data-content-wrapper {
+    height: auto; }
+  .meta-data.open .toggle-meta-data i {
+    transform: rotate(180deg);
+    line-height: 22px; }
+  .meta-data .meta-data-content-wrapper {
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out; }
+    .meta-data .meta-data-content-wrapper h5 {
+      padding: 20px 1.25rem 0 1.25rem; }
+    .meta-data .meta-data-content-wrapper .columns {
+      width: 100%;
+      height: auto;
+      padding: 0 1.25rem;
+      transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out; }
+      .meta-data .meta-data-content-wrapper .columns .column {
+        width: 50%;
+        height: auto;
+        box-sizing: border-box;
+        margin-bottom: 20px; }
+        .meta-data .meta-data-content-wrapper .columns .column:first-child {
+          padding-right: 0.625rem; }
+        .meta-data .meta-data-content-wrapper .columns .column:last-child {
+          padding-left: 0.625rem; }
+        .meta-data .meta-data-content-wrapper .columns .column .column-row {
+          width: 100%;
+          height: 40px;
+          margin-bottom: 10px; }
+          .meta-data .meta-data-content-wrapper .columns .column .column-row label {
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            margin: 0; }
+          .meta-data .meta-data-content-wrapper .columns .column .column-row .value {
+            width: calc(100% - 100px);
+            height: 40px;
+            line-height: 40px;
+            float: left; }
+            .meta-data .meta-data-content-wrapper .columns .column .column-row .value input, .meta-data .meta-data-content-wrapper .columns .column .column-row .value select {
+              height: 40px; }
+        .meta-data .meta-data-content-wrapper .columns .column.left {
+          float: left; }
+          .meta-data .meta-data-content-wrapper .columns .column.left table {
+            padding-right: 0.625rem; }
+        .meta-data .meta-data-content-wrapper .columns .column.right {
+          float: right; }
+          .meta-data .meta-data-content-wrapper .columns .column.right table {
+            padding-left: 0.625rem; }
+  .meta-data .toggle-meta-data {
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid #ced4da;
+    transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out; }
+    .meta-data .toggle-meta-data:hover {
+      background: rgba(0, 0, 0, 0.2); }
+    .meta-data .toggle-meta-data i {
+      transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out; }
+
+.meta-data-overlay {
+  z-index: 8;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0; }
+
+ng-scrollbar {
+  padding-top: 20px; }
+
+/* --------------------------------------- */
+/* Normal text input section styling start */
+.text-input {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem;
+  overflow: hidden; }
+
+/*  Normal text input section styling end */
+/* -------------------------------------- */
+/* ----------------------------- */
+/* Message section styling start */
+.message {
+  padding: 10px 1.25rem; }
+  .message .message-data {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px; }
+    .message .message-data .message-row {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid #e6e6e6;
+      position: relative; }
+      .message .message-data .message-row label {
+        width: 150px;
+        position: absolute;
+        left: 0;
+        top: 0; }
+      .message .message-data .message-row input {
+        border: none;
+        outline: none;
+        background: transparent;
+        width: calc(100% - 150px);
+        height: 40px;
+        line-height: 40px;
+        position: absolute;
+        left: 150px;
+        top: 0; }
+      .message .message-data .message-row ng-select {
+        width: calc(100% - 150px) !important;
+        border: none !important;
+        float: right;
+        padding: 5px 0;
+        height: 30px !important;
+        line-height: 30px; }
+        .message .message-data .message-row ng-select .ng-select-container .ng-value-container .ng-value {
+          height: 30px !important;
+          line-height: 30px !important;
+          margin-right: 10px !important;
+          overflow: hidden !important; }
+
+/* Message section styling end */
+/* --------------------------- */
+/* --------------------------------- */
+/* Attach form content styling start */
+.attach-content {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem; }
+  .attach-content .attach-content-wrapper {
+    padding: 1.25rem;
+    background: #f0f0f0; }
+    .attach-content .attach-content-wrapper input {
+      display: block;
+      float: left;
+      margin: 5px 10px 0 0; }
+
+/* Attach form content styling end */
+/* ------------------------------- */
+/* ------------------------------- */
+/* Decisions section styling start */
+.decisions {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem; }
+  .decisions .decision-wrapper {
+    padding: 1.25rem;
+    background: #f0f0f0; }
+    .decisions .decision-wrapper .decision {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      background: #fff;
+      border-radius: 5px; }
+  .decisions .new-decision {
+    width: 100%;
+    height: 50px;
+    text-align: center; }
+
+/* Decisions section styling end */
+/* ----------------------------- */
+/* ------------------------------------ */
+/* Forms dropdown section styling start */
+.form {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem; }
+
+/* DForms dropdown section styling end */
+/* ----------------------------------- */
+/* -------------------------------- */
+/* Continue condition styling start */
+.continue {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem; }
+
+/* Continue condition styling end */
+/* ------------------------------ */
+/* -------------------------------- */
+/* Conditions section styling start */
+.conditions {
+  width: 100%;
+  height: auto;
+  padding: 10px 1.25rem; }
+  .conditions .condition-wrapper {
+    border: 1px solid #ced4da;
+    height: auto;
+    overflow: hidden;
+    border-radius: 5px 5px 0 0;
+    border-bottom: none; }
+    .conditions .condition-wrapper .condition-header {
+      width: 100%;
+      height: 40px;
+      line-height: 40px;
+      overflow: hidden;
+      border-bottom: 1px solid #ced4da;
+      background: #f7f7f7; }
+      .conditions .condition-wrapper .condition-header .field {
+        height: 40px;
+        line-height: 40px;
+        border-right: 1px solid #ced4da;
+        float: left;
+        font-weight: bold;
+        padding: 0 10px; }
+        .conditions .condition-wrapper .condition-header .field.input, .conditions .condition-wrapper .condition-header .field.value {
+          width: calc(40% - 40px); }
+        .conditions .condition-wrapper .condition-header .field.equation {
+          width: 20%; }
+    .conditions .condition-wrapper .condition {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      border-bottom: 1px solid #ced4da; }
+      .conditions .condition-wrapper .condition ng-select, .conditions .condition-wrapper .condition .input {
+        float: left;
+        width: calc(40% - 40px);
+        height: 40px;
+        border-radius: 0;
+        border-top: none;
+        border-left: none;
+        border-bottom: none;
+        border-right: 1px solid #ced4da; }
+      .conditions .condition-wrapper .condition select option {
+        height: 40px; }
+        .conditions .condition-wrapper .condition select option.option-title {
+          font-weight: bold; }
+        .conditions .condition-wrapper .condition select option.none {
+          font-style: italic; }
+      .conditions .condition-wrapper .condition select, .conditions .condition-wrapper .condition input {
+        float: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 40px;
+        border-radius: 0;
+        border-top: none;
+        border-left: none;
+        border-bottom: none;
+        border-right: 1px solid #ced4da; }
+        .conditions .condition-wrapper .condition select.operator, .conditions .condition-wrapper .condition input.operator {
+          width: 20%; }
+        .conditions .condition-wrapper .condition select.decisions, .conditions .condition-wrapper .condition input.decisions {
+          width: calc(40% - 40px); }
+      .conditions .condition-wrapper .condition input {
+        width: calc(40% - 40px); }
+      .conditions .condition-wrapper .condition button {
+        background: #fff !important;
+        border: none;
+        width: 40px;
+        height: 40px;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+        float: left;
+        transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out; }
+        .conditions .condition-wrapper .condition button.input-style {
+          color: #2390a8;
+          border-right: 1px solid #ced4da !important; }
+        .conditions .condition-wrapper .condition button.delete {
+          color: #f55753; }
+          .conditions .condition-wrapper .condition button.delete.disabled {
+            opacity: 0.2; }
+        .conditions .condition-wrapper .condition button:hover {
+          opacity: 0.7; }
+  .conditions .new-condition {
+    width: 100%;
+    background: #fff;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #ced4da;
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+    color: #2390a8;
+    transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out; }
+    .conditions .new-condition:hover {
+      background: #f7f7f7; }
+
+/* Conditions section styling end */
+/* ------------------------------ */
+/* ------------------------ */
+/* Date input styling start */
+.date-input .input-db {
+  width: calc(100% - 80px);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  float: left; }
+.date-input .btn-dp {
+  background: #fff !important;
+  color: #626262;
+  width: 40px;
+  border-radius: 0;
+  border: 1px solid #ced4da !important;
+  float: left;
+  height: 33px;
+  border-left: none !important; }
+  .date-input .btn-dp.calendar {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; }
+  .date-input .btn-dp:hover {
+    background: #f1f1f1 !important; }
+
+/* Date input styling end */
+/* ---------------------- */
+
+/*# sourceMappingURL=sequenceflow.component.css.map */

@@ -3,6 +3,10 @@ import { ProcessService } from '../../services/process.service';
 import { DeployService } from '../../services/deploy.service';
 import { DeleteService } from '../../services/delete.service';
 import { FlowLoadService } from '../../services/flowload.service';
+import { EMPTY_XML } from '../../../global';
+import { AlertService } from '../../../components/services/alert.service';
+import { Alert } from '../../../components/alert/alert';
+import { FormsService } from '../../../forms/services/forms.service';
 
 declare var require;
 const Viewer = require('bpmn-js/lib/Viewer');
@@ -15,16 +19,20 @@ const Viewer = require('bpmn-js/lib/Viewer');
 export class ProcessesOverviewComponent implements OnInit, OnDestroy {
 
   /**
-    * processes   :   received processes
+    * loading     :   indicates whether the processes are loading
+    * processes   :   associative array of all processes
+    * keys        :   ids of all processes
     * process     :   empty array for new process
-    * deployment  :   an object which holds all process deployment statusses
+    * deploying   :   holds the id of the process that is currently deploying/undeploying
     * subs        :   component subscriptions
     * */
 
+  protected loading = true;
   protected processes = [];
+  protected keys = [];
   protected process = [];
   protected viewer: any;
-  protected deployment: any;
+  protected deploying = 0;
   private subs = [];
 
   /**
@@ -35,7 +43,9 @@ export class ProcessesOverviewComponent implements OnInit, OnDestroy {
       private flowLoader: FlowLoadService,
       private processService: ProcessService,
       private deployService: DeployService,
-      private deleteService: DeleteService
+      private deleteService: DeleteService,
+      private alert: AlertService,
+      private formsService: FormsService
   ) { }
 
   /**
@@ -43,47 +53,41 @@ export class ProcessesOverviewComponent implements OnInit, OnDestroy {
    *
    * */
   ngOnInit() {
+    this.formsService.getForms();
     this.viewer = new Viewer({container: '#canvas'});
-    const deploymentObject = {};
     this.subs.push(
-      this.processService.processes.subscribe((processes) => {
-          this.processes = processes;
-          /** Create an array with all deployment statusses */
-          for (const process of processes) {
-              deploymentObject[process['id']] = process['deploy'];
-          }
-      })
+      this.processService.processes.subscribe(processes => {
+        this.processes = processes;
+        this.keys = Object.keys(processes);
+      }),
+      this.processService.loadingProcesses.subscribe(value => this.loading = value),
+      this.deployService.deploying.subscribe(deploying => this.deploying = deploying)
     );
     this.processService.getProcesses();
-    this.deployService.deployment.next(deploymentObject);
-    this.subs.push(this.deployService.deployment.subscribe(deployment => this.deployment = deployment));
   }
 
   /**
    * Pass data to modal for deployment confirmation
    *
+   * @param event - the click event on the toggle button
    * @param state - current deployment state
    * @param id - process id
    * @param name - process name
+   * @param link - the linked caller (form) of the process
    * */
-  deployModal(state, id, name) {
-    if (state === 'false') {
+  deployModal(event: any, state: string, id: number, name: string) {
+      let action = 'deploy';
+      if (state === 'true') {
+        action = 'undeploy';
+      }
+
       this.deployService.deployModelContent.next({
         'id': id,
         'name': name,
-        'type': 'deploy',
-        'title': 'Deploy',
-        'text': 'Are you sure you want to deploy \'' + name + '\'?'
+        'type': action,
+        'title': action,
+        'text': 'Are you sure you want to ' + action + ' \'' + name + '\'?'
       });
-    } else {
-      this.deployService.deployModelContent.next({
-        'id': id,
-        'name': name,
-        'type': 'undeploy',
-        'title': 'Undeploy',
-        'text': 'Are you sure you want to undeploy \'' + name + '\'?'
-      });
-    }
   }
 
   /**
@@ -92,7 +96,7 @@ export class ProcessesOverviewComponent implements OnInit, OnDestroy {
    * @param id - process id
    * @param name - process name
    * */
-  deleteProcess(id, name) {
+  deleteProcess(id: number, name: string) {
     this.deleteService.content.next({
         'id': id,
         'name': name
@@ -105,12 +109,16 @@ export class ProcessesOverviewComponent implements OnInit, OnDestroy {
    * @param id - process id
    * */
   loadPreview(id) {
+    this.viewer.importXML(EMPTY_XML);
+    this.flowLoader.previewLoaded.next(false);
+    this.flowLoader.loadingPreview.next(true);
     this.flowLoader.load(id).subscribe(process => {
       this.viewer.importXML(process[0]['process_xml'], err => {
         if (err) {
           console.log(err);
         } else {
           this.flowLoader.previewLoaded.next(true);
+          this.flowLoader.loadingPreview.next(false);
           this.viewer.get('canvas').zoom('fit-viewport');
         }
       });

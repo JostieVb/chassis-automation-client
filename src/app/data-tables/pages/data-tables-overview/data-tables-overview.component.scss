@@ -11,6 +11,7 @@
 }
 
 .ch-table {
+  position: relative;
   .ch-row {
     &.selected {
       background: #f2f2f2;
@@ -30,6 +31,15 @@
         top: 5px;
       }
     }
+  }
+  .placeholder {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    line-height: calc(100vh - 150px);
   }
 }
 

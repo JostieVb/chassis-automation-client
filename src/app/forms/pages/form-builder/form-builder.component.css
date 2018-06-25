@@ -1,138 +1,235 @@
+@keyframes dragging-new-item {
+  0% {
+    background: rgba(35, 144, 168, 0.1); }
+  50% {
+    background: rgba(35, 144, 168, 0); }
+  100% {
+    background: rgba(35, 144, 168, 0.1); } }
 .card {
   height: calc(100vh - 116px);
   overflow: auto; }
-  .card .card-body h5 {
-    margin: 0 !important;
-    padding: 0 0 15px 0 !important;
-    border-bottom: 1px solid #e6e6e6; }
-    .card .card-body h5 .control-buttons {
+  .card .card-body {
+    position: relative; }
+    .card .card-body .placeholder {
       position: absolute;
-      right: 1.25rem;
-      top: 10px; }
-  .card .card-body hr {
-    width: 100%;
-    margin: 20px 0; }
-  .card .card-body .no-preview {
-    width: 100%;
-    text-align: center;
-    opacity: 0.7;
-    margin: 20px 0 0 0; }
-  .card .card-body .toggle-new-field {
-    margin: 20px 0 0 0;
-    width: 100%;
-    height: auto;
-    text-align: center;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    -ms-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -webkit-transition: all 0.2s ease-in-out; }
-    .card .card-body .toggle-new-field:hover {
-      opacity: 1; }
-    .card .card-body .toggle-new-field .plus-icon {
-      width: 30px;
-      height: 30px;
-      line-height: 30px;
-      text-align: center;
-      display: inline-block;
-      background: #626262;
-      color: #fff;
-      -webkit-border-radius: 5px;
-      -moz-border-radius: 5px;
-      border-radius: 5px; }
-    .card .card-body .toggle-new-field span {
+      left: 0;
+      right: 0;
+      height: 40px;
+      line-height: 40px;
+      top: 50%;
+      margin-top: -20px;
+      text-align: center; }
+    .card .card-body h5 {
+      margin: 0 !important;
+      padding: 0 0 15px 0 !important;
+      border-bottom: 1px solid #e6e6e6; }
+      .card .card-body h5 .control-buttons {
+        position: absolute;
+        right: 1.25rem;
+        top: 10px; }
+      .card .card-body h5.margin {
+        margin: 0 1.25rem 0 1.25rem !important; }
+    .card .card-body hr {
       width: 100%;
-      display: inline-block; }
-  .card .card-body .form-structure {
-    background: #f0f0f0;
-    height: auto;
-    border-radius: 5px;
-    box-sizing: border-box; }
-    .card .card-body .form-structure p {
-      font-style: italic;
-      padding: 0 1.25rem; }
-    .card .card-body .form-structure .form-group {
-      padding: 10px 1.25rem 20px 1.25rem;
-      overflow: hidden;
-      position: relative;
-      margin: 0;
-      transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      -ms-transition: all 0.2s ease-in-out;
-      -moz-transition: all 0.2s ease-in-out;
-      -webkit-transition: all 0.2s ease-in-out; }
-      .card .card-body .form-structure .form-group .form-control {
+      margin: 20px 0; }
+    .card .card-body .form-structure {
+      height: auto;
+      border-radius: 5px;
+      box-sizing: border-box; }
+      .card .card-body .form-structure:hover .form-group .drag-handle {
+        opacity: 1; }
+      .card .card-body .form-structure:hover .form-group .input-field-example {
+        width: calc(100% - 40px); }
+      .card .card-body .form-structure .form-group {
+        padding: 0 1.25rem 0 1.25rem;
+        overflow: hidden;
         position: relative;
-        background: #fff !important; }
-        .card .card-body .form-structure .form-group .form-control .placeholder {
-          color: #d3d3d3; }
-        .card .card-body .form-structure .form-group .form-control.textarea {
-          height: 100px; }
-      .card .card-body .form-structure .form-group .label {
-        height: 25px; }
-        .card .card-body .form-structure .form-group .label .required {
-          position: absolute;
-          right: 1.25rem;
-          color: #bebebe; }
-      .card .card-body .form-structure .form-group .delete-overlay {
-        background: rgba(103, 15, 15, 0.2);
-        text-align: center;
-        line-height: 100%;
-        color: #fff;
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        z-index: 1;
-        display: none;
-        justify-content: center;
-        align-content: center;
-        flex-direction: column; }
-        .card .card-body .form-structure .form-group .delete-overlay.show {
-          display: flex; }
-      .card .card-body .form-structure .form-group .form-item {
-        width: 30px;
-        height: 30px;
-        color: #fff;
-        position: absolute;
-        z-index: 2;
-        text-align: center;
-        line-height: 30px;
-        top: -30px;
-        border-bottom-left-radius: 3px;
-        border-bottom-right-radius: 3px;
-        cursor: pointer;
+        margin: 0;
         transition: all 0.2s ease-in-out;
         -o-transition: all 0.2s ease-in-out;
         -ms-transition: all 0.2s ease-in-out;
         -moz-transition: all 0.2s ease-in-out;
         -webkit-transition: all 0.2s ease-in-out; }
-        .card .card-body .form-structure .form-group .form-item.delete {
-          background: #f55753;
-          right: 90px; }
-          .card .card-body .form-structure .form-group .form-item.delete:hover {
-            background: #c54d4a; }
-        .card .card-body .form-structure .form-group .form-item.edit {
-          background: #2390A8;
-          right: 130px; }
-          .card .card-body .form-structure .form-group .form-item.edit:hover {
-            background: #24788a; }
-      .card .card-body .form-structure .form-group:hover {
-        background: #eaeaea; }
-      .card .card-body .form-structure .form-group:hover > .delete {
-        top: 0; }
-      .card .card-body .form-structure .form-group:hover > .edit {
-        top: 0; }
-  .card .card-body .new-field {
-    display: none;
-    margin: 20px 0 0 0; }
-    .card .card-body .new-field.show {
-      display: block; }
+        .card .card-body .form-structure .form-group:hover {
+          background: #f0f0f0; }
+          .card .card-body .form-structure .form-group:hover .drag-handle span {
+            background: #b8b8b8; }
+        .card .card-body .form-structure .form-group .drop-overlay {
+          height: 40px;
+          background: #f0f0f0;
+          z-index: 1;
+          display: none;
+          -moz-box-shadow: inset 0 0 10px #a6a6a6;
+          -webkit-box-shadow: inset 0 0 10px #a6a6a6;
+          box-shadow: inset 0 0 10px #a6a6a6;
+          transition: all 0.2s ease-in-out;
+          -o-transition: all 0.2s ease-in-out;
+          -ms-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+          -webkit-transition: all 0.2s ease-in-out; }
+        .card .card-body .form-structure .form-group.drop-hover .drop-overlay {
+          display: block; }
+        .card .card-body .form-structure .form-group .drag-handle {
+          position: absolute;
+          left: 25px;
+          top: calc(50% - 15px);
+          width: 20px;
+          height: 30px;
+          opacity: 0;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+          -o-transition: all 0.2s ease-in-out;
+          -ms-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+          -webkit-transition: all 0.2s ease-in-out; }
+          .card .card-body .form-structure .form-group .drag-handle:hover span {
+            background: #353535; }
+          .card .card-body .form-structure .form-group .drag-handle span {
+            width: 100%;
+            height: 3px;
+            background: #fff;
+            margin-top: 5px;
+            display: inline-block;
+            float: left;
+            border-radius: 5px;
+            transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -webkit-transition: all 0.2s ease-in-out; }
+        .card .card-body .form-structure .form-group .input-field-example {
+          position: relative;
+          overflow: hidden;
+          height: auto;
+          width: 100%;
+          float: right;
+          padding: 10px 0;
+          transition: all 0.2s ease-in-out;
+          -o-transition: all 0.2s ease-in-out;
+          -ms-transition: all 0.2s ease-in-out;
+          -moz-transition: all 0.2s ease-in-out;
+          -webkit-transition: all 0.2s ease-in-out; }
+          .card .card-body .form-structure .form-group .input-field-example .form-control {
+            position: relative;
+            background: #fff !important; }
+            .card .card-body .form-structure .form-group .input-field-example .form-control.textarea {
+              height: 100px; }
+          .card .card-body .form-structure .form-group .input-field-example h5 {
+            height: 40px;
+            line-height: 40px;
+            border-bottom: none !important;
+            padding: 0 !important; }
+          .card .card-body .form-structure .form-group .input-field-example p {
+            margin: 0;
+            height: 40px;
+            line-height: 40px; }
+          .card .card-body .form-structure .form-group .input-field-example .label {
+            height: 25px; }
+            .card .card-body .form-structure .form-group .input-field-example .label .required {
+              position: absolute;
+              right: 1.25rem;
+              color: #bebebe; }
+          .card .card-body .form-structure .form-group .input-field-example .form-item {
+            width: 30px;
+            height: 30px;
+            color: #fff;
+            position: absolute;
+            z-index: 2;
+            text-align: center;
+            line-height: 30px;
+            top: -30px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            -ms-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -webkit-transition: all 0.2s ease-in-out; }
+            .card .card-body .form-structure .form-group .input-field-example .form-item.delete {
+              background: #f55753;
+              right: calc(50% - 35px); }
+              .card .card-body .form-structure .form-group .input-field-example .form-item.delete:hover {
+                background: #c54d4a; }
+            .card .card-body .form-structure .form-group .input-field-example .form-item.edit {
+              background: #2390a8;
+              right: calc(50% + 5px); }
+              .card .card-body .form-structure .form-group .input-field-example .form-item.edit:hover {
+                background: #24788a; }
+          .card .card-body .form-structure .form-group .input-field-example:hover > .delete {
+            top: calc(50% - 15px); }
+          .card .card-body .form-structure .form-group .input-field-example:hover > .edit {
+            top: calc(50% - 15px); }
+        .card .card-body .form-structure .form-group:hover {
+          background: #fafafa; }
+    .card .card-body #drop-field {
+      width: calc(100% - 2.5rem);
+      height: 100px;
+      text-align: center;
+      line-height: 100px;
+      font-size: 20px;
+      font-weight: bold;
+      border: 2px dotted #c5c5c5;
+      margin: 30px 1.25rem;
+      transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out; }
+      .card .card-body #drop-field.hover {
+        color: #2390a8;
+        border: 2px dotted #2390a8;
+        animation-play-state: paused; }
+      .card .card-body #drop-field.dragging {
+        animation-name: dragging-new-item;
+        animation-duration: 1s;
+        animation-iteration-count: infinite; }
+    .card .card-body .new-fields-container {
+      margin-top: 30px;
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      background: #fff;
+      padding: 20px 20px 10px 20px;
+      position: relative; }
+      .card .card-body .new-fields-container .disabled-overlay {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        background: rgba(0, 0, 0, 0.4); }
+      .card .card-body .new-fields-container .new-field {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        border: 1px solid #e6e6e6;
+        background: #fafafa;
+        cursor: pointer;
+        margin-bottom: 10px;
+        transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out; }
+        .card .card-body .new-fields-container .new-field:hover {
+          background: #e6e6e6; }
+        .card .card-body .new-fields-container .new-field span {
+          float: left;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis; }
+          .card .card-body .new-fields-container .new-field span.field-type {
+            width: 100px;
+            padding: 0 10px 0 20px; }
+          .card .card-body .new-fields-container .new-field span.field-description {
+            width: calc(100% - 150px);
+            color: #cacaca; }
+          .card .card-body .new-fields-container .new-field span.field-icon {
+            width: 50px;
+            padding: 0 20px 0 10px;
+            text-align: right; }
 
 ng-scrollbar {
-  padding-bottom: 30px; }
+  padding-bottom: 20px; }
 
-/*# sourceMappingURL=forms-add.component.css.map */
+/*# sourceMappingURL=form-builder.component.css.map */

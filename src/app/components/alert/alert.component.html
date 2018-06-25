@@ -1,9 +1,11 @@
 <div id="alert-box" [ngClass]="{'show': showAlertBox}">
   <div *ngFor="let key of keys" id="{{key}}" [ngClass]="{'not-dismissable': alerts[key].dismissable === false}" class="alert {{alerts[key].type}}">
     <p>
-      <b *ngIf="alerts[key].prefix !== '' && alerts[key].prefix !== undefined">{{alerts[key].prefix}} </b>
+      <b *ngIf="alerts[key].prefix['content'] !== '' && alerts[key].prefix !== undefined" [innerHTML]="alerts[key].prefix['content']"></b>
       {{alerts[key].message}}
     </p>
     <span class="close" (click)="hideAlert(key)">&times;</span>
+
+    <div *ngIf="alerts[key].showDurationIndicator" class="duration-indicator" id="indicator-{{key}}"></div>
   </div>
 </div>

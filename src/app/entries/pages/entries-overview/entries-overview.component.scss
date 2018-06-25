@@ -35,98 +35,103 @@ $row-height: 20px;
   }
   .card-body {
     position: relative;
-    .entry {
+    .entries-wrapper {
       width: 100%;
-      height: auto;
-      overflow: hidden;
-      padding: 10px 20px;
-      box-sizing: border-box;
-      border-bottom: 1px solid $light-border;
-      cursor: pointer;
-      position: relative;
-      &.selected {
-        background: $lighter-bg;
-      }
-      &:hover {
-        background: $lighter-bg;
+      height: calc(100vh - 180px);
+      .entry {
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+        padding: 10px 20px;
+        box-sizing: border-box;
+        border-bottom: 1px solid $light-border;
+        cursor: pointer;
+        position: relative;
         &.selected {
-          cursor: default;
+          background: $lighter-bg;
         }
-      }
-      &.unread {
-        font-weight: 500;
-        &:after {
-          display: block;
-          content: "New";
-          position: absolute;
-          width: auto;
-          height: 20px;
-          line-height: 20px;
-          color: #fff;
-          padding: 0 5px;
-          float: right;
-          font-size: 75%;
-          font-weight: bold;
-          @include border-radius(5px);
-          background: $color-warning;
-          right: 20px;
-          top: 40px;
+        &:hover {
+          background: $lighter-bg;
+          &.selected {
+            cursor: default;
+          }
+        }
+        &.unread {
+          font-weight: 500;
+          &:after {
+            display: block;
+            content: "New";
+            position: absolute;
+            width: auto;
+            height: 20px;
+            line-height: 20px;
+            color: #fff;
+            padding: 0 5px;
+            float: right;
+            font-size: 75%;
+            font-weight: bold;
+            @include border-radius(5px);
+            background: $color-warning;
+            right: 20px;
+            top: 40px;
+          }
+          h6 {
+            font-weight: 500;
+          }
         }
         h6 {
-          font-weight: 500;
-        }
-      }
-      h6 {
-        font-weight: 400;
-        position: relative;
-        min-height: $row-height;
-        line-height: $row-height;
-        @include text-overflow;
-        .badge {
-          width: auto;
-          height: 20px;
-          line-height: 20px;
-          color: $default-text-color;
-          padding: 0 5px;
-          float: right;
-          @include border-radius(5px);
-          background: $color-secondary;
-          margin: 0 0 0 10px;
-          &.completed {
-            background: $color-success;
-            color: #fff;
-          }
-          &.rejected {
-            background: $color-danger;
-            color: #fff;
+          font-weight: 400;
+          position: relative;
+          min-height: $row-height;
+          line-height: $row-height;
+          @include text-overflow;
+          .badge {
+            width: auto;
+            height: 20px;
+            line-height: 20px;
+            color: $default-text-color;
+            padding: 0 5px;
+            float: right;
+            position: absolute;
+            right: 0;
+            background: $color-secondary;
+            @include border-radius(5px);
+            &.completed {
+              background: $color-success;
+              color: #fff;
+            }
+            &.rejected {
+              background: $color-danger;
+              color: #fff;
+            }
           }
         }
+        .meta-data {
+          display: block;
+          color: $color-secondary;
+          height: $row-height;
+          line-height: $row-height;
+          @include text-overflow;
+        }
+        p {
+          font-style: italic;
+          height: $row-height;
+          line-height: $row-height;
+          margin: 0;
+          @include text-overflow;
+        }
       }
-      .meta-data {
-        display: block;
-        color: $color-secondary;
-        height: $row-height;
-        line-height: $row-height;
-        @include text-overflow;
+      .placeholder {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 50px;
+        line-height: 50px;
+        box-sizing: border-box;
+        margin: -25px 40px 0 40px;
+        text-align: center;
+        top: 50%;
       }
-      p {
-        font-style: italic;
-        height: $row-height;
-        line-height: $row-height;
-        margin: 0;
-        @include text-overflow;
-      }
-    }
-    #no-entries {
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 50px;
-      line-height: 50px;
-      box-sizing: border-box;
-      margin: -25px 40px 0 40px;
-      text-align: center;
-      top: 50%;
     }
   }
 }

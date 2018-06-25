@@ -21,13 +21,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
       {link: true, title: 'Dashboard', path: '/dashboard', permissions: 'dashboard', icon: 'fa fa-columns', children: []},
       {link: true, title: 'Processes', path: '/processes', permissions: 'processes', icon: 'fa fa-cogs', children: []},
       {link: true, title: 'Products', path: '/products', permissions: 'products', icon: 'fa fa-shopping-basket', children: []},
-      {link: true, title: 'Entries', path: '/entries', permissions: 'entries', icon: 'fa fa-inbox', children: []},
-      {link: true, title: 'Forms', path: '/forms', permissions: 'forms', icon: 'fa fa-list', children: []},
-      {link: true, title: 'Data tables', path: '/data-tables', permissions: 'data-tables', icon: 'fa fa-database', children: []},
+      {link: true, title: 'Inbox', path: '/inbox', permissions: 'entries', icon: 'fa fa-inbox', children: []},
+      {link: true, title: 'Form builder', path: '/forms', permissions: 'forms', icon: 'fa fa-list', children: []}
     ];
     protected navItems = [];
     protected unreadEntries = 0;
     protected toggle = false;
+    protected loadingSidebarItems = true;
     private subs = [];
 
   constructor(
@@ -41,6 +41,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
    *
    * */
   ngOnInit() {
+    this.loadingSidebarItems = true;
     this.subs.push(
         this.auth.getAuthUser().subscribe(user => {
             this.fillables.forEach(navItem => {
@@ -50,6 +51,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
                   }
               }
             });
+            this.loadingSidebarItems = false;
         }),
         this.sidebar.toggle.subscribe(toggle => this.toggle = toggle)
     );

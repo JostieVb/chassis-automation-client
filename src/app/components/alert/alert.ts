@@ -5,6 +5,7 @@ export class Alert {
         public prefix?: string,
         public clearAlertBox?: boolean,
         public dismissable?: boolean,
+        public showDurationIndicator?: boolean,
         public interval?: number
     ) {}
 }

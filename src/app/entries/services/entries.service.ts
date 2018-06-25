@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { API_BASE } from '../../global';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { UserService } from '../../auth/user.service';
-import { Entry } from '../models/entry';
 import { EntryResponse } from '../models/entry-response';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class EntriesService {
@@ -13,6 +13,7 @@ export class EntriesService {
      * entries          :   all entries
      * entry            :   selected entry
      * loading          :   whether an entry is loading
+     * loadingEntries   :   whether entries are loading
      * selectedEntryId  :   the id of the selected entry
      * heightAuto       :   whether the entry table should be collapsed
      * unreadEntries    :   the amount of unread entries
@@ -21,6 +22,7 @@ export class EntriesService {
     public entries: BehaviorSubject<any> = new BehaviorSubject<any>('');
     public entry: BehaviorSubject<any> = new BehaviorSubject<any>([]);
     public loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public loadingEntries: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
     public selectedEntryId: BehaviorSubject<number> = new BehaviorSubject<number>(null);
     public heightAuto: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     public unreadEntries: BehaviorSubject<any> = new BehaviorSubject(0);
@@ -38,14 +40,21 @@ export class EntriesService {
      * @param   filter - optional filters
      * */
     public getEntries(filter?: string) {
+      this.loadingEntries.next(true);
       if (filter) {
         this.http.get(API_BASE + 'entries/filter/' + filter, {
             headers: this.auth.authHeaders()
-        }).subscribe(entries => this.entries.next(entries));
+        }).subscribe(entries => {
+            this.entries.next(entries);
+            this.loadingEntries.next(false);
+        });
       } else {
         this.http.get(API_BASE + 'entries', {
             headers: this.auth.authHeaders()
-        }).subscribe(entries => this.entries.next(entries));
+        }).subscribe(entries => {
+            this.entries.next(entries);
+            this.loadingEntries.next(false);
+        });
       }
     }
 
@@ -60,23 +69,13 @@ export class EntriesService {
         this.http.get(API_BASE + 'entries/' + id, {
             headers: this.auth.authHeaders()
         }).subscribe(entry => {
-            const formattedEntry = new Entry();
-            formattedEntry.id = entry['id'];
-            formattedEntry.responseMessage = entry['response_message'];
-            formattedEntry.dbTable = entry['db_table'];
-            formattedEntry.contentId = entry['content_id'];
-            formattedEntry.title = entry['title'];
-            formattedEntry.date = entry['date'];
-            formattedEntry.label = entry['label'];
-            formattedEntry.caller = entry['caller'];
-            formattedEntry.status = entry['status'];
-            formattedEntry.sender = entry['sender'];
-            formattedEntry.task = entry['task_id'];
-            formattedEntry.message = entry['message'];
-            formattedEntry.decisions = entry['decisions'];
-            formattedEntry.content = entry['content'];
             this.selectedEntryId.next(entry['id']);
-            this.entry.next(formattedEntry);
+            if ('due' in entry) {
+                const due: any = new Date(entry['due']);
+                entry['due'] = due;
+            }
+            this.entry.next(entry);
+            console.log(entry);
             this.loading.next(false);
             for (const entr of this.entries.getValue()) {
                 if (entr['id'] === id && entr['unread'] === 'true') {
@@ -116,5 +115,18 @@ export class EntriesService {
             }
             this.entries.next(entries);
         });
+    }
+
+    /**
+     * Load the attachment of type form contents
+     *
+     * @param       id - id of the content
+     * @param       form - name of the linked form
+     * */
+    public loadAttachedFormContents(id: any, form: string): Observable<any> {
+      return this.http.get(
+      API_BASE + 'entries/attachment/form-contents/' + id + '/' + form,
+      {headers: this.auth.authHeaders()}
+      );
     }
 }

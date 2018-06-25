@@ -11,13 +11,15 @@ export class EntriesOverviewComponent implements OnInit, OnDestroy {
    * entries            :   an array that holds all entries
    * selectedEntryId    :   the id of the selected entry
    * selectedEntry      :   an array that holds the selected entry's data
-   * filter             :   the
+   * filter             :   the filters that should be applied while fetching the entries
+   * loadingEntries     :   indicates whether the entries are loading
    * subs               :   component subscriptions
    * */
   protected entries = [];
   protected selectedEntryId: number;
   protected selectedEntry = [];
   protected filter = 'all';
+  protected loadingEntries = true;
   private subs = [];
 
   constructor(
@@ -34,7 +36,8 @@ export class EntriesOverviewComponent implements OnInit, OnDestroy {
     this.subs.push(
       this.entriesService.entries.subscribe(entries => this.entries = entries),
       this.entriesService.entry.subscribe(entry => this.selectedEntry = entry),
-        this.entriesService.selectedEntryId.subscribe( selectedEntryId => this.selectedEntryId = selectedEntryId)
+      this.entriesService.selectedEntryId.subscribe( selectedEntryId => this.selectedEntryId = selectedEntryId),
+      this.entriesService.loadingEntries.subscribe(value => this.loadingEntries = value)
     );
   }
 

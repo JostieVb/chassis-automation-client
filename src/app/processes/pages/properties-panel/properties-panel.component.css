@@ -1,0 +1,200 @@
+#properties-panel {
+  position: fixed;
+  top: -100vh;
+  bottom: 0;
+  height: auto;
+  overflow: hidden;
+  width: 1000px;
+  left: calc(50% - 500px);
+  z-index: 99;
+  border-radius: 5px;
+  box-sizing: border-box;
+  max-height: calc(100vh - 200px);
+  transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  background: #fff;
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12); }
+  #properties-panel.show {
+    top: 100px; }
+  #properties-panel .modal-header {
+    margin: 0;
+    height: 40px;
+    line-height: 40px;
+    background: #2b303b;
+    padding: 0 1.25rem;
+    color: #fff;
+    border-bottom: 0 !important; }
+    #properties-panel .modal-header span {
+      position: absolute;
+      right: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -webkit-transition: all 0.2s ease-in-out;
+      opacity: 0.7; }
+      #properties-panel .modal-header span:hover {
+        opacity: 1; }
+  #properties-panel .modal-body {
+    height: calc(100% - 40px);
+    overflow: hidden;
+    padding: 0; }
+  #properties-panel .prop-group {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e6e6e6;
+    height: auto;
+    position: relative; }
+    #properties-panel .prop-group:first-child {
+      border-top: 1px solid #e6e6e6; }
+    #properties-panel .prop-group:last-child {
+      border-bottom: none; }
+    #properties-panel .prop-group label {
+      width: 100%;
+      color: #aeaeae;
+      height: 20px;
+      line-height: 20px;
+      margin: 0 0 5px 0; }
+      #properties-panel .prop-group label:first-letter {
+        text-transform: uppercase; }
+      #properties-panel .prop-group label .help {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        width: 15px;
+        height: 15px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        cursor: default;
+        border-radius: 20px;
+        color: #fff;
+        line-height: 15px;
+        text-align: center;
+        font-weight: bold;
+        background: #d0d0d0;
+        font-style: normal;
+        transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out; }
+        #properties-panel .prop-group label .help:hover {
+          background: #484848; }
+        #properties-panel .prop-group label .help:hover > .help-message {
+          display: block; }
+        #properties-panel .prop-group label .help .help-message {
+          font-weight: 400;
+          z-index: 2;
+          right: -8px;
+          top: 25px;
+          font-style: italic;
+          text-align: left;
+          background: #fff;
+          position: absolute;
+          width: 275px;
+          height: auto;
+          padding: 10px;
+          color: #4f4f4f;
+          -webkit-border-radius: 5px;
+          -moz-border-radius: 5px;
+          border-radius: 5px;
+          border: 1px solid #e6e6e6;
+          display: none; }
+          #properties-panel .prop-group label .help .help-message .selector {
+            width: 20px;
+            height: 10px;
+            background-image: url("../../../../assets/img/selector.png");
+            background-size: 100%;
+            background-position: center bottom;
+            position: absolute;
+            top: -10px;
+            right: 5px; }
+    #properties-panel .prop-group .prop.height-auto {
+      height: auto;
+      overflow: hidden;
+      margin-bottom: 10px; }
+    #properties-panel .prop-group .prop:last-child {
+      margin: 0; }
+    #properties-panel .prop-group .prop .input-group {
+      margin-bottom: 10px; }
+      #properties-panel .prop-group .prop .input-group:last-child {
+        margin-bottom: 0; }
+      #properties-panel .prop-group .prop .input-group .condition {
+        width: 100%; }
+        #properties-panel .prop-group .prop .input-group .condition ng-select {
+          float: left;
+          width: 40%;
+          border-top-right-radius: 0 !important;
+          border-bottom-right-radius: 0 !important; }
+        #properties-panel .prop-group .prop .input-group .condition select {
+          float: left;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis; }
+          #properties-panel .prop-group .prop .input-group .condition select.operator {
+            width: 20%;
+            border-radius: 0 !important;
+            border-left: none !important;
+            border-right: none !important; }
+          #properties-panel .prop-group .prop .input-group .condition select.decisions {
+            width: 40%;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0; }
+
+.btn-dp {
+  height: 40px;
+  width: 40px;
+  background: #fff !important;
+  color: #626262;
+  float: left;
+  border-radius: 0 !important;
+  border: 1px solid #ced4da !important; }
+  .btn-dp.clear {
+    border-left: 0 !important;
+    border-right: 0 !important; }
+  .btn-dp.calendar {
+    border-top-right-radius: .25rem !important;
+    border-bottom-right-radius: .25rem !important; }
+  .btn-dp:hover {
+    background: #eee !important; }
+
+.input-db {
+  height: 40px !important;
+  float: left;
+  width: calc(100% - 84px);
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important; }
+
+/* Media Queries */
+@media only screen and (max-width: 1600px) {
+  #properties-panel {
+    width: 800px;
+    left: calc(50% - 400px); } }
+@media only screen and (max-height: 850px) {
+  #properties-panel {
+    max-height: calc(100vh - 50px); }
+    #properties-panel.show {
+      top: 25px; } }
+@media only screen and (max-width: 980px) {
+  #properties-panel {
+    width: calc(100% - 50px);
+    left: 25px; } }
+@media only screen and (max-width: 520px) {
+  #properties-panel {
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    max-height: 100vh;
+    width: 100%;
+    left: 0; }
+    #properties-panel.show {
+      top: 0; }
+    #properties-panel .modal-header {
+      border-radius: 0; } }
+
+/*# sourceMappingURL=properties-panel.component.css.map */

@@ -3,14 +3,21 @@
     <h5 class="card-title">Data tables<button class="btn btn-primary" data-toggle="modal" data-target="#newTableModal"><i class="fa fa-plus"></i></button></h5>
     <ng-scrollbar [autoHide]="true">
     <div class="ch-table ch-no-padding ch-col-max-h">
-      <div class="ch-row" *ngFor="let table of tables" [ngClass]="{'selected': selectedTable === table.name }">
-        <div class="ch-col ch-overflow-hidden ch-no-text-overflow">
-          <a class="link" (click)="editTable(table.name)" title="Edit {{table.name}}">{{table.name}}</a>
+      <ng-container *ngIf="tables.length === 0; else showTables">
+        <div *ngIf="!loadingTables" class="placeholder">No data tables</div>
+        <div *ngIf="loadingTables" class="placeholder"><i class="fa fa-circle-o-notch fa-spin"></i> Loading data tables...</div>
+      </ng-container>
+
+      <ng-template #showTables>
+        <div class="ch-row" *ngFor="let table of tables" [ngClass]="{'selected': selectedTable === table.name }">
+          <div class="ch-col ch-overflow-hidden ch-no-text-overflow">
+            <a class="link" (click)="editTable(table.name)" title="Edit {{table.name}}">{{table.name}}</a>
+          </div>
+          <div class="ch-col">
+            <button class="btn btn-danger" (click)="deleteTable(table.name)" data-toggle="modal" data-target="#deleteTableModal"><i class="fa fa-trash"></i></button>
+          </div>
         </div>
-        <div class="ch-col">
-          <button class="btn btn-danger" (click)="deleteTable(table.name)" data-toggle="modal" data-target="#deleteTableModal"><i class="fa fa-trash"></i></button>
-        </div>
-      </div>
+      </ng-template>
     </div>
     </ng-scrollbar>
   </div>

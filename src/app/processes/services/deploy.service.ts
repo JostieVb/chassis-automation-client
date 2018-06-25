@@ -9,10 +9,10 @@ export class DeployService {
 
   /**
    * deployModelContent       :   the content that should be displayed in the modal
-   * deployment               :   indicates if a process should be deployed or undeployed
+   * deploying                :   holds the id of the process that is currently deploying/undeploying
    * */
   public deployModelContent: BehaviorSubject<any> = new BehaviorSubject<any>({});
-  public deployment: BehaviorSubject<any> = new BehaviorSubject<any>({});
+  public deploying: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(
       private http: HttpClient,

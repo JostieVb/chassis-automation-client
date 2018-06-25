@@ -4,75 +4,92 @@
     <div class="card-body no-padding">
       <h5 class="card-title">
           {{entry.title}}
-          <button class="btn btn-secondary back-button" (click)="backResponsive()"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-          <div class="dropdown">
-              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fa fa-ellipsis-v"></i>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" (click)="deleteEntry(entry.id)">Delete entry</a>
-              </div>
-          </div>
+          <button class="btn btn-primary responsive-back-button" (click)="dismissEntry()">Back</button>
       </h5>
 
-      <div class="meta-data">
-        <p><span class="label">From:</span>{{entry.sender}}</p>
-        <p><span class="label">On:</span>{{entry.date}}</p>
-      </div>
+      <ng-scrollbar [autoHide]="true">
+      <div class="entry-wrapper" [ngClass]="{'attachment-open': selectedAttachment !== 0}">
+      <div class="entry">
+          <div class="meta-data">
+            <p><span class="label">From</span>{{entry.sender}}</p>
+            <p><span class="label">On</span>{{entry.date}}</p>
 
-      <div class="content">
-        <div class="message">
-            <p>{{entry.message}}</p>
-            <div class="ch-table ch-no-padding ch-table-striped" [ngClass]="{'height-auto': heightAuto}" *ngIf="entry.content">
-                <div class="ch-row ch-head">
-                    <div class="ch-col ch-text-overflow-ellipsis" *ngFor="let key of entry.content['keys']">{{key}}</div>
-                    <i class="expand fa" [ngClass]="{'fa-compress': heightAuto, 'fa-expand': !heightAuto}" (click)="toggleContent()"></i>
-                </div>
-                <div class="ch-row">
-                    <div class="ch-col ch-text-overflow-ellipsis" *ngFor="let value of entry.content['values']">{{value}}</div>
+            <div class="attachments" *ngIf="entry['attached-contents'].length > 0">
+                <div class="attachment" *ngFor="let attachment of entry['attached-contents']" [ngClass]="{'open': selectedAttachment === attachment['id']}" (click)="loadAttachment(attachment['id'], attachment['type'], entry['caller'])">
+                    <div class="icon"><i class="fa fa-paperclip"></i></div>
+                    <div class="label">{{attachment['title']}}</div>
+                    <div class="click-to-open">Click to open</div>
                 </div>
             </div>
-        </div>
+          </div>
 
-        <div class="action-container" *ngIf="entry.decisions.length > 0 && entry.status !== 'completed'">
-          <form *ngIf="entry.decisions">
-              <label for="message">Optional message:</label>
-              <textarea class="form-control textarea" id="message" [(ngModel)]="response.message" name="message" placeholder="Enter a optional message..."></textarea>
-              <div class="decisions">
-                  <h6>Decisions</h6>
-                  <table>
-                      <tr *ngFor="let decision of entry.decisions">
-                          <td>
-                              <input type="radio" [(ngModel)]="response.decision" id="{{decision}}" name="decision" value="{{decision}}">
-                          </td>
-                          <td>
-                              <label for="{{decision}}">{{decision}}</label>
-                          </td>
-                      </tr>
-                  </table>
-              </div>
-              <button class="btn btn-primary" (click)="sendResponse(entry.id, entry.caller, entry.task, entry.dbTable, entry.contentId)">Send</button>
-              <button class="btn btn-secondary" (click)="dismissEntry()">Cancel</button>
-          </form>
-        </div>
+          <div class="content">
+            <div class="message" [innerHTML]="entry.message">
+                <!-- Message will be loaded here -->
+            </div>
 
-        <div class="response-container" *ngIf="entry.responseMessage">
-            {{entry.responseMessage}}
-        </div>
-
-        <div class="response-container" *ngIf="entry.status === 'completed'">
-              You already completed this entry.
-        </div>
+            <div class="response-message-container" *ngIf="entry.response_message">
+                <div class="response-message-header">Response message from {{entry.sender}}</div>
+                <div class="response-message-content" [innerHTML]="entry.response_message">
+                    <!-- Response message will be loaded here -->
+                </div>
+            </div>
+          </div>
       </div>
+
+      <div class="response" *ngIf="entry.decisions.length > 0 && entry.status !== 'completed'" [ngClass]="{'show-action-bar': showReply}">
+        <h4 (click)="showReply = true" *ngIf="!showReply"><i class="fa fa-reply" aria-hidden="true"></i> Reply to this message</h4>
+        <ng-container *ngIf="showReply">
+            <h3>Reply to this message</h3>
+            <div class="response-message">
+              <quill-editor [modules]="quillModules" spellcheck="false" [(ngModel)]="response.message" class="response-message-quill" [placeholder]="'Enter response message...'"></quill-editor>
+            </div>
+            <div class="decisions">
+                <h6>Actions</h6>
+                <table>
+                    <tr *ngFor="let decision of entry.decisions">
+                        <td>
+                            <input type="radio" [(ngModel)]="response.decision" id="{{decision['value']}}" name="decision" value="{{decision['value']}}">
+                        </td>
+                        <td>
+                            <label for="{{decision['value']}}">{{decision['label']}}</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="response-action-bar">
+                <button class="btn btn-primary" (click)="sendResponse(entry.id, entry.caller, entry.task_id, entry.content_id)">Send</button>
+                <button class="btn btn-secondary" (click)="showReply = false">Cancel</button>
+            </div>
+        </ng-container>
+      </div>
+    </div>
+    </ng-scrollbar>
+
+    <div class="attachment-container" [ngClass]="{'open': selectedAttachment !== 0}">
+        <div class="close" (click)="dismissAttachment()"><i class="fa fa-times" aria-hidden="true"></i></div>
+        <div class="attachment-bg">
+            <ng-scrollbar [trackX]="true">
+            <table *ngIf="attachment.fields.length > 0">
+                <tr>
+                    <th *ngFor="let id of attachment.fields">{{attachment.keys[id]}}</th>
+                </tr>
+                <tr>
+                    <td *ngFor="let id of attachment.fields">{{attachment.values[id]}}</td>
+                </tr>
+            </table>
+            </ng-scrollbar>
+        </div>
+    </div>
     </div>
     </ng-container>
 
     <ng-template #loadingBlock>
       <div class="no-entry" *ngIf="loading">
-        <i class="fa fa-circle-o-notch fa-spin"></i> Loading entry
+        <i class="fa fa-circle-o-notch fa-spin"></i> Loading message
       </div>
         <div class="no-entry" *ngIf="selectedEntryId === null && !loading">
-            No entry selected
+            Nothing selected for display
         </div>
     </ng-template>
     </ng-scrollbar>

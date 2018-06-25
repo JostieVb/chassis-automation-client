@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { FormsService } from '../../services/forms.service';
 
 @Component({
@@ -6,12 +6,15 @@ import { FormsService } from '../../services/forms.service';
   templateUrl: './forms-overview.component.html',
   styleUrls: ['./forms-overview.component.scss']
 })
-export class FormsOverviewComponent implements OnInit {
+export class FormsOverviewComponent implements OnInit, OnDestroy {
 
   /**
-   * forms    :   an array that holds all forms
+   * forms        :   an array that holds all forms
+   * loadingForms :   indicates whether the forms are loading
    * */
   protected forms = [];
+  protected loadingForms = true;
+  private subs = [];
 
   constructor(
     private formsService: FormsService
@@ -22,26 +25,27 @@ export class FormsOverviewComponent implements OnInit {
    *
    * */
   ngOnInit() {
-    this.formsService.forms.subscribe(forms => this.forms = forms);
+    this.subs.push(
+      this.formsService.forms.subscribe(forms => this.forms = forms),
+      this.formsService.loadingForms.subscribe(value => this.loadingForms = value)
+    );
     this.formsService.getForms();
   }
 
   /**
-   * Open the 'new form' form
+   * Delete the form
+   *
+   * @param id - id of the form
+   * @param name - name of the form
+   * @param identifier - the identifier of the form
    * */
-  newForm() {
-    this.formsService.title.next('New form');
-    this.formsService.showForm.next(true);
+  deleteForm(id: number, name: string, identifier: string) {
+    this.formsService.deleteModalContent.next({id: id, name: name, identifier: identifier});
   }
 
-  /**
-   * Edit the selected form
-   *
-   * @param   id - id of the selected form
-   * */
-  editForm(id: number) {
-    this.formsService.loadForm(id);
-    this.formsService.title.next('Edit form');
+  ngOnDestroy() {
+    this.subs.forEach(sub => sub.unsubscribe());
+    this.formsService.forms.next([]);
   }
 
 }

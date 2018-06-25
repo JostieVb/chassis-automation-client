@@ -21,6 +21,7 @@
     background: #fff;
     color: $default-text-color;
     opacity: 0;
+    border: none !important;
     @include transition(.5s);
     &.show {
       opacity: 1;
@@ -48,24 +49,44 @@
       width: calc(100% - 20px);
       float: left;
       b {
-        text-transform: capitalize;
+        margin-right: 5px;
       }
     }
     &.danger {
       color: #933432;
       background: #fddddd;
+      .duration-indicator {
+        background: #933432;
+      }
     }
     &.success {
       color: #0a7c71;
       background: #cff5f2;
+      .duration-indicator {
+        background: #0a7c71;
+      }
     }
     &.info {
       color: #2b6a94;
       background: #daeffd;
+      .duration-indicator {
+        background: #2b6a94;
+      }
     }
     &.warning {
       color: #957d32;
       background: #fef6dd;
+      .duration-indicator {
+        background: #957d32;
+      }
+    }
+    .duration-indicator {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: $default-text-color;
     }
   }
 }

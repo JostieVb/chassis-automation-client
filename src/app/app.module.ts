@@ -9,8 +9,13 @@ import { Ng5BreadcrumbModule } from 'ng5-breadcrumb';
 import { ScrollbarModule } from 'ngx-scrollbar';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { UiSwitchModule } from 'ngx-toggle-switch';
-import { SelectModule } from 'ng-select';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgDragDropModule } from 'ng-drag-drop';
+import { QuillModule } from 'ngx-quill';
+import { ScrollEventModule } from 'ngx-scroll-event';
 
 /* Services */
 import { ProcessService } from './processes/services/process.service';
@@ -68,6 +73,14 @@ import { NewTableComponent } from './data-tables/modals/new-table/new-table.comp
 import { NewColumnComponent } from './data-tables/modals/new-column/new-column.component';
 import { DeleteDataTableComponent } from './data-tables/modals/delete-data-table/delete-data-table.component';
 import { DeleteColumnComponent } from './data-tables/modals/delete-column/delete-column.component';
+import { PropertiesPanelComponent } from './processes/pages/properties-panel/properties-panel.component';
+import { KeyboardShortcutsComponent } from './processes/pages/keyboard-shortcuts/keyboard-shortcuts.component';
+import { NewFormComponent } from './forms/modals/new-form/new-form.component';
+import { EditFormItemComponent } from './forms/modals/edit-form-item/edit-form-item.component';
+import { TaskComponent } from './processes/pages/properties-panel/templates/task/task.component';
+import { SequenceflowComponent } from './processes/pages/properties-panel/templates/sequenceflow/sequenceflow.component';
+import { StarteventComponent } from './processes/pages/properties-panel/templates/startevent/startevent.component';
+import { DeleteFormComponent } from './forms/modals/delete-form/delete-form.component';
 
 /* Routes */
 const appRoutes: Routes = [
@@ -89,7 +102,7 @@ const appRoutes: Routes = [
       }
     },
     {
-      path: 'entries',
+      path: 'inbox',
       component: EntriesComponent,
       canActivate: [],
       data: {
@@ -127,6 +140,14 @@ const appRoutes: Routes = [
       data: {
         permission: 'forms'
       }
+    },
+    {
+        path: 'forms/:param',
+        component: FormBuilderComponent,
+        canActivate: [],
+        data: {
+            permission: 'forms'
+        }
     },
     {
         path: 'data-tables',
@@ -177,7 +198,15 @@ const appRoutes: Routes = [
     NewTableComponent,
     NewColumnComponent,
     DeleteDataTableComponent,
-    DeleteColumnComponent
+    DeleteColumnComponent,
+    PropertiesPanelComponent,
+    KeyboardShortcutsComponent,
+    NewFormComponent,
+    EditFormItemComponent,
+    TaskComponent,
+    SequenceflowComponent,
+    StarteventComponent,
+    DeleteFormComponent
   ],
   imports: [
     BrowserModule,
@@ -189,7 +218,13 @@ const appRoutes: Routes = [
     ScrollbarModule,
     LoadingBarHttpClientModule,
     UiSwitchModule,
-    SelectModule
+    NgSelectModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
+    BrowserAnimationsModule,
+    NgDragDropModule.forRoot(),
+    ScrollEventModule,
+    QuillModule
   ],
   exports: [
     CallerDirective,

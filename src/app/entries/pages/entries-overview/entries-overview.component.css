@@ -20,98 +20,102 @@
         display: block; }
 .card .card-body {
   position: relative; }
-  .card .card-body .entry {
+  .card .card-body .entries-wrapper {
     width: 100%;
-    height: auto;
-    overflow: hidden;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    border-bottom: 1px solid #e6e6e6;
-    cursor: pointer;
-    position: relative; }
-    .card .card-body .entry.selected {
-      background: #f8f8f8; }
-    .card .card-body .entry:hover {
-      background: #f8f8f8; }
-      .card .card-body .entry:hover.selected {
-        cursor: default; }
-    .card .card-body .entry.unread {
-      font-weight: 500; }
-      .card .card-body .entry.unread:after {
-        display: block;
-        content: "New";
-        position: absolute;
-        width: auto;
-        height: 20px;
-        line-height: 20px;
-        color: #fff;
-        padding: 0 5px;
-        float: right;
-        font-size: 75%;
-        font-weight: bold;
-        border-radius: 5px;
-        -o-border-radius: 5px;
-        -ms-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        background: #f8d053;
-        right: 20px;
-        top: 40px; }
-      .card .card-body .entry.unread h6 {
+    height: calc(100vh - 180px); }
+    .card .card-body .entries-wrapper .entry {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      padding: 10px 20px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #e6e6e6;
+      cursor: pointer;
+      position: relative; }
+      .card .card-body .entries-wrapper .entry.selected {
+        background: #f8f8f8; }
+      .card .card-body .entries-wrapper .entry:hover {
+        background: #f8f8f8; }
+        .card .card-body .entries-wrapper .entry:hover.selected {
+          cursor: default; }
+      .card .card-body .entries-wrapper .entry.unread {
         font-weight: 500; }
-    .card .card-body .entry h6 {
-      font-weight: 400;
-      position: relative;
-      min-height: 20px;
-      line-height: 20px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis; }
-      .card .card-body .entry h6 .badge {
-        width: auto;
+        .card .card-body .entries-wrapper .entry.unread:after {
+          display: block;
+          content: "New";
+          position: absolute;
+          width: auto;
+          height: 20px;
+          line-height: 20px;
+          color: #fff;
+          padding: 0 5px;
+          float: right;
+          font-size: 75%;
+          font-weight: bold;
+          border-radius: 5px;
+          -o-border-radius: 5px;
+          -ms-border-radius: 5px;
+          -moz-border-radius: 5px;
+          -webkit-border-radius: 5px;
+          background: #f8d053;
+          right: 20px;
+          top: 40px; }
+        .card .card-body .entries-wrapper .entry.unread h6 {
+          font-weight: 500; }
+      .card .card-body .entries-wrapper .entry h6 {
+        font-weight: 400;
+        position: relative;
+        min-height: 20px;
+        line-height: 20px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+        .card .card-body .entries-wrapper .entry h6 .badge {
+          width: auto;
+          height: 20px;
+          line-height: 20px;
+          color: #626262;
+          padding: 0 5px;
+          float: right;
+          position: absolute;
+          right: 0;
+          background: #c7c7c7;
+          border-radius: 5px;
+          -o-border-radius: 5px;
+          -ms-border-radius: 5px;
+          -moz-border-radius: 5px;
+          -webkit-border-radius: 5px; }
+          .card .card-body .entries-wrapper .entry h6 .badge.completed {
+            background: #10cfbd;
+            color: #fff; }
+          .card .card-body .entries-wrapper .entry h6 .badge.rejected {
+            background: #f55753;
+            color: #fff; }
+      .card .card-body .entries-wrapper .entry .meta-data {
+        display: block;
+        color: #c7c7c7;
         height: 20px;
         line-height: 20px;
-        color: #626262;
-        padding: 0 5px;
-        float: right;
-        border-radius: 5px;
-        -o-border-radius: 5px;
-        -ms-border-radius: 5px;
-        -moz-border-radius: 5px;
-        -webkit-border-radius: 5px;
-        background: #c7c7c7;
-        margin: 0 0 0 10px; }
-        .card .card-body .entry h6 .badge.completed {
-          background: #10cfbd;
-          color: #fff; }
-        .card .card-body .entry h6 .badge.rejected {
-          background: #f55753;
-          color: #fff; }
-    .card .card-body .entry .meta-data {
-      display: block;
-      color: #c7c7c7;
-      height: 20px;
-      line-height: 20px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis; }
-    .card .card-body .entry p {
-      font-style: italic;
-      height: 20px;
-      line-height: 20px;
-      margin: 0;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis; }
-  .card .card-body #no-entries {
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 50px;
-    line-height: 50px;
-    box-sizing: border-box;
-    margin: -25px 40px 0 40px;
-    text-align: center;
-    top: 50%; }
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+      .card .card-body .entries-wrapper .entry p {
+        font-style: italic;
+        height: 20px;
+        line-height: 20px;
+        margin: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+    .card .card-body .entries-wrapper .placeholder {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 50px;
+      line-height: 50px;
+      box-sizing: border-box;
+      margin: -25px 40px 0 40px;
+      text-align: center;
+      top: 50%; }
 
 /*# sourceMappingURL=entries-overview.component.css.map */

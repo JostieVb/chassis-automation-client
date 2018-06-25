@@ -19,9 +19,9 @@ export class BpmnService {
    * Call to the back-end bpmn engine
    *
    * */
-  call(caller: string, dbTable?: string, insertId?: number): Observable<any> {
+  call(caller: string, insertId?: number): Observable<any> {
     return this.http.post(API_BASE + 'call',
-        {caller: caller, dbTable: dbTable, insertId: insertId},
+        {caller: caller, insertId: insertId},
         {headers: this.auth.authHeaders()}
         );
   }
@@ -29,12 +29,12 @@ export class BpmnService {
   /**
    * Post the form data
    *
-   * @param     caller - name of the caller
+   * @param     form - name of the form
    * @param     data - form data
    * */
-  postData(caller, data) {
+  postData(form, data) {
     return this.http.post(
-       API_BASE + 'post/' + caller,
+       API_BASE + 'post/' + form,
        data,
       {headers: this.auth.authHeaders()}
     );
@@ -43,11 +43,11 @@ export class BpmnService {
   /**
    * Get data from table
    *
-   * @param     table - the table name where the data should be selected
+   * @param     dataName - the name of the data that should be displayed
    * */
-  getData(table: string) {
+  getData(dataName: string) {
       this.http.get(
-          API_BASE + 'get-data/' + table,
+          API_BASE + 'get-data/' + dataName,
           {headers: this.auth.authHeaders()}
       ).subscribe(data => this.data.next(data));
   }

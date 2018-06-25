@@ -33,6 +33,7 @@ export class EntriesComponent implements OnInit, OnDestroy {
    *
    * */
   ngOnDestroy() {
+    this.entriesService.entries.next([]);
     this.subs.forEach(sub => sub.unsubscribe());
   }
 

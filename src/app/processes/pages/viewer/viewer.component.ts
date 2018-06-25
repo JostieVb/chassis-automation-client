@@ -10,9 +10,10 @@ import { EMPTY_XML } from '../../../global';
 export class ViewerComponent implements OnInit, OnDestroy {
 
   /**
-   * previewLoaded      :   indicates if the flowloaders has finished loading the preview
+   * loadingPreview     :   indicates if the flowloaders is loading the preview
    * subs               :   component subscriptions
    * */
+  protected loadingPreview = false;
   protected previewLoaded = false;
   private subs = [];
 
@@ -24,6 +25,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
    * */
   ngOnInit() {
     this.subs.push(
+      this.flowLoader.loadingPreview.subscribe(loading => this.loadingPreview = loading),
       this.flowLoader.previewLoaded.subscribe(loaded => this.previewLoaded = loaded)
     );
   }

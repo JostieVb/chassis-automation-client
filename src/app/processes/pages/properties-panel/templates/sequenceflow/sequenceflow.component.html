@@ -1,0 +1,80 @@
+<div class="meta-data" [ngClass]="{'open': metaDataOpen}">
+  <div class="meta-data-content-wrapper">
+    <h5>Meta data</h5>
+    <div class="columns">
+      <div class="column left">
+        <div class="column-row">
+          <label>Identifier:</label>
+          <div class="value">{{id}}</div>
+        </div>
+        <div class="column-row">
+          <label>Type:</label>
+          <div class="value">
+            Sequenceflow
+          </div>
+        </div>
+      </div>
+      <div class="column right">
+      </div>
+    </div>
+  </div>
+<div class="toggle-meta-data" (click)="metaDataOpen = !metaDataOpen"><i class="fa fa-chevron-down"></i></div>
+</div>
+<div class="meta-data-overlay" *ngIf="metaDataOpen" (click)="metaDataOpen = false"></div>
+
+<ng-scrollbar [autoHide]="true">
+  <div class="text-input">
+    <h5>Name of the sequenceflow</h5>
+    <input type="text" name="name" [(ngModel)]="fieldBindings['name']" (ngModelChange)="updateProperty('name', true)" class="form-control" placeholder="Enter a name for this sequenceflow arrow" />
+  </div>
+
+  <div class="continue">
+    <h5>Follow this sequence when...</h5>
+    <select class="form-control" name="follow" [(ngModel)]="fieldBindings['follow']" (ngModelChange)="updateProperty('follow')">
+      <option value="all">All of the below conditions are met</option>
+      <option value="1">At least one of the below conditions is met</option>
+    </select>
+  </div>
+
+  <div class="conditions">
+    <h5>Conditions</h5>
+    <div class="condition-wrapper">
+      <div class="condition-header">
+        <div class="field input">Input</div>
+        <div class="field equation">Equation</div>
+        <div class="field value">Value</div>
+      </div>
+      <div class="condition" *ngFor="let id of conditionsKeys">
+        <select class="form-control input" [(ngModel)]="fieldBindings['conditions'][id]['key']" [ngModelOptions]="{standalone: true}" (ngModelChange)="updateProperty('follow')">
+          <option disabled class="option-title">Decisions:</option>
+          <option value="previous-decision">Previous decision</option>
+          <option disabled class="option-title">Form fields:</option>
+          <option disabled class="none" *ngIf="formFields.length === 0">No form fields available</option>
+          <ng-container *ngIf="formFields.length > 0">
+            <option *ngFor="let formField of formFields" value="{{formField.value}}">{{formField.label}}</option>
+          </ng-container>
+        </select>
+
+        <select class="form-control operator" [(ngModel)]="fieldBindings['conditions'][id]['operator']" [ngModelOptions]="{standalone: true}"  (ngModelChange)="updateProperty('follow')">
+          <option value="equals">Is equal to</option>
+          <option value="unequal">Is unequal to</option>
+        </select>
+        <select class="form-control decisions" [(ngModel)]="fieldBindings['conditions'][id]['value']['value']" [ngModelOptions]="{standalone: true}" *ngIf="fieldBindings['conditions'][id]['value']['type'] === 'dropdown'">
+          <option value="" selected disabled>Select decision</option>
+          <option *ngFor="let decision of decisions" [value]="decision['value']">{{decision['label']}}</option>
+        </select>
+        <input type="text" class="form-control" placeholder="Enter a value" *ngIf="fieldBindings['conditions'][id]['value']['type'] === 'text'" [(ngModel)]="fieldBindings['conditions'][id]['value']['value']" [ngModelOptions]="{standalone: true}" (ngModelChange)="updateProperty('follow')" />
+
+        <button *ngIf="fieldBindings['conditions'][id]['value']['type'] === 'dropdown'" class="btn input-style" (click)="changeValueType(id)" title="Switch to free text input">
+          <i class="fa fa-pencil"></i>
+        </button>
+
+        <button *ngIf="fieldBindings['conditions'][id]['value']['type'] === 'text'" class="btn input-style" (click)="changeValueType(id)" title="Switch to dropdown input">
+          <i class="fa fa-list"></i>
+        </button>
+        <button class="btn delete" (click)="deleteCondition(id)" [ngClass]="{'disabled': conditionsKeys.length === 1}" title="Delete this condition"><i class="fa fa-trash"></i></button>
+      </div>
+    </div>
+    <div class="new-condition" (click)="addEmptyCondition()"><i class="fa fa-plus" aria-hidden="true"></i> Click to add a new condition</div>
+  </div>
+</ng-scrollbar>
